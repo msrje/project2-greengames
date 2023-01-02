@@ -5,9 +5,43 @@
     <title>Insert title here</title>
 </head>
 <body>
-	<h1>기본페이지</h1>
-	<div class="wrap">
-		기본페이지
-	</div>
+	<h1>로그인페이지</h1>
+		<div class="wrap  view-size-m">
+			<section >
+				<h1>로그인</h1>
+				<div class="wrap">
+					<p class="page-tit">로그인</p>
+				</div>
+			</section>
+			<section id="login-form">
+				<h1>로그인 입력폼</h1>
+				<div class="wrap">
+					<form action="/signin"  method="post">
+						<ul>
+							<li>
+								<input class="box-style-common" type="text" name="email" placeholder="이메일">
+							</li>
+							<li>
+								<input class="box-style-common" type="password" name="pass" placeholder="비밀번호">
+							</li>
+							<li class="user-info-support flex between">
+								<div>
+									<input type="checkbox" id="chbox-idsave" >
+									<label for="chbox-idsave">아이디 저장</label>
+								</div>
+								<div class="ch font-zero">
+									<span><a href="#">아이디 찾기</a></span>
+									<span><a href="#">비밀번호 변경</a></span>
+									<span><a href="/signup">회원가입</a></span>
+								</div>
+							</li>
+							<li>
+								<button class="btn-style-common">로그인</button>
+							</li>
+						</ul>
+					</form>
+				</div>
+			</section>
+		</div>
 </body>
 </html>

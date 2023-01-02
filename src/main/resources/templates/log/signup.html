@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+</head>
+<main>
+	<h1>메인컨텐츠</h1>
+	<div class="wrap view-size-m">
+		<section id="signup-form">
+			<h1>회원가입 폼</h1>
+			<div class="wrap">
+				<form action="/signup" method="post">
+					<ul>
+						<li>
+							<label for="email">이메일</label>
+							<input class="box-style-common" type="text" id="email" placeholder="이메일">
+							<div class="msg"></div>
+						</li>
+						<li>
+							<label for="pass">비밀번호</label>
+							<input class="box-style-common" type="password" id="pass" placeholder="비밀번호">
+							<div class="msg"></div>
+						</li>
+						<li>
+							<label for="pass-confirm">비밀번호 확인</label>
+							<input class="box-style-common" type="password" id="pass-confirm" placeholder="비밀번호 확인">
+							<div class="msg"></div>
+						</li>
+						<li>
+							<label for="name">번호</label>
+							<input class="box-style-common" type="text" id="phone" placeholder="번호">
+							<div class="msg"></div>
+						</li>
+						<li>
+							<label for="name">주소</label>
+							<input class="box-style-common" type="text" id="addr" placeholder="주소">
+							<div class="msg"></div>
+						</li>
+						<li>
+							<label for="name">상세주소</label>
+							<input class="box-style-common" type="text" id="addr" placeholder="주소">
+							<div class="msg"></div>
+						</li>
+						<li>
+							<label for="name">인증코드</label>
+							<input class="box-style-common" type="text" id="Code" placeholder="코드">
+							<div class="msg"></div>
+						</li>
+						<li><button>회원가입</button></li>
+					</ul>
+				</form>
+			</div>
+		</section>
+		
+	</div>
+</main>
+</html>

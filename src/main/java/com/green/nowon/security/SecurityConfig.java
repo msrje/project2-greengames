@@ -6,6 +6,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+/**
+ * @author LeeYongJu
+ * 권한 허가 : 모든 페이지("/**") , /css/** ,"/images/**","/js/**"
+ * email , pass 로 아이디와 비밀번호 입력
+ */
+
 @EnableWebSecurity
 public class SecurityConfig {
 	
@@ -13,15 +19,15 @@ public class SecurityConfig {
  	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
  		http.authorizeRequests(authorize->authorize
  				.antMatchers("/css/**","/images/**","/js/**").permitAll()
- 				.antMatchers("/","/members/**").permitAll()
+ 				.antMatchers("/**").permitAll()
  				.anyRequest().authenticated()
  				)
  				.formLogin(formLogin-> formLogin
- 						.loginPage("/")
-							.loginProcessingUrl("/")
+ 						.loginPage("/login")
+							.loginProcessingUrl("/signin")
 							.usernameParameter("email")
 							.passwordParameter("pass")
-							.defaultSuccessUrl("/")
+							.defaultSuccessUrl("/index")
 							.failureUrl("/")
 							.permitAll()
 							)
