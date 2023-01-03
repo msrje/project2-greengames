@@ -1,4 +1,4 @@
-package com.green.nowon.domain.entity;
+package com.green.nowon.domain.entity.member;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.green.nowon.domain.entity.BaseDateEntity;
 import com.green.nowon.security.MyRole;
 
 import lombok.AllArgsConstructor;
