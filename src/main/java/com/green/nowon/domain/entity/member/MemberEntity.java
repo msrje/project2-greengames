@@ -27,15 +27,16 @@ import lombok.NoArgsConstructor;
  * @author LeeYongJu
  * 직원 관련 DB
  * DB 이름 : GgMember
- * 컬럼 목록 : mno(사번) , email(이메일) , pass(비밀번호) , phone(번호) , addr(주소) , mem_img(프로필) , salary(월급)
+ * 컬럼 목록 : mno(사번) ,name(이름), email(이메일) , pass(비밀번호) , phone(번호)  
+ * , mem_img(프로필)
  * myRole : user(사원) , admin(팀장)
  */
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@SequenceGenerator(name = "seq_gen_member", 
-		sequenceName = "seq_member", initialValue = 1, allocationSize = 1)
+@SequenceGenerator(name = "seq_gen_GgMember", 
+		sequenceName = "seq_GgMember", initialValue = 1, allocationSize = 1)
 @Table(name = "GgMember")
 @Entity
 public class MemberEntity extends BaseDateEntity{
@@ -45,18 +46,16 @@ public class MemberEntity extends BaseDateEntity{
 	private long mno;//사원번호
 	
 	@Column(nullable = false, unique = true)
+	private String name;
+	
+	@Column(nullable = false, unique = true)
 	private String email;//이메일
+	
 	@Column(nullable = false)
 	private String pass;//비밀번호
+	
 	@Column(nullable = false)
 	private String phone;//번호
-	@Column(nullable = false)
-	private String addr;//주소
-	@Column(nullable = true)
-	private String mem_img;//프로필 이미지
-	@Column(nullable = false)
-	private int salary;//월급
-	
 	
 	@Builder.Default
 	@CollectionTable(name = "GgDeploy")
