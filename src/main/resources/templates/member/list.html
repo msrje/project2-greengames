@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="layout/user-layout :: layout(~{this::head}, ~{this::main})">
+<head>
+
+</head>
+
+<main>
+	<h1>메인컨텐츠</h1>
+	<div class="wrap view-size"> 
+		<p>상품리스트</p>
+		<ul class="flex">
+			<!-- <li th:each="dto:${list}"> -->
+				<div>
+					<!-- <a th:href="|/common/goods/${dto.no}|"><img width="180px" th:src="${dto.defImgUrl}"></a> -->
+				</div>
+				<div class="info">
+					<!-- <p><a th:href="|/common/goods/${dto.no}|"><span>[[${dto.title}]]</span></a></p> -->
+					<div class="">
+						<i>
+							<span></span>
+							<span></span>
+						</i>
+						<!-- <span>[[${dto.price}]]</span> -->
+					</div>
+					<div></div>
+				</div>
+			</li>
+		</ul>
+	</div>
+</main>
+</html>

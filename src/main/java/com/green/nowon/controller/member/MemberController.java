@@ -1,5 +1,14 @@
 package com.green.nowon.controller.member;
 
-public class MemberController {
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 
+@Controller
+public class MemberController {
+	
+	@GetMapping("/mypage")
+	public String myPage() {
+		return"member/mypage";
+	}
+	
 }
