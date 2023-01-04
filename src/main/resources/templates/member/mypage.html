@@ -4,40 +4,51 @@
  	<th:block th:insert="~{admin/AdminLayout :: head}"/>
 	<link rel="stylesheet" href="/css/default.css">
 	<th:block th:insert="~{admin/AdminLayout :: header}"/>
-	<script src="/css/member/slick.js" type="text/javascript" charset="utf-8"></script>
-	
+	<link rel="stylesheet" href="/css/member/mypage.css">
 </head>
 <body class="flex">
     <main>
 	    <div>
-	    	<div class="wrap">
+	    	<div class="mypage">
 	    		<div class="wrap-title">
-	    			<h1>
+	    			<h1 class="mypage-title">
 	    				<strong>접속한 회원의 이름</strong>
 	    				"님 어서오세요."
 	    			</h1>
 	    		</div>
-	    		<div>
-	    			<img src="/image/test/profiletest.jpeg"style="margin-left:30px; float: left;">
-	    			<p>이름</p>
-	    			<p>사원번호</p>
-	    			<p>전화번호</p>
-	    			<p>이메일</p>
-	    			<p>회원의 직책</p>
-	    			<p>오늘의 날짜</p>
+	    		<div class="mypage-info">
+	    			<img src="/image/test/profiletest.jpeg" align="left">
+	    			<br>
+	    			<div class="member-info">
+		    			<p>이름</p>
+		    			<p>사원번호</p>
+		    			<p>전화번호</p>
+		    			<p>이메일</p>
+		    			<p>직책</p>
+		    			<p>주소</p>
+		    			<div style="text-align:right; margin-right: 50px; ">
+		    				<button>개인정보수정</button>
+		    			</div>
+		    		</div>
 	    		</div>
 	    	</div>
-		    	<div class="wrap">
-				<section>
-					<div class="main">
-						<div class="visual2">			
-							<button>스케쥴관리</button>
-							<button>근태관리</button>
-							<button>급여</button>
-						</div>
+		</div>
+		<div class="approval-1">
+			<div class="approval-2">
+				<div class="approval-3">
+					<div>전자결재
+					<br>
+					<a>업무</a>
+					<a>휴가/병가</a>
 					</div>
-				</section>
-			</div>
+					<div>
+						<a>급여</a>
+					</div>
+				</div>
+			</div>		
+		</div>
+		<div>
+			<h1>캘린더 위치</h1>
 		</div>
     </main>
 </body>

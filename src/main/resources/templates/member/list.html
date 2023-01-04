@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	th:replace="layout/user-layout :: layout(~{this::head}, ~{this::main})">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-
+	<th:block th:insert="~{admin/AdminLayout :: head}"/>
+	<link rel="stylesheet" href="/css/default.css">
+	<th:block th:insert="~{admin/AdminLayout :: header}"/>
 </head>
 
 <main>
@@ -10,6 +11,7 @@
 	<div class="wrap view-size"> 
 		<p>상품리스트</p>
 		<ul class="flex">
+			<li>
 			<!-- <li th:each="dto:${list}"> -->
 				<div>
 					<!-- <a th:href="|/common/goods/${dto.no}|"><img width="180px" th:src="${dto.defImgUrl}"></a> -->

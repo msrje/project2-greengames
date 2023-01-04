@@ -10,5 +10,8 @@ public class MemberController {
 	public String myPage() {
 		return"member/mypage";
 	}
-	
+	@GetMapping("/list")
+	public String memberList() {
+		return"member/list";
+	}
 }

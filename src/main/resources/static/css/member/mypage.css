@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+
+.mypage{
+	width: 1050px;
+	height: auto;
+	margin: 5%;
+}
+.mypage-info{
+	border: 1px solid black;
+	width: auto;
+	max-width: 700px;
+	height: 450px;
+	border-radius: 30px;
+}
+.mypage-info>p{
+	font-size: 15px;
+}
+.mypage-info >img{
+	width: 120px;
+	height :150px;
+	margin: 15px;
+	padding-top: 50px;
+	padding-bottom: 50px;
+	border-radius: 60%;
+}
+.main-btn{
+	width: 1050px;
+	height: auto;
+	margin: 10%;
+}
+.member-info{
+	margin-top: 45px;
+}
+.member-info >button {
+	text-align: right;
+}
