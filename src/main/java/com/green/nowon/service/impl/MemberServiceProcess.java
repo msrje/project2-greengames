@@ -26,8 +26,8 @@ public class MemberServiceProcess implements MemberService {
 	@Override
 	public void save(MemberInsertDTO mdto, AddressInsertDTO adto) {
 		memberRepo.save(mdto.signin(pe).addRole(MyRole.USER));
-	    String email = mdto.getEmail();
-		addressRepo.save(adto.signin().member(memberRepo.findByEmail(email)));
+	    String id = mdto.getId();
+		addressRepo.save(adto.signin().member(memberRepo.findById(id)));
 	}
 
 }

@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 public class MemberInsertDTO {
 	
-	private String email;
+	private String id;
 	private String pass;
 	private String name;
 	private String phone;
@@ -20,7 +20,7 @@ public class MemberInsertDTO {
 	//비밀번호
 	public MemberEntity signin(PasswordEncoder pe) {
 		return MemberEntity.builder()
-				.email(email)
+				.id(id)
 				.name(name)
 				.pass(pe.encode(pass))//비밀번호 암호화
 				.phone(phone)

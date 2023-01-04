@@ -27,7 +27,7 @@ import lombok.NoArgsConstructor;
  * @author LeeYongJu
  * 직원 관련 DB
  * DB 이름 : GgMember
- * 컬럼 목록 : mno(사번) ,name(이름), email(이메일) , pass(비밀번호) , phone(번호)  
+ * 컬럼 목록 : mno(사번) ,name(이름), id(아이디) , pass(비밀번호) , phone(번호)  
  * , mem_img(프로필)
  * myRole : user(사원) , admin(팀장)
  */
@@ -49,7 +49,7 @@ public class MemberEntity extends BaseDateEntity{
 	private String name;
 	
 	@Column(nullable = false, unique = true)
-	private String email;//이메일
+	private String id;//이메일x ->수정 id로 변경 (domain은 모두 같은 부분을 사용하기 때문에)
 	
 	@Column(nullable = false)
 	private String pass;//비밀번호
