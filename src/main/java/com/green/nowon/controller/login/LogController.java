@@ -39,4 +39,9 @@ public class LogController {
 		//회원가입 만들기! 프로필 이미지 삽입X
 		return "redirect:/login";
 	}
+	
+	@GetMapping("/update")
+	public String update() {
+		return "admin/employeeUpdate";
+	}
 }
