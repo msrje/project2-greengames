@@ -6,6 +6,9 @@
 	height: auto;
 	margin: 5%;
 }
+.mypage-addr>li{
+	list-style: none;
+}
 .mypage-info{
 	border: 1px solid black;
 	width: auto;
@@ -20,8 +23,8 @@
 	width: 120px;
 	height :150px;
 	margin: 15px;
-	padding-top: 50px;
-	padding-bottom: 50px;
+	padding-top: 65px;
+	padding-bottom: 65px;
 	border-radius: 60%;
 }
 .main-btn{
