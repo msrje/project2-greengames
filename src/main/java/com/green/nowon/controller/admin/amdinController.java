@@ -11,10 +11,11 @@ public class amdinController {
 	public String admin() {
 		return "admin/ggAdmin";
 	}
-	
+
 	@GetMapping("/adminlist")
 	public String adminlist() {
 		return "admin/admin-list";
 	}
+
 	
 }
