@@ -11,4 +11,6 @@ public class amdinController {
 		return "admin/ggAdmin";
 	}
 	
+
+	
 }
