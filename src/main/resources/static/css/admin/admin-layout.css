@@ -5,7 +5,7 @@ header>.wrap{
 	background-color: #464964;
 	color: #fff;
 	padding: 10px 20px;
-	height: 100vh;
+	height: auto;
 }
 header>.wrap a{
 	color: #fff;
