@@ -11,4 +11,6 @@ public interface AddressEntityRepsoitory extends JpaRepository<AddressEntity, Lo
 
 	Optional<AddressEntity> findByMember_mno(long mno);
 
+	Optional<AddressEntity> findByBaseAndMemberId(boolean b, String id);
+
 }
