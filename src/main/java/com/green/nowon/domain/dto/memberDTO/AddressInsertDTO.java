@@ -22,4 +22,5 @@ public class AddressInsertDTO {
 				.extraAddress(extraAddress)
 				.build();
 	}
+
 }
