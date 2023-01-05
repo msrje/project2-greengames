@@ -17,10 +17,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebSecurity
 public class SecurityConfig {
 	
-	@Bean
-    PasswordEncoder passwordEncoder() {
-       return new BCryptPasswordEncoder();
-    }
 	
 	@Bean
  	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

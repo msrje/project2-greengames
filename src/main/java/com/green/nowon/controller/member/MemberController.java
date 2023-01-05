@@ -34,7 +34,7 @@ public class MemberController {
 	@GetMapping("/update")
 	public String update() {
 		return "/admin/employeeUpdate";
-
+	}
 	@GetMapping("/list")
 	public String memberList() {
 		return"member/list";

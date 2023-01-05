@@ -1,5 +1,8 @@
 @charset "UTF-8";
-
+.mypage-title{
+	position: relative;
+	
+}
 
 .mypage{
 	width: 1050px;
@@ -13,19 +16,23 @@
 	border: 1px solid black;
 	width: auto;
 	max-width: 700px;
-	height: 450px;
+	height: 420px;
 	border-radius: 30px;
 }
-.mypage-info>p{
+.member-info>p{
 	font-size: 15px;
+	margin-top: 15px;
 }
-.mypage-info >img{
+.mypage-img{
+	width: 100%;
+}
+.mypage-img >img{
 	width: 120px;
 	height :150px;
 	margin: 15px;
-	padding-top: 65px;
-	padding-bottom: 65px;
 	border-radius: 60%;
+	margin-top: 10%;
+	margin-bottom: 200px;
 }
 .main-btn{
 	width: 1050px;
@@ -34,7 +41,4 @@
 }
 .member-info{
 	margin-top: 45px;
-}
-.member-info >button {
-	text-align: right;
 }
