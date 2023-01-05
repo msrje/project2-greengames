@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" >
+<head>
+ 	<th:block th:insert="~{admin/AdminLayout :: head}"/>
+	<link rel="stylesheet" href="/css/default.css">
+	<th:block th:insert="~{admin/AdminLayout :: header}"/>
+	<link rel="stylesheet" href="/css/member/mypage.css">
+</head>
+<body class="flex">
+    <main>
+	    <div>
+	    	<div class="mypage">
+	    		<div class="wrap-title">
+	    			<h1 class="mypage-title">
+	    				<strong>접속한 회원의 이름</strong>
+	    				"님 어서오세요."
+	    			</h1>
+	    		</div>
+	    		<div class="mypage-info">
+	    			<img src="/image/test/profiletest.jpeg" align="left">
+	    			<br>
+	    			<div class="member-info">
+		    			<p>이름</p>
+		    			<p>사원번호</p>
+		    			<p>전화번호</p>
+		    			<p>이메일</p>
+		    			<p>직책</p>
+		    			<ul class="mypage-addr">
+		    				<li>
+		    					<p>주소</p>
+		    					<div class="baseAddr" id="base-address">
+		    						<p>주소가 존재하지 않습니다.</p>
+		    					</div>
+		    				</li>
+		    			</ul>
+		    			<div style="text-align:right; margin-right: 50px;">
+		    				<button>개인정보수정</button>
+		    			</div>
+		    		</div>
+	    		</div>
+	    	</div>
+		</div>
+		<div class="approval-1">
+			<div class="approval-2">
+				<div class="approval-3">
+					<div>전자결재
+						<br>
+						<a>업무</a>
+						<a>휴가/병가</a>
+					</div>
+				</div>
+			</div>		
+		</div>
+		<div>급여정보
+			<table>
+				<thead>
+				<!-- thymleaf사용 -->
+					<tr>
+						<td>사원번호</td>
+						<td>이름</td>
+						<td>직책</td>
+						<td>기본급여</td>
+						<td>변동금액</td>
+						<td>이번 달 급여</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>사원번호</td>
+						<td>이름</td>
+						<td>직책</td>
+						<td>기본급여</td>
+						<td>변동금액</td>
+						<td>이번 달 급여</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div>
+			<h1>캘린더 위치</h1>
+		</div>
+    </main>
+</body>
+</html>

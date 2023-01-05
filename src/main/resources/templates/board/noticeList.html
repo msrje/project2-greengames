@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" >
+<head>
+ 	<th:block th:insert="~{admin/AdminLayout :: head}"/>
+	<link rel="stylesheet" href="/css/default.css">
+</head>
+<body class="flex">
+	<th:block th:insert="~{admin/AdminLayout :: header}"/>
+    	<main>
+	    	<h1>공지사항 게시판</h1>
+	    	<div class="wrap">
+				<a href="/admin/board-registration">글쓰기</a>
+		   		<p>공지사항</p>
+			    <table>
+			    	<tr>
+			    		<td>No</td>
+			    		<td>분류</td>
+			    		<td>제목</td>
+			    		<td>등록자</td>
+			    		<td>등록일</td>
+			    		<td>조회수</td>
+			    	</tr>
+			    	<tr th:each="dto:${list}" th:onclick="|boradClicked(${dto.gno})|">
+			    		<td>[[${dto.dno}]]</td>
+			    		<td>[[${dto.cate}]]</td>
+			    		<td>[[${dto.title}]]</td>
+			    		<td>[[${dto.name}]]</td>
+			    		<td>[[${dto.createdDate}]]</td>
+			    		<td>[[${dto.readCount}]]</td>
+    				</tr>
+			    </table>
+   			</div>
+ 		</main>
+</body>
+</html>

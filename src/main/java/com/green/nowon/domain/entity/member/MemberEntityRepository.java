@@ -7,5 +7,7 @@ import org.springframework.stereotype.Repository;
 public interface MemberEntityRepository extends JpaRepository<MemberEntity, Long>{
 
 	MemberEntity findById(String id);
- 
+
+	
 }
+

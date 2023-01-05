@@ -4,6 +4,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.green.nowon.domain.entity.member.MemberEntity;
 
+import com.green.nowon.security.MyRole;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,4 +28,5 @@ public class MemberInsertDTO {
 				.build();
 	}
 	
+
 }
