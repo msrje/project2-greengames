@@ -3,7 +3,11 @@ package com.green.nowon.domain.dto.memberDTO;
 import com.green.nowon.domain.entity.member.AddressEntity;
 
 import lombok.Data;
-
+/**
+ * 
+ * @author LeeYongJu
+ *
+ */
 @Data
 public class AddressDetailDTO {
 
@@ -12,6 +16,8 @@ public class AddressDetailDTO {
 	private String jibunAddress;
 	private String detailAddress;
 	private String extraAddress;
+	private boolean base;
+	
 	
 	public AddressDetailDTO(AddressEntity e) {
 		this.postcode = e.getPostcode();
@@ -19,5 +25,6 @@ public class AddressDetailDTO {
 		this.jibunAddress = e.getJibunAddress();
 		this.detailAddress = e.getDetailAddress();
 		this.extraAddress = e.getExtraAddress();
+		this.base = e.isBase();
 	}
 }

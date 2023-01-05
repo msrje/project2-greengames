@@ -82,6 +82,7 @@
 						</li>
 						<!-- 주소입력 -->
 						<li>
+							<input type="hidden" id="base" name="base" th:value="${aDetail.base}">
 							<input type="text" readonly="readonly" id="postcode" name="postcode" placeholder="우편번호" th:value="${aDetail.postcode}">
 							<input type="button" onclick="daumPostcode()" value="우편번호 찾기"><br>
 							<input type="text" readonly="readonly" id="roadAddress" name="roadAddress" placeholder="도로명주소" th:value="${aDetail.roadAddress}">
