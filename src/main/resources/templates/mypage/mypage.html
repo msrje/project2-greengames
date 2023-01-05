@@ -5,6 +5,17 @@
 	<link rel="stylesheet" href="/css/default.css">
 	<th:block th:insert="~{admin/AdminLayout :: header}"/>
 	<link rel="stylesheet" href="/css/member/mypage.css">
+	<script type="text/javascript">
+		function getBaseAddr(){
+			$.ajax({
+				url:"/mypage/address/base",
+				success:function(resultHTML){
+					$("#base-address").html(resultHTML);
+				}
+			});
+			
+		}
+	</script>
 </head>
 <body class="flex">
     <main>

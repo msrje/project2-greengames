@@ -37,9 +37,7 @@ public class MemberController {
 	}
 	@GetMapping("/list")
 	public String memberList() {
-		return"member/list";
-
-
+		return"member/employee-list";
 	}
 	
 }
