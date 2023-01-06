@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
+<head>
+ 	<th:block th:insert="~{admin/AdminLayout :: head}"/>
+	<link rel="stylesheet" href="/css/approval/approval.css">
+</head>
+<body class="flex">
+	<th:block th:insert="~{admin/AdminLayout :: header}"/>
+    <main>
+    	<h1>메인컨텐츠</h1>
+    	<div class="wrap">
+    		<div>
+    				<div  class="title" th:text="${list.title}"></div>
+    				<br>
+    				<textarea rows="30" cols="200" placeholder="내용을 입력하세요" name="content" class="content"></textarea>
+    				<button>등록</button>	
+    		</div>
+    	</div>
+    </main>
+</body>
+</html>

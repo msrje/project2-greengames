@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" >
+<head>
+ 	<th:block th:insert="~{admin/AdminLayout :: head}"/>
+	<link rel="stylesheet" href="/css/approval/approval.css">
+</head>
+<body class="flex">
+	<th:block th:insert="~{admin/AdminLayout :: header}"/>
+    <main>
+    	<h1>메인컨텐츠</h1>
+    	<div class="wrap">
+   			<table >
+   				<tr>
+   					<td>결재번호</td>
+   					<td>결재제목</td>
+   					<td>결재상태</td>
+   				</tr>
+   				<tr th:each="dto:${list}">
+   					<td>[[${dto.ano}]]</td>
+   					<td>[[${dto.title}]]</td>
+   					<td>
+   						<div th:if="${dto.status == false}">결재 대기중</div>
+   						<div th:if="${dto.status == true}">결재 승인</div>
+   					</td>
+   					<td><a href="/approval/detail/${dto.ano}"> 내용 보기 </a></td>
+   				</tr>	
+   			
+   			</table>
+       	</div>
+    </main>
+</body>
+</html>

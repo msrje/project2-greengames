@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" >
+<head>
+ 	<th:block th:insert="~{admin/AdminLayout :: head}"/>
+	<link rel="stylesheet" href="/css/approval/approval.css">
+</head>
+<body class="flex">
+	<th:block th:insert="~{admin/AdminLayout :: header}"/>
+    <main>
+    	<h1>메인컨텐츠</h1>
+    	<div class="wrap">
+    		<div>
+    			<form action="/approval/vacation" method="post">
+    				<input type="text" placeholder="제목을 입력하세요" name="title">
+    				<br>
+    				<textarea rows="30" cols="200" placeholder="내용을 입력하세요" name="content"></textarea>
+    				<br>
+    				<input type="date">
+    				<div>부터</div>
+    				<input type="date">
+    				<div>까지</div>
+    				<button>등록</button>	
+    			</form>
+    		</div>
+    	</div>
+    </main>
+</body>
+</html>
