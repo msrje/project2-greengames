@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" >
+<head>
+ 	<th:block th:insert="~{admin/AdminLayout :: head}"/>
+	<link rel="stylesheet" href="/css/default.css">
+	<th:block th:insert="~{admin/AdminLayout :: header}"/>
+	<link rel="stylesheet" href="/css/member/mypage.css">
+</head>
+<body class="flex">
+    <main>
+	    <div>
+	    	<div class="mypage">
+	    		<div class="wrap-title">
+	    			<h2 class="mypage-title">
+	    				관리자 페이지 입니다.
+	    			</h2>
+	    		</div>
+	    	</div>
+	    	<div>
+	    		<!--임시링크-->
+	    		<a href="/">등록된 사원정보</a>
+	    		<a href="/">급여관리</a>
+	    		<a href="/">결재승인</a>
+	    		<a href="/">공지사항 등록 수정 삭제</a>
+	    		<a href="/">자유게시판 삭제</a>
+	    	</div>
+	    </div>
+    </main>
+</body>
+</html>

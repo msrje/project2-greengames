@@ -1,0 +1,44 @@
+@charset "UTF-8";
+.mypage-title{
+	position: relative;
+	
+}
+
+.mypage{
+	width: 1050px;
+	height: auto;
+	margin: 5%;
+}
+.mypage-addr>li{
+	list-style: none;
+}
+.mypage-info{
+	border: 1px solid black;
+	width: auto;
+	max-width: 700px;
+	height: 420px;
+	border-radius: 30px;
+}
+.member-info>p{
+	font-size: 15px;
+	margin-top: 15px;
+}
+.mypage-img{
+	width: 100%;
+}
+.mypage-img >img{
+	width: 120px;
+	height :150px;
+	margin: 15px;
+	border-radius: 60%;
+	margin-top: 10%;
+	margin-bottom: 200px;
+}
+.main-btn{
+	width: 1050px;
+	height: auto;
+	margin: 10%;
+}
+.member-info{
+	margin-top: 45px;
+}

@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<ul th:if="${mpageaddr}">
+		<li>
+			(<span th:text="${mpageaddr.postcode}">우편번호</span>)
+			<span th:text="${mpageaddr.roadAddress}">도로명</span>
+			<span th:text="${mpageaddr.jibunAddress}">지번</span>
+			<span th:text="${mpageaddr.detailAddress}">상세주소</span>
+		</li>
+	</ul>
+</html>
