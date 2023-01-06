@@ -6,5 +6,4 @@ public interface MyPageService {
 
 	void myPageBaseAddr(String id, Model model);
 
-
 }

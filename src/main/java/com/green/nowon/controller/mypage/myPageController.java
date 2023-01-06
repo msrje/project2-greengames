@@ -17,8 +17,10 @@ public class myPageController {
 	
 	@GetMapping("/mypage")
 	public String myPageInfo() {
-		return"member/mypage";
+		return"mypage/mypage";
 	}
+	
+
 	
 	@GetMapping("/mypage/address/base")
 	public String baseAddr(@AuthenticationPrincipal MyUserDetails userDetails, Model model) {
