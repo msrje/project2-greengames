@@ -1,20 +1,36 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org" >
+<html  xmlns:th="http://www.thymeleaf.org" 
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
  	<th:block th:insert="~{admin/AdminLayout :: head}"/>
 	<link rel="stylesheet" href="/css/default.css">
 	<th:block th:insert="~{admin/AdminLayout :: header}"/>
 	<link rel="stylesheet" href="/css/member/mypage.css">
 	<script type="text/javascript">
+		$(function(){
+			getBaseAddr();
+		});
 		function getBaseAddr(){
 			$.ajax({
 				url:"/mypage/address/base",
 				success:function(resultHTML){
 					$("#base-address").html(resultHTML);
+				},
+				error:function(){
+					memuAdClicked($("myepage-addr>li").eq(1));
+					console.log("등록된 주소가 없습니다.");
 				}
 			});
-			
 		}
+			function memuAdClicked(el){
+				if($(el).index()==0){
+					getBaseAddr();
+					return;
+				}
+				$("#mypage-addr>li").removeClass("target");
+				$(el).addClass("target");
+			}
+		 
 	</script>
 </head>
 <body class="flex">
@@ -38,17 +54,17 @@
 		    			<p>전화번호</p>
 		    			<p>이메일</p>
 		    			<p>직책</p>
-		    			<ul class="mypage-addr">
-		    				<li><br>
-		    					<p>주소</p>
-		    					<div class="baseAddr" id="base-address">
-		    						<p>주소가 존재하지 않습니다.</p>
-		    					</div>
-		    				</li>
-		    			</ul>
-		    			<div style="text-align:right; margin-right: 50px;">
-		    				<button>개인정보수정</button>
-		    			</div>
+		    		</div>
+		    		<ul id="mypage-addr">
+		    			<li onclick="memuAdClicked(this)">
+		    				<button type="button">주소확인</button>										
+							<div class="baseAddrs" id="base-address">
+								<p>배송지 정보가 존재하지 않습니다.</p>
+							</div>
+						</li>
+		    		</ul>
+		    		<div style="text-align:right; margin-right: 50px;">
+		    			<button>개인정보수정</button>
 		    		</div>
 	    		</div>
 	    	</div>

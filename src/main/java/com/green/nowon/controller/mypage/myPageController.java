@@ -20,6 +20,8 @@ public class myPageController {
 		return"mypage/mypage";
 	}
 	
+
+	
 	@GetMapping("/mypage/address/base")
 	public String baseAddr(@AuthenticationPrincipal MyUserDetails userDetails, Model model) {
 		service.myPageBaseAddr(userDetails.getId(),model);

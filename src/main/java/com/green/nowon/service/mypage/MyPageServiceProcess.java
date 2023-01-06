@@ -16,11 +16,16 @@ public class MyPageServiceProcess implements MyPageService{
 	@Autowired
 	private AddressEntityRepsoitory aRepo;
 	
+	
 	@Override
 	public void myPageBaseAddr(String id, Model model) {
 		model.addAttribute("mpageaddr",aRepo.findByBaseAndMemberId(true,id)
 				.map(AddressDetailDTO::new).orElseThrow()
 				);
 	}
+
+
+		
+	
 
 }
