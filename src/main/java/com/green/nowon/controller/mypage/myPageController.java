@@ -5,8 +5,12 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
+import com.green.nowon.domain.dto.memberDTO.MemberUpdateDTO;
 import com.green.nowon.security.MyUserDetails;
+import com.green.nowon.service.MemberService;
 import com.green.nowon.service.mypage.MyPageService;
 
 @Controller
@@ -14,6 +18,9 @@ public class myPageController {
 	
 	@Autowired
 	private MyPageService service;
+	
+	@Autowired
+	private MemberService memberService;
 	
 	@GetMapping("/mypage")
 	public String myPageInfo() {
@@ -27,5 +34,15 @@ public class myPageController {
 		service.myPageBaseAddr(userDetails.getId(),model);
 		return "mypage/mypage-baseaddr";
 	}
+	
+	
+	@PatchMapping("/mypage/{id}/update")
+	public String update(@PathVariable long id, MemberUpdateDTO dto) {
+		System.out.println("update patch 작동");
+		memberService.update(id, dto);
+		return "redirect:/admin/goods/list";
+	}
+	
+	
 	
 }
