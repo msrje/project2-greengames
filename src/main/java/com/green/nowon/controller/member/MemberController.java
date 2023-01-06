@@ -35,9 +35,12 @@ public class MemberController {
 	public String update() {
 		return "/admin/employeeUpdate";
 	}
-	@GetMapping("/list")
-	public String memberList() {
+	@GetMapping("/employee")
+	public String employeeList() {
 		return"member/employee-list";
 	}
-	
+	@GetMapping("/salary")
+	public String memberList() {
+		return"member/salary-list";
+	}
 }
