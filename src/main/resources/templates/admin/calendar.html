@@ -59,17 +59,6 @@
 										}//전송할 객체 생성
 
 										console.log(obj); //서버로 해당 객체를 전달해서 DB 연동 가능
-
-										$.ajax({
-											url : "/schedule/calendar",
-											type : "post",
-											contentType : false,
-											processData : false,
-											data : obj,
-											success : function(map) {
-
-											}
-										});
 									}
 								});
 					}
@@ -87,7 +76,7 @@
 </head>
 <body class="flex">
 	<th:block th:insert="~{admin/AdminLayout :: header}" />
-	<div style="width: 1000px; height: 760px; margin: auto;">
+	<div style="width: 1000px; height: 1000px; margin: auto;">
 		<div id='calendar'></div>
 	</div>
 	<div class="modal fade" id="calendarModal" tabindex="-1" role="dialog"
