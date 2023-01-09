@@ -52,24 +52,50 @@
 	    			</div>
 	    			<br>
 	    			<div class="member-info">
-		    			<p>이름</p>
-		    			<p>사원번호</p>
-		    			<p>전화번호</p>
-		    			<p>이메일</p>
-		    			<p>직책</p>
+	    				<form>
+	    					<ul>
+	    						<li>
+	    							<label for="name">이름 -</label>
+	    							<span>[[${detail.name}]]</span>
+	    						</li>
+	    						<li>
+	    							<label for="name">사번 -</label>
+	    							<span>[[${detail.mno}]]</span>
+	    						</li>
+	    						<li>
+	    							<label for="name">전화번호 -</label>
+	    							<span>[[${detail.phone}]]</span>
+	    							
+	    						</li>
+	    						<li>
+	    							<label for="name">id=email -</label>
+	    							<span>[[${detail.id}]]</span>
+	    							
+	    						</li>
+	    						<li>
+	    							<label for="name">직책 -</label>
+	    							<span></span>
+	    							
+	    						</li>
+	    					</ul>
+	    				</form>
 		    		</div>
 		    		<ul id="mypage-addr">
-		    			<li onclick="memuAdClicked(this)">
-		    				<button type="button">주소확인</button>										
-							<div class="baseAddrs" id="base-address">
-								<p>배송지 정보가 존재하지 않습니다.</p>
-							</div>
-						</li>
+		    			<li>
+		    				<input type="hidden" id="base" name="base" th:value="${mpageaddr.base}">
+							<input type="text" readonly="readonly" id="postcode" name="postcode" placeholder="우편번호" th:value="${mpageaddr.postcode}">
+							<br>
+							<input type="text" readonly="readonly" id="roadAddress" name="roadAddress" placeholder="도로명주소" th:value="${mpageaddr.roadAddress}">
+							<br>
+							<input type="text" readonly="readonly" id="jibunAddress" name="jibunAddress" placeholder="지번주소" th:value="${mpageaddr.jibunAddress}">
+							<span id="guide" style="color:#999;display:none"></span>
+							<br>
+							<input type="text" id="detailAddress"  name="detailAddress" placeholder="상세주소" th:value="${mpageaddr.detailAddress}">
+		    			</li>
 		    		</ul>
 		    		<div style="text-align:center;">
 		    			<button>개인정보수정</button>
 		    		</div>
-		    		
 	    		</div>
 	    	</div>
 		</div>
@@ -90,7 +116,7 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td>사원번호</td>
+						<td>사번</td>
 						<td>이름</td>
 						<td>직책</td>
 						<td>기본급여</td>
@@ -108,7 +134,7 @@
 					</div>
 					<div class="text-link">
 						<a>업무</a>
-						<a>휴가/병가</a>			
+						<a>휴가/병가</a>	
 					</div>
 				</div>
 			</div>		
