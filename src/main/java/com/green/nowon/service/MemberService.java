@@ -10,9 +10,13 @@ public interface MemberService {
 	
 	void detail(long mno, Model model ,Model model2) ;
 	
-	static String saveUser(MemberInsertDTO memberInsertDTO) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
+	void list(Model model);
+
+//	static String saveUser(MemberInsertDTO memberInsertDTO) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+
 
 }

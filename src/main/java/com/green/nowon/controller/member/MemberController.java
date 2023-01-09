@@ -1,7 +1,5 @@
 package com.green.nowon.controller.member;
 
-import javax.websocket.server.PathParam;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.green.nowon.service.MemberService;
-import com.green.nowon.service.impl.MemberSerivceProc;
 
 @Controller
 public class MemberController {
@@ -35,12 +32,16 @@ public class MemberController {
 	public String update() {
 		return "/admin/employeeUpdate";
 	}
-	@GetMapping("/employee")
+	
+	@GetMapping("/employee")//카테고리 리스트롤 사용할 예정
 	public String employeeList() {
 		return"member/employee-list";
 	}
-	@GetMapping("/salary")
-	public String memberList() {
+	
+	@GetMapping("/salary")//급여관리 페이지에서 보이는 멤버리스트
+	public String memberList(Model model) {
+		memberService.list(model);
 		return"member/salary-list";
 	}
+	
 }
