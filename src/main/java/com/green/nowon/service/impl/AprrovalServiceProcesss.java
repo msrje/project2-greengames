@@ -1,5 +1,6 @@
 package com.green.nowon.service.impl;
 
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ public class AprrovalServiceProcesss implements ApprovalService{
 		repo.save(ApprovalEntity.builder()
 				.title(dto.getTitle())
 				.content(dto.getContent())
+				.date(dto.getDate())
 				.build());
 		
 	}
@@ -36,10 +38,25 @@ public class AprrovalServiceProcesss implements ApprovalService{
 	}
 
 	@Override
-	public void detail(long ano, Model model, ApprovalListDTO dto) {
-		model.addAttribute("list", repo.findById(ano));
+	public void detail(long ano, Model model) {
+		model.addAttribute("list", repo.findById(ano).map(ApprovalListDTO::new)
+				.orElseThrow());
 		
 	}
+
+	@Override
+	public void ok(long ano) {
+			Optional<ApprovalEntity> approval=repo.findById(ano);
+			
+			approval.ifPresent(e -> {
+				e.setStatus(true);
+				repo.save(e);
+			});
+			
+		
+	}
+
+	
 
 
 

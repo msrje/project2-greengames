@@ -1,5 +1,6 @@
 package com.green.nowon.domain.dto.approval;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 import lombok.Data;
@@ -12,8 +13,6 @@ public class ApprovalSaveDTO {
 	
 	private String content;
 	
-	private LocalDate startDate;
-	
-	private LocalDate endDate;
+	private Date date;
 	
 }

@@ -13,16 +13,18 @@
    				<tr>
    					<td>결재번호</td>
    					<td>결재제목</td>
+   					<td>결재등록일</td>
    					<td>결재상태</td>
    				</tr>
    				<tr th:each="dto:${list}">
    					<td>[[${dto.ano}]]</td>
    					<td>[[${dto.title}]]</td>
+   					<td>[[${dto.date}]]</td>
    					<td>
    						<div th:if="${dto.status == false}">결재 대기중</div>
    						<div th:if="${dto.status == true}">결재 승인</div>
    					</td>
-   					<td><a href="/approval/detail/${dto.ano}"> 내용 보기 </a></td>
+   					<td><a th:href="|/approval/detail/${dto.ano}|"> 내용 보기 </a></td>
    				</tr>	
    			
    			</table>

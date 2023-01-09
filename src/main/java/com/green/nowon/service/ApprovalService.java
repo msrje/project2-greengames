@@ -11,6 +11,8 @@ public interface ApprovalService {
 
 	void list(Model model);
 
-	void detail(long ano, Model model, ApprovalListDTO dto);
+	void detail(long ano, Model model);
+
+	void ok(long ano);
 
 }

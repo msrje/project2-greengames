@@ -1,5 +1,7 @@
 package com.green.nowon.domain.dto.approval;
 
+import java.sql.Date;
+
 import com.green.nowon.domain.entity.approval.ApprovalEntity;
 
 import lombok.Data;
@@ -13,10 +15,13 @@ public class ApprovalListDTO {
 	
 	private String content;
 	
+	private Date date;
+		
 	private boolean status;
 	
 	
 	public ApprovalListDTO(ApprovalEntity e) {
+		this.date=e.getDate();
 		this.ano=e.getAno();
 		this.title=e.getTitle();
 		this.content=e.getContent();

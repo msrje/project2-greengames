@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -48,8 +49,8 @@ public class ApprovalController {
 	}
 	
 	@GetMapping("/approval/detail/{ano}")  //마무리합시다 .
-	public String detail(@PathVariable long ano,Model model,ApprovalListDTO dto) {
-		approvalService.detail(ano,model,dto);
+	public String detail(@PathVariable long ano,Model model) {
+		approvalService.detail(ano,model);
 		return "/approval/detail";
 	}
 	
@@ -57,5 +58,11 @@ public class ApprovalController {
 	public String vacation() {
 		
 		return "/approval/vacation";
+	}
+	
+	@PatchMapping("/approval/ok/{ano}")
+	public String ok(@PathVariable long ano) {
+		approvalService.ok(ano);
+		return "redirect:/approval/check";
 	}
 }

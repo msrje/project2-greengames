@@ -5,26 +5,33 @@
     <title>Admin Page</title>
 	<!-- 추가 head 정보를 replace 할 위치 -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-	<link rel="stylesheet" href="/css/common/common.css">
+	<link rel="stylesheet" href="/css/commons/common.css">
 	<link rel="stylesheet" href="/css/admin/admin-layout.css">
 </head>
 <body id="layout-admin">
     <header>
-   		<h1></h1>
    		<div class="wrap">
    			<ul>
    				<li>
-   					<img src="/image/logo/logo.png" style="width: 150px;">
+   					<a href="/admin">
+   						<img src="/image/logo/logo.png" style="width: 150px; border-bottom: 1px solid white;">
+   					</a>
    				</li>
-   				<li>
-   					<dl>
-   						<a href="/">마이페이지</a>
-   					</dl>   				
-   				</li>
+   			</ul>
+   				<div style="text-align: center;">
+   					<img src="/image/test/profiletest.jpeg" style="width: 120px; border-radius: 50%; padding-top: 10px;">
+   					<!--접속한 사원의 이미지-->
+   					<p>접속한사원의이름</p>
+   					<p>사원번호</p>
+   				</div>
+   				<div style="text-align: center;">
+   					<a href="/mypage">내정보</a>
+				</div>
+			<ul>
    				<li>
    					<dl>
    						<dt>인사관리</dt>
-   						<dd><a href="/">사원정보관리</a></dd>
+   						<dd><a href="/list">사원정보관리</a></dd>
    						<dd><a href="/">급여관리</a></dd>
    					</dl>
    				</li>
@@ -61,6 +68,10 @@
    					</dl>
    				</li>
    			</ul>
+   			<br>
+   			<div style="text-align: center;">
+   				<a href="/adminlist">관리자페이지</a>
+   			</div>
    		</div>
    	</header>
 </body>
