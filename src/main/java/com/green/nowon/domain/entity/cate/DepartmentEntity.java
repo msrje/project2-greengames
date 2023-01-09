@@ -40,7 +40,7 @@ public class DepartmentEntity {
 	private int depth;
 	
 	@JoinColumn
-	@ManyToOne
+	@ManyToOne//parent_dno
 	private DepartmentEntity parent; 
 	
 }

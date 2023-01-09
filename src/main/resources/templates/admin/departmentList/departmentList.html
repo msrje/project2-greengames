@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" >
+<head>
+ 	<th:block th:insert="~{admin/AdminLayout :: head}"/>
+	<script type="text/javascript">
+    	//var left=0;
+    	$(function(){
+    		createCategory($(".gnb"));
+    	});
+    	
+    	function createCategory(target){
+    		var parentDno=$(target).attr("value");
+    		console.log("pno:"+parentDno);
+    		$.ajax({
+    			url:`/admin/departmentsList/${parentDno}`,
+    			success:function(olTag){
+    				$(target).children(".cate-wrap").html(olTag);
+    				var sub=$(target).find(".cate");
+    				$.each(sub, subCategory);
+    			}
+    		});
+    	}
+    	function subCategory(){
+    		createCategory($(this));
+    	}
+    </script>
+</head>
+<body class="flex">
+    <th:block th:insert="~{admin/AdminLayout :: header}"/>
+    <main>
+	<h1>메인컨텐츠</h1>
+	<div class="wrap">
+		<ul class="flex">
+			<li value="0" class="gnb cate">
+				<a href="#" class="flex">
+					<span>전체상품보기</span>
+				</a>
+				<div class="cate-wrap">
+				
+				</div>
+			</li>
+		</ul>
+	</div>
+</main>
+</body>
+</html>
