@@ -10,6 +10,8 @@ public interface BoardService {
 	void getListAll(int page, Model model);
 
 	void sendDetail(long bno, Model model);
+	
+	void save(BoardSaveDTO dto, String name);
 
 	void save(BoardSaveDTO dto);
 

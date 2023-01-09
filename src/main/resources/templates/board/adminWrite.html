@@ -31,6 +31,14 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		}
 	};
 	
+	function btn_click(str){                             
+        if(str=="notice"){                                 
+            frm1.action="/notice-boards";      
+        } else if(str=="normal"){      
+            frm1.action="/boards";      
+        }
+	};
+        
 	</script>
 </head>
 <body class="flex">
@@ -39,7 +47,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     	<h1>메인컨텐츠</h1>
     	<div class="wrap">
 		<p class="pagetitle">게시물 작성</p>
-    		<form class="form" action="/admin/boards-registration" method="post">
+    		<form class="form" method="post"> <!-- 관리자 목록으로..?  -->
 	    		<table class="all">
 	    			<tr>
 	    				<td>제목</td>
@@ -59,7 +67,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	    			</tr>
 	    			<tr>
 	    				<td colspan="2">
-							<button>등록</button>
+							<input type="submit" value="공지사항 등록" onclick='btn_click("notice");'>
+							<input type="submit" value="자유게시물 등록" onclick='btn_click("normal");'>
 	    				</td>
 	    			</tr>
 	    		</table>
