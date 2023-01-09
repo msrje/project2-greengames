@@ -4,6 +4,7 @@ import org.springframework.ui.Model;
 
 public interface MyPageService {
 
-	void myPageBaseAddr(String id, Model model);
+
+	void info(long mno, Model model, Model model2);
 
 }

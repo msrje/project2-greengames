@@ -1,5 +1,7 @@
 package com.green.nowon.service.impl;
 
+import java.util.stream.Collectors;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +47,11 @@ public class MemberSerivceProc implements MemberService {
 		model2.addAttribute("aDetail",addressRepo.findByMember_mno(mno)
 				.map(AddressDetailDTO::new)
 				.orElseThrow());
+	}
+
+	@Override
+	public void list(Model model) {
+		model.addAttribute("list", memberRepo.findAll().stream()
+				.map(MemberDetailDTO::new).collect(Collectors.toList()));
 	}
 }

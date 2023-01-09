@@ -7,6 +7,16 @@ import com.green.nowon.domain.dto.memberDTO.MemberInsertDTO;
 
 public interface MemberService {
 	void save(MemberInsertDTO mdto,AddressInsertDTO adto);
+	
 	void detail(long mno, Model model ,Model model2) ;
+	
+
+	void list(Model model);
+
+//	static String saveUser(MemberInsertDTO memberInsertDTO) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+
 
 }

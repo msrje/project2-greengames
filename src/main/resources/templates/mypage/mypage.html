@@ -38,53 +38,74 @@
 	    <div>
 	    	<div class="mypage">
 	    		<div class="wrap-title">
-	    			<h1 class="mypage-title">
-	    				<strong>접속한 회원의 이름</strong>
-	    				"님 어서오세요."
-	    			</h1>
+	    			<h2 class="mypage-title">
+	    				<strong>[[${detail.name}]]</strong>
+	    				님 어서오세요.
+	    			</h2>
 	    		</div>
+	    		<div style="text-align: right;">
+		    		<a>캘린더</a>
+		    	</div>
 	    		<div class="mypage-info">
 	    			<div class="mypage-img">
 	    				<img src="/image/test/profiletest.jpeg" align="left">
 	    			</div>
 	    			<br>
 	    			<div class="member-info">
-		    			<p>이름</p>
-		    			<p>사원번호</p>
-		    			<p>전화번호</p>
-		    			<p>이메일</p>
-		    			<p>직책</p>
+	    				<form>
+	    					<ul>
+	    						<li>
+	    							<label for="name">이름 -</label>
+	    							<span>[[${detail.name}]]</span>
+	    						</li>
+	    						<li>
+	    							<label for="name">사번 -</label>
+	    							<span>[[${detail.mno}]]</span>
+	    						</li>
+	    						<li>
+	    							<label for="name">전화번호 -</label>
+	    							<span>[[${detail.phone}]]</span>
+	    							
+	    						</li>
+	    						<li>
+	    							<label for="name">id=email -</label>
+	    							<span>[[${detail.id}]]</span>
+	    							
+	    						</li>
+	    						<li>
+	    							<label for="name">직책 -</label>
+	    							<span></span>
+	    							
+	    						</li>
+	    					</ul>
+	    				</form>
 		    		</div>
 		    		<ul id="mypage-addr">
-		    			<li onclick="memuAdClicked(this)">
-		    				<button type="button">주소확인</button>										
-							<div class="baseAddrs" id="base-address">
-								<p>배송지 정보가 존재하지 않습니다.</p>
-							</div>
-						</li>
+		    			<li>
+		    				<input type="hidden" id="base" name="base" th:value="${mpageaddr.base}">
+							<input type="text" readonly="readonly" id="postcode" name="postcode" placeholder="우편번호" th:value="${mpageaddr.postcode}">
+							<br>
+							<input type="text" readonly="readonly" id="roadAddress" name="roadAddress" placeholder="도로명주소" th:value="${mpageaddr.roadAddress}">
+							<br>
+							<input type="text" readonly="readonly" id="jibunAddress" name="jibunAddress" placeholder="지번주소" th:value="${mpageaddr.jibunAddress}">
+							<span id="guide" style="color:#999;display:none"></span>
+							<br>
+							<input type="text" id="detailAddress"  name="detailAddress" placeholder="상세주소" th:value="${mpageaddr.detailAddress}">
+		    			</li>
 		    		</ul>
-		    		<div style="text-align:right; margin-right: 50px;">
+		    		<div style="text-align:center;">
 		    			<button>개인정보수정</button>
 		    		</div>
 	    		</div>
 	    	</div>
 		</div>
-		<div class="approval-1">
-			<div class="approval-2">
-				<div class="approval-3">
-					<div>전자결재
-						<br>
-						<a>업무</a>
-						<a>휴가/병가</a>
-					</div>
-				</div>
-			</div>		
-		</div>
-		<div>급여정보
+		
+		<div class="salary-info">
+		<p>이번달 내 급여정보</p>
 			<table>
 				<thead>
 				<!-- thymleaf사용 -->
-					<tr>
+					<tr class="salary-info-1">
 						<td>사원번호</td>
 						<td>이름</td>
 						<td>직책</td>
@@ -95,7 +116,7 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td>사원번호</td>
+						<td>사번</td>
 						<td>이름</td>
 						<td>직책</td>
 						<td>기본급여</td>
@@ -105,6 +126,20 @@
 				</tbody>
 			</table>
 		</div>
+		<div class="approval-1">
+			<div class="approval-2">
+				<div class="approval-3">
+					<div>
+						<p>전자결재</p>
+					</div>
+					<div class="text-link">
+						<a>업무</a>
+						<a>휴가/병가</a>	
+					</div>
+				</div>
+			</div>		
+		</div>
+		
 		<div>
 			<h1>캘린더 위치</h1>
 		</div>
