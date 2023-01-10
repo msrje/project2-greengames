@@ -8,7 +8,8 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 	<script src="/js/admin/AdminLayout.js"></script>
 	<link rel="stylesheet" href="/css/commons/common.css">
-	<link rel="stylesheet" href="/css/admin/admin-layout.css">	
+	<link rel="stylesheet" href="/css/admin/admin-layout.css">
+	
 </head>
 <body id="layout-admin">
     <header>
@@ -29,7 +30,7 @@
    					<p th:text="${#authentication.principal.mno}">
    				</div>
    				<div style="text-align: center;">
-   					<a href="/mypage/info/{mno}">내정보</a>
+   					<a th:href="|/mypage/info/${#authentication.principal.mno}|" class="test">내정보</a>
    					<a href="/login" style="font-size: 11px;">로그아웃</a>
 				</div>
 			<ul>
@@ -59,8 +60,7 @@
    					<dl>
    						<dt>스케쥴관리</dt>
    						<dd><a href="/">출/퇴근 관리</a></dd>
-   						<dd><a href="/">휴가</a></dd>
-   						<dd><a href="/">병가</a></dd>
+   						<dd><a href="/schedule/Request-for-Vacation">휴가/병가</a></dd>
    						<dd><a href="/schedule/calendar">캘린더</a></dd>
    						
    					</dl>

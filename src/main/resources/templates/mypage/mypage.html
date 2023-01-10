@@ -1,110 +1,89 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org" 
+<html xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
- 	<th:block th:insert="~{admin/AdminLayout :: head}"/>
-	<link rel="stylesheet" href="/css/default.css">
-	<th:block th:insert="~{admin/AdminLayout :: header}"/>
-	<link rel="stylesheet" href="/css/member/mypage.css">
-	<script type="text/javascript">
-		$(function(){
-			getBaseAddr();
+<link rel="stylesheet" href="/css/admin/main.css">
+<script src='/js/main.js'></script>
+<th:block th:insert="~{admin/AdminLayout :: head}" />
+<link rel="stylesheet" href="/css/default.css">
+<th:block th:insert="~{admin/AdminLayout :: header}" />
+<link rel="stylesheet" href="/css/member/mypage.css">
+<script type="text/javascript">
+
+	document.addEventListener('DOMContentLoaded', function() {
+		var calendarEl = document.getElementById('calendar');
+		var calendar = new FullCalendar.Calendar(calendarEl, {
+			initialView : 'dayGridMonth'
 		});
-		function getBaseAddr(){
-			$.ajax({
-				url:"/mypage/address/base",
-				success:function(resultHTML){
-					$("#base-address").html(resultHTML);
-				},
-				error:function(){
-					memuAdClicked($("myepage-addr>li").eq(1));
-					console.log("등록된 주소가 없습니다.");
-				}
-			});
-		}
-			function memuAdClicked(el){
-				if($(el).index()==0){
-					getBaseAddr();
-					return;
-				}
-				$("#mypage-addr>li").removeClass("target");
-				$(el).addClass("target");
-			}
-		 
-	</script>
+		calendar.render();
+	});
+</script>
 </head>
 <body class="flex">
-    <main>
-	    <div>
-	    	<div class="mypage">
-	    		<div class="wrap-title">
-	    			<h2 class="mypage-title">
-	    				<strong>[[${detail.name}]]</strong>
-	    				님 어서오세요.
-	    			</h2>
-	    		</div>
-	    		<div style="text-align: right;">
-		    		<a>캘린더</a>
-		    	</div>
-	    		<div class="mypage-info">
-	    			<div class="mypage-img">
-	    				<img src="/image/test/profiletest.jpeg" align="left">
-	    			</div>
-	    			<br>
-	    			<div class="member-info">
-	    				<form>
-	    					<ul>
-	    						<li>
-	    							<label for="name">이름 -</label>
-	    							<span>[[${detail.name}]]</span>
-	    						</li>
-	    						<li>
-	    							<label for="name">사번 -</label>
-	    							<span>[[${detail.mno}]]</span>
-	    						</li>
-	    						<li>
-	    							<label for="name">전화번호 -</label>
-	    							<span>[[${detail.phone}]]</span>
-	    							
-	    						</li>
-	    						<li>
-	    							<label for="name">id=email -</label>
-	    							<span>[[${detail.id}]]</span>
-	    							
-	    						</li>
-	    						<li>
-	    							<label for="name">직책 -</label>
-	    							<span></span>
-	    							
-	    						</li>
-	    					</ul>
-	    				</form>
-		    		</div>
-		    		<ul id="mypage-addr">
-		    			<li>
-		    				<input type="hidden" id="base" name="base" th:value="${mpageaddr.base}">
-							<input type="text" readonly="readonly" id="postcode" name="postcode" placeholder="우편번호" th:value="${mpageaddr.postcode}">
-							<br>
-							<input type="text" readonly="readonly" id="roadAddress" name="roadAddress" placeholder="도로명주소" th:value="${mpageaddr.roadAddress}">
-							<br>
-							<input type="text" readonly="readonly" id="jibunAddress" name="jibunAddress" placeholder="지번주소" th:value="${mpageaddr.jibunAddress}">
-							<span id="guide" style="color:#999;display:none"></span>
-							<br>
-							<input type="text" id="detailAddress"  name="detailAddress" placeholder="상세주소" th:value="${mpageaddr.detailAddress}">
-		    			</li>
-		    		</ul>
-		    		<div style="text-align:center;">
-		    			<button>개인정보수정</button>
-		    		</div>
-	    		</div>
-	    	</div>
+	<main>
+		<div>
+			<div class="mypage">
+				<div class="wrap-title">
+					<h2 class="mypage-title">
+						<strong>[[${detail.name}]]</strong> 님 어서오세요.
+					</h2>
+				</div>
+				<div style="text-align: right;">
+					<a style="position: relative; left: 122px; top:-20px; font-weight: bold; font-size: 20px">캘린더</a>
+					<div style="width: 500px; position: relative; left: 900px;">
+						<div id='calendar'></div>
+					</div>
+				</div>
+				<div class="mypage-info">
+					<div class="mypage-img">
+						<img src="/image/test/profiletest.jpeg" align="left">
+					</div>
+					<br>
+					<div class="member-info">
+						<form>
+							<ul>
+								<li><label for="name">이름 -</label> <span>[[${detail.name}]]</span>
+								</li>
+								<li><label for="name">사번 -</label> <span>[[${detail.mno}]]</span>
+								</li>
+								<li><label for="name">전화번호 -</label> <span>[[${detail.phone}]]</span>
+
+								</li>
+								<li><label for="name">id=email -</label> <span>[[${detail.id}]]</span>
+
+								</li>
+								<li><label for="name">직책 -</label> <span></span></li>
+							</ul>
+						</form>
+					</div>
+					<ul id="mypage-addr">
+						<li><input type="hidden" id="base" name="base"
+							th:value="${mpageaddr.base}"> <input type="text"
+							readonly="readonly" id="postcode" name="postcode"
+							placeholder="우편번호" th:value="${mpageaddr.postcode}"> <br>
+							<input type="text" readonly="readonly" id="roadAddress"
+							name="roadAddress" placeholder="도로명주소"
+							th:value="${mpageaddr.roadAddress}"> <br> <input
+							type="text" readonly="readonly" id="jibunAddress"
+							name="jibunAddress" placeholder="지번주소"
+							th:value="${mpageaddr.jibunAddress}"> <span id="guide"
+							style="color: #999; display: none"></span> <br> <input
+							type="text" id="detailAddress" name="detailAddress"
+							placeholder="상세주소" th:value="${mpageaddr.detailAddress}">
+						</li>
+					</ul>
+					<div style="text-align: center;">
+						<a th:href="|/mypage/${mno}|"><button>개인정보수정</button></a>
+					</div>
+				</div>
+			</div>
 		</div>
-		
+
 		<div class="salary-info">
-		<p>이번달 내 급여정보</p>
+			<p>이번달 내 급여정보</p>
 			<table>
 				<thead>
-				<!-- thymleaf사용 -->
+					<!-- thymleaf사용 -->
 					<tr class="salary-info-1">
 						<td>사원번호</td>
 						<td>이름</td>
@@ -133,16 +112,14 @@
 						<p>전자결재</p>
 					</div>
 					<div class="text-link">
-						<a>업무</a>
-						<a>휴가/병가</a>	
+						<a>업무</a> <a>휴가/병가</a>
 					</div>
 				</div>
-			</div>		
+			</div>
 		</div>
-		
 		<div>
 			<h1>캘린더 위치</h1>
 		</div>
-    </main>
+	</main>
 </body>
 </html>
