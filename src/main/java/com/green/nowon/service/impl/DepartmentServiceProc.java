@@ -1,5 +1,6 @@
 package com.green.nowon.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,16 +42,19 @@ public class DepartmentServiceProc implements DepartmentService {
 	 */
 	@Override
 	public void departmentList(Long parentDno, Model model) {
-		System.err.println(">>>>>>>>>>>>>>>"+parentDno);
-		if(parentDno.intValue()==0)parentDno=null;//null은 회사명
-		System.err.println(">>>>>>>>>>>>>>>"+parentDno);
-		model.addAttribute("list", departmentRepo.findByParentDnoOrderByDnameAsc(parentDno));
+//		if(parentDno.intValue()==0)parentDno=null;//null은 회사명
+//		List<DepartmentEntity> list = departmentRepo.findAll();
+		if(parentDno.intValue()==0)parentDno=null;
+		List<DepartmentEntity> result= departmentRepo.findAllByParentDno(parentDno);
+		
+//		model.addAttribute("list", departmentRepo.findByParentDnoOrderByDnameAsc(parentDno));
+		model.addAttribute("list", result);
 	}
+
 	@Override
 	public void firstDepartment(Model model) {
-		System.err.println(model);
-		model.addAttribute("list", departmentRepo.findByParentDnoOrderByDnameAsc(null));
-		System.err.println(model);
+		// TODO Auto-generated method stub
+		
 	}
 
 }
