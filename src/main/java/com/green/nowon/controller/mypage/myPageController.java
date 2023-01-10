@@ -5,6 +5,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.green.nowon.security.MyUserDetails;
 import com.green.nowon.service.mypage.MyPageService;
@@ -15,17 +16,13 @@ public class myPageController {
 	@Autowired
 	private MyPageService service;
 	
-	@GetMapping("/mypage")
-	public String myPageInfo() {
+	@GetMapping("/mypage/info/{mno}")
+	public String myPageInfo(@PathVariable long mno,Model model,Model model2) {
+		service.info(mno,model,model2);
 		return"mypage/mypage";
 	}
 	
 
 	
-	@GetMapping("/mypage/address/base")
-	public String baseAddr(@AuthenticationPrincipal MyUserDetails userDetails, Model model) {
-		service.myPageBaseAddr(userDetails.getId(),model);
-		return "mypage/mypage-baseaddr";
-	}
 	
 }

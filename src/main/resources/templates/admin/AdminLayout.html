@@ -29,14 +29,15 @@
    					<p th:text="${#authentication.principal.mno}">
    				</div>
    				<div style="text-align: center;">
-   					<a href="/mypage">내정보</a>
+   					<a href="/mypage/info/{mno}">내정보</a>
+   					<a href="/login" style="font-size: 11px;">로그아웃</a>
 				</div>
 			<ul>
    				<li>
    					<dl>
    						<dt>인사관리</dt>
-   						<dd><a href="/list">사원정보관리</a></dd>
-   						<dd><a href="/">급여관리</a></dd>
+   						<dd><a href="/employee">사원정보관리</a></dd>
+   						<dd><a href="/salary">급여관리</a></dd>
    					</dl>
    				</li>
    				<li>
@@ -48,8 +49,10 @@
    				<li>
    					<dl>
    						<dt>업무결재</dt>
-   						<dd><a href="/">전자결재</a></dd>
-   						<dd><a href="/">휴가및병가</a></dd>
+   						<dd><a href="/approval">전자결재</a></dd>
+   						<dd><a href="/approval/vacation">휴가및병가</a></dd>
+   						<dd><a href="/approval/check">결재확인</a></dd>
+   						<dd><a href="/approval/sure">결재확인</a></dd>
    					</dl>
    				</li>
    				<li>
@@ -58,7 +61,7 @@
    						<dd><a href="/">출/퇴근 관리</a></dd>
    						<dd><a href="/">휴가</a></dd>
    						<dd><a href="/">병가</a></dd>
-   						<dd><a href="/">캘린더</a></dd>
+   						<dd><a href="/schedule/calendar">캘린더</a></dd>
    						
    					</dl>
    				</li>

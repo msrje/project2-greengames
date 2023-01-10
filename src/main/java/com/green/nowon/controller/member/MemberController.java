@@ -34,8 +34,17 @@ public class MemberController {
 	public String update() {
 		return "/admin/employeeUpdate";
 	}
-	@GetMapping("/list")
-	public String memberList() {
+	
+	@GetMapping("/employee")//카테고리 리스트롤 사용할 예정
+	public String employeeList() {
 		return"member/employee-list";
 	}
+
+	
+	@GetMapping("/salary")//급여관리 페이지에서 보이는 멤버리스트
+	public String memberList(Model model) {
+		memberService.list(model);
+		return"member/salary-list";
+	}
+	
 }
