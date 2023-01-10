@@ -33,6 +33,14 @@ public class MyPageServiceProcess implements MyPageService{
 	}
 
 
+	@Override //급여관리리스트에서 사원의 디테일페이지
+	public void salaryInfo(long mno, Model model) {
+		model.addAttribute("detail",mRepo.findById(mno)
+				.map(MemberDetailDTO::new).orElseThrow()
+				);
+	}
+
+
 		
 	
 
