@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Admin Page</title>
 	<!-- 추가 head 정보를 replace 할 위치 -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	<script src="/js/admin/AdminLayout.js"></script>
 	<link rel="stylesheet" href="/css/commons/common.css">
-	<link rel="stylesheet" href="/css/admin/admin-layout.css">
+	<link rel="stylesheet" href="/css/admin/admin-layout.css">	
 </head>
 <body id="layout-admin">
     <header>
@@ -19,10 +21,12 @@
    				</li>
    			</ul>
    				<div style="text-align: center;">
+   					<input type="hidden" id="memberNoInfo" th:value="${#authentication.principal.name}">
    					<img src="/image/test/profiletest.jpeg" style="width: 120px; border-radius: 50%; padding-top: 10px;">
    					<!--접속한 사원의 이미지-->
-   					<p>접속한사원의이름</p>
-   					<p>사원번호</p>
+   					
+   					<p th:text="${#authentication.principal.name}"></p>
+   					<p th:text="${#authentication.principal.mno}">
    				</div>
    				<div style="text-align: center;">
    					<a href="/mypage/info/{mno}">내정보</a>
