@@ -36,15 +36,21 @@ public class DepartmentServiceProc implements DepartmentService {
 				.orElseGet(()->departmentRepo.save(DepartmentEntity.builder().dname(names[2]).depth(3).parent(cate2).build()));
 	}
 
+	/**
+	 * 부서들 리스트 카테고리
+	 */
 	@Override
 	public void departmentList(Long parentDno, Model model) {
+		System.err.println(">>>>>>>>>>>>>>>"+parentDno);
 		if(parentDno.intValue()==0)parentDno=null;//null은 회사명
+		System.err.println(">>>>>>>>>>>>>>>"+parentDno);
 		model.addAttribute("list", departmentRepo.findByParentDnoOrderByDnameAsc(parentDno));
 	}
-
 	@Override
 	public void firstDepartment(Model model) {
+		System.err.println(model);
 		model.addAttribute("list", departmentRepo.findByParentDnoOrderByDnameAsc(null));
+		System.err.println(model);
 	}
 
 }

@@ -24,6 +24,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 /**
  * @author LeeYongJu
  * 직원 관련 DB
@@ -36,6 +37,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Setter
 @SequenceGenerator(name = "seq_gen_GgMember", 
 		sequenceName = "seq_GgMember", initialValue = 1, allocationSize = 1)
 @Table(name = "GgMember")
@@ -46,7 +48,7 @@ public class MemberEntity extends BaseDateEntity{
 	@Id
 	private long mno;//사원번호
 	
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false)
 	private String name;
 	
 	@Column(nullable = false, unique = true)
@@ -70,9 +72,6 @@ public class MemberEntity extends BaseDateEntity{
 	}
 	
 	public MemberEntity update(MemberUpdateDTO dto) {
-		this.id=dto.getId();
-		this.pass=dto.getPass();
-		this.name = dto.getName();
 		this.phone = dto.getPhone();
 		return this;
 	}

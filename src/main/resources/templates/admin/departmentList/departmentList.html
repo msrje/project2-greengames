@@ -10,13 +10,17 @@
     	
     	function createCategory(target){
     		var parentDno=$(target).attr("value");
-    		console.log("pno:"+parentDno);
+    		console.log("parentDno:"+parentDno);
     		$.ajax({
     			url:`/admin/departmentsList/${parentDno}`,
     			success:function(olTag){
     				$(target).children(".cate-wrap").html(olTag);
     				var sub=$(target).find(".cate");
     				$.each(sub, subCategory);
+    				alert("1");
+    			},
+    			error:function(){
+    				alert("실패");	
     			}
     		});
     	}
@@ -36,7 +40,7 @@
 					<span>전체상품보기</span>
 				</a>
 				<div class="cate-wrap">
-				
+					
 				</div>
 			</li>
 		</ul>
