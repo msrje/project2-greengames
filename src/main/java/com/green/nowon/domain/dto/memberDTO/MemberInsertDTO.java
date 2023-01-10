@@ -1,10 +1,13 @@
 package com.green.nowon.domain.dto.memberDTO;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.green.nowon.domain.entity.member.MemberEntity;
-
-import com.green.nowon.security.MyRole;
+import com.green.nowon.domain.entity.member.ProfileEntity;
+import com.green.nowon.util.MyFileUtils;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +20,7 @@ public class MemberInsertDTO {
 	private String pass;
 	private String name;
 	private String phone;
+	
 	
 	//비밀번호
 	public MemberEntity signin(PasswordEncoder pe) {
