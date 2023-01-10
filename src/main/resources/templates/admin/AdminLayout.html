@@ -8,7 +8,8 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 	<script src="/js/admin/AdminLayout.js"></script>
 	<link rel="stylesheet" href="/css/commons/common.css">
-	<link rel="stylesheet" href="/css/admin/admin-layout.css">	
+	<link rel="stylesheet" href="/css/admin/admin-layout.css">
+	
 </head>
 <body id="layout-admin">
     <header>
@@ -29,7 +30,7 @@
    					<p th:text="${#authentication.principal.mno}">
    				</div>
    				<div style="text-align: center;">
-   					<a href="/mypage/info/{mno}">내정보</a>
+   					<a th:href="|/mypage/info/${#authentication.principal.mno}|" class="test">내정보</a>
    					<a href="/login" style="font-size: 11px;">로그아웃</a>
 				</div>
 			<ul>
