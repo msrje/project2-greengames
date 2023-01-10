@@ -9,8 +9,11 @@ import org.springframework.ui.Model;
 
 import com.green.nowon.domain.dto.approval.ApprovalListDTO;
 import com.green.nowon.domain.dto.approval.ApprovalSaveDTO;
+import com.green.nowon.domain.dto.attendance.AttendanceSaveDTO;
 import com.green.nowon.domain.entity.approval.ApprovalEntity;
 import com.green.nowon.domain.entity.approval.ApprovalEntityRepository;
+import com.green.nowon.domain.entity.attendance.AttendanceEntity;
+import com.green.nowon.domain.entity.attendance.AttendanceEntityRepository;
 import com.green.nowon.service.ApprovalService;
 
 @Service
@@ -18,6 +21,9 @@ public class AprrovalServiceProcesss implements ApprovalService{
 
 	@Autowired
 	ApprovalEntityRepository repo;
+	
+	@Autowired
+	AttendanceEntityRepository adrepo;
 	
 	@Override
 	public void save(ApprovalSaveDTO dto) {
@@ -53,6 +59,21 @@ public class AprrovalServiceProcesss implements ApprovalService{
 				repo.save(e);
 			});
 			
+		
+	}
+
+	@Override
+	public void save(AttendanceSaveDTO dto) {		
+		repo.save(ApprovalEntity.builder()
+				.content(dto.getContent())
+				.date(dto.getDate())
+				.title(dto.getAdtype())
+				.adno(AttendanceEntity.builder()
+						.adtype(dto.getAdtype())
+						.sdate(dto.getSdate())
+						.edate(dto.getEdate())
+						.build())
+				.build());
 		
 	}
 

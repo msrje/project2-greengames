@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.green.nowon.domain.dto.approval.ApprovalListDTO;
 import com.green.nowon.domain.dto.approval.ApprovalSaveDTO;
+import com.green.nowon.domain.dto.attendance.AttendanceSaveDTO;
 import com.green.nowon.service.ApprovalService;
 
 @Controller
@@ -27,13 +28,13 @@ public class ApprovalController {
 	@PostMapping("/approval/save")
 	public String save(ApprovalSaveDTO dto) {
 		approvalService.save(dto);
-		return "redirect:/approval";
+		return "redirect:/approval/check";
 	}
 	
 	@PostMapping("/approval/vacation")
-	public String vacation(ApprovalSaveDTO dto) {
+	public String vacation(AttendanceSaveDTO dto) {
 		approvalService.save(dto);
-		return "redirect:/approval";
+		return "redirect:/approval/check";
 	}
 	
 	@GetMapping("/approval/check")
