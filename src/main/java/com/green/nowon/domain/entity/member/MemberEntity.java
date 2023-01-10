@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.green.nowon.domain.dto.memberDTO.MemberUpdateDTO;
 import com.green.nowon.domain.entity.BaseDateEntity;
 import com.green.nowon.security.MyRole;
 
@@ -67,5 +68,14 @@ public class MemberEntity extends BaseDateEntity{
 		roles.add(role);
 		return this;
 	}
+	
+	public MemberEntity update(MemberUpdateDTO dto) {
+		this.id=dto.getId();
+		this.pass=dto.getPass();
+		this.name = dto.getName();
+		this.phone = dto.getPhone();
+		return this;
+	}
+	
 	
 }

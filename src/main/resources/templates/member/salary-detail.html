@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" 
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+ 	<th:block th:insert="~{admin/AdminLayout :: head}"/>
+	<link rel="stylesheet" href="/css/default.css">
+	<th:block th:insert="~{admin/AdminLayout :: header}"/>
+	<link rel="stylesheet" href="/css/member/mypage.css">
+</head>
+<body class="flex">
+    <main>
+	    <div>
+	    	<div class="mypage">
+	    		<div class="mypage-info">
+	    			<div class="mypage-img">
+	    				<img src="/image/test/profiletest.jpeg" align="left">
+	    			</div>
+	    			<br>
+	    			<div class="member-info">
+	    				<form>
+	    					<ul>
+	    						<li>
+	    							<label for="name">이름 -</label>
+	    							<span>[[${detail.name}]]</span>
+	    						</li>
+	    						<li>
+	    							<label for="name">사번 -</label>
+	    							<span>[[${detail.mno}]]</span>
+	    						</li>
+	    						<li>
+	    							<label for="name">전화번호 -</label>
+	    							<span>[[${detail.phone}]]</span>
+	    							
+	    						</li>
+	    						<li>
+	    							<label for="name">id=email -</label>
+	    							<span>[[${detail.id}]]</span>
+	    							
+	    						</li>
+	    						<li>
+	    							<label for="name">직책 -</label>
+	    							<span></span>
+	    							
+	    						</li>
+	    					</ul>
+	    				</form>
+		    		</div>
+	    		</div>
+	    	</div>
+		</div>
+		<div class="salary-info">
+		<p>이번달 내 급여정보</p>
+			<table>
+				<thead>
+				<!-- thymleaf사용 -->
+					<tr class="salary-info-1">
+						<td>사원번호</td>
+						<td>이름</td>
+						<td>직책</td>
+						<td>기본급여</td>
+						<td>변동금액</td>
+						<td>이번 달 급여</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>사번</td>
+						<td>이름</td>
+						<td>직책</td>
+						<td>기본급여</td>
+						<td>변동금액</td>
+						<td>이번 달 급여</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+    </main>
+</body>
+</html>
