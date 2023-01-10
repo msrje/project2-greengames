@@ -26,12 +26,14 @@ public class MyPageServiceProcess implements MyPageService{
 
 
 	@Override
-	public void info(long mno, Model model,Model model2) {
+	public void info(long mno, Model model,Model model2,Model model3) {
 		model.addAttribute("detail",mRepo.findById(mno)
 				.map(MemberDetailDTO::new).orElseThrow());
 		model2.addAttribute("mpageaddr",aRepo.findByMember_mno(mno)
 				.map(AddressDetailDTO::new)
 				.orElseThrow());
+		model3.addAttribute("infoimg",proRepo.findById(mno)
+				.map(ProfileDTO::new).orElseThrow());
 	}
 
 
@@ -49,6 +51,11 @@ public class MyPageServiceProcess implements MyPageService{
 				.map(MemberDetailDTO::new).orElseThrow()
 				);
 	}
+
+
+
+
+	
 
 
 		
