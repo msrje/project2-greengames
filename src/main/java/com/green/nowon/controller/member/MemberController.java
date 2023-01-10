@@ -48,10 +48,6 @@ public class MemberController {
 	}
 
 	
-	@GetMapping("/salary")//급여관리 페이지에서 보이는 멤버리스트
-	public String memberList(Model model) {
-		memberService.list(model);
-		return"member/salary-list";
-	}
+	
 	
 }

@@ -78,4 +78,5 @@ public class MemberEntity extends BaseDateEntity{
 	}
 	
 	
+	
 }

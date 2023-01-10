@@ -9,4 +9,7 @@ public interface MyPageService {
 
 	void salaryInfo(long mno, Model model);
 
+	void list(long mno, Model model);
+
+	
 }
