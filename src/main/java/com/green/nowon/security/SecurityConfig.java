@@ -3,10 +3,7 @@ package com.green.nowon.security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 /**
  * @author LeeYongJu
@@ -17,30 +14,30 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebSecurity
 public class SecurityConfig {
 	
-	
 	@Bean
  	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
  		http.authorizeRequests(authorize->authorize
  				.antMatchers("/css/**","/images/**","/js/**").permitAll()
+ 				.antMatchers("/log/signup").permitAll()
  				.antMatchers("/**").permitAll()
+ 				
+ 				
  				.anyRequest().authenticated()
  				)
- 				.formLogin(formLogin-> formLogin
- 						.loginPage("/login")
-							.loginProcessingUrl("/signin")
-							.usernameParameter("email")
+ 				.formLogin(login-> login
+ 							.loginPage("/login")//로그인 페이지
+							.loginProcessingUrl("/signin")//form의 action값
+							.usernameParameter("id")
 							.passwordParameter("pass")
-							.defaultSuccessUrl("/index")
-							.failureUrl("/")
+							.failureUrl("/login")//로그인 실패 시 다시 로그인페이지로 이동
+							.defaultSuccessUrl("/admin") //로그인 성공 후 인덱스페이지로 이동
+							
 							.permitAll()
 							)
  				.csrf(csrf->csrf.disable()
 		 					)
- 		
- 		;
- 				
+ 		;		
  		return http.build();
  	}
-
-
+	
 }
