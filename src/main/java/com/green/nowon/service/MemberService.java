@@ -14,5 +14,6 @@ public interface MemberService {
 	void detail(long mno, Model model ,Model model2) ;
 	Map<String, String> fileTempUpload(MultipartFile img);
 	void update(long mno, MemberUpdateDTO dto);
+  void list(Model model);
 
 }
