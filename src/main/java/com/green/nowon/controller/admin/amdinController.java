@@ -12,10 +12,6 @@ import com.green.nowon.service.DepartmentService;
 public class amdinController {
 	
 	
-	@Autowired
-	private DepartmentService  departmentService;
-	
-	
 	@GetMapping("/admin")
 	public String admin() {
 		return "admin/ggAdmin";
@@ -24,22 +20,6 @@ public class amdinController {
 	@GetMapping("/adminlist")
 	public String adminlist() {
 		return "admin/admin-list";
-	}
-
-	@GetMapping("/admin/departmentRegist")
-	public String departmentReg() {
-		return "admin/departmentCate/reg";
-	}
-	
-	@GetMapping("/admin/departments")
-	public String departmentList() {
-		return "admin/departmentList/departmentList";
-	}
-	
-	@GetMapping("/admin/departmentsList/{parentDno}")
-	public String category(@PathVariable long parentDno, Model model) {
-		departmentService.departmentList(parentDno, model);
-		return "admin/departmentCate/ol-category";
 	}
 	
 }
