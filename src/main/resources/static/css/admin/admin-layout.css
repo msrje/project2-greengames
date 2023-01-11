@@ -1,12 +1,16 @@
 @charset "UTF-8";
 
+main{
+	max-height: 105vh;
+    overflow: auto;
+    width: 100%;
+}
 
 header>.wrap{
 	background-color: #03bb85;
 	color: #fff;
-	padding: 10px 20px;
-	height: auto;
-	height: 100vh;
+	padding: 0px 20px 10px;
+	height: 105vh;
 	min-width:200px;
 }
 header>.wrap a{

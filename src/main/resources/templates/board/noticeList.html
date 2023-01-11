@@ -4,10 +4,11 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
  	<th:block th:insert="~{admin/AdminLayout :: head}"/>
 	<link rel="stylesheet" href="/css/commons/common.css">
+	<link rel="stylesheet" href="/css/board/board-list.css">
 </head>
 <body class="flex">
 	<th:block th:insert="~{admin/AdminLayout :: header}"/>
-    	<main>
+    	<main class="board-list">
 	    	<h1>공지사항 게시판</h1>
 	    	<div class="wrap">
 	    		<div>
@@ -15,9 +16,9 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	    			<th:block th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
 					<a href="/admin/boards-registration">글쓰기</a>
 				</div>
-		   		<p>공지사항</p>
-				<table border="1" >
-	    			<tr>
+		   		<p class="title">공지사항</p>
+				<table>
+	    			<tr class="board-title">
 	    				<td>No</td>
 	    				<td>제목</td>
 	    				<td>조회수</td>
