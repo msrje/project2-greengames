@@ -8,11 +8,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import com.green.nowon.domain.entity.attendance.AttendanceEntity;
 import com.green.nowon.domain.entity.member.MemberEntity;
 
 import lombok.AllArgsConstructor;
@@ -39,7 +43,7 @@ public class ApprovalEntity {
 	
 	private String content;
 	
-	private boolean status;
+	private String status;
 	
 	private Date date;
 	@OnDelete(action = OnDeleteAction.CASCADE)
@@ -47,5 +51,7 @@ public class ApprovalEntity {
 	@ManyToOne
 	private MemberEntity mno;
 	
-	private long adno;
+	@OneToOne
+	@Cascade(CascadeType.PERSIST)
+	private AttendanceEntity adno;
 }

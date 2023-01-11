@@ -13,12 +13,14 @@
 		bir = document.getElementById("todaybirthday");
 		bir.value = today;
 	}
+	
+	  
+
 </script>
 </head>
 <body class="flex">
 	<th:block th:insert="~{admin/AdminLayout :: header}"/>
 	<main>
-	<form th:action="|/approval/ok/${list.ano}|" th:method="patch">
 <span style=" font-size: 10pt; line-height: normal; margin-top: 0px; margin-bottom: 0px;"><!-- default copy start --><span style=" font-size: 10pt; line-height: normal; margin-top: 0px; margin-bottom: 0px;"> 
   
 <table style="border: 0px solid rgb(0, 0, 0); width: 800px; font-family: malgun gothic, dotum, arial, tahoma; margin-top: 1px; border-collapse: collapse;"><!-- Header --> 
@@ -119,8 +121,15 @@
 	</tbody>
 </table>
 <p style=" font-size: 10pt; line-height: 20px; margin-top: 0px; margin-bottom: 0px;"><br></p>
+<input type="hidden" name="mno" th:value="${#authentication.principal.mno}">
+<div class="flex">
+<form th:action="|/approval/ok/${list.ano}|" th:method="patch" id="myForm">
 <button>승인</button>
 </form>
+<form th:action="|/approval/refuse/${list.ano}|"; th:method="patch">
+<button>거부</button>
+</form>
+</div>
 </main>
 </body>
 </html>
