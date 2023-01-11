@@ -1,6 +1,8 @@
 package com.green.nowon.domain.entity.member;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CollectionTable;
@@ -13,6 +15,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -61,6 +64,10 @@ public class MemberEntity extends BaseDateEntity{
 	private String phone;//번호
 	
 	@Builder.Default
+	@OneToMany(mappedBy = "member")
+	List<ProfileEntity> profile=new ArrayList<>();
+	
+	@Builder.Default
 	@CollectionTable(name = "GgDeploy")
 	@Enumerated(EnumType.STRING)//직책
 	@ElementCollection(fetch = FetchType.EAGER)
@@ -75,6 +82,14 @@ public class MemberEntity extends BaseDateEntity{
 		this.phone = dto.getPhone();
 		return this;
 	}
-	
-	
+	/**
+	 * 대표이미지 없는데 없으면 @builder가 안먹힘
+	 * @return
+	 */
+	public ProfileEntity defImg() {
+		for(ProfileEntity pimg:profile) {
+			return pimg;
+		}
+		return profile.get(0);
+	}
 }
