@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+ 	<th:block th:insert="~{admin/AdminLayout :: head}"/>
+	<link rel="stylesheet" href="/css/commons/common.css">
+</head>
+<body class="flex">
+	<th:block th:insert="~{admin/AdminLayout :: header}"/>
+    	<main>
+	    	<h1>자유 게시판</h1>
+	    	<div class="wrap">
+	    		<div>
+					<a href="/general/boards-registration">글쓰기</a>
+				</div>
+		   		<p>자유게시판</p>
+				<table border="1" >
+	    			<tr>
+	    				<td>No</td>
+	    				<td>제목</td>
+	    				<td>조회수</td>
+	    				<td>작성자</td>
+	    				<td>작성일</td>
+	    			</tr>
+	    			<tr th:each="dto : ${list2}">
+	    				<td th:text="${dto.bno}">No</td>
+	    				<td><a th:href="|/boards/${dto.bno}|">[[${dto.title}]]</a></td>
+	    				<td th:text="${dto.readCount}">조회수</td>
+	    				<td>[[${dto.writer}]]</td>
+	    				<td>
+	    					<span
+	    					th:text="${dto.updatedDate.toLocalDate()}">날짜</span>
+	    				</td>
+	    			</tr>
+	    			<tr th:if="${p2.getNumberOfElements()==0}">
+	    				<td colspan="5">존재하지 않는페이지</td>
+	    			</tr>
+	    		</table>
+    		<div th:if="${p2.getNumberOfElements()>0}">
+    			<a th:if="${p2.hasPrevious()}" th:href="|/boards?page=${p2.getNumber()}|">&lt;</a>
+    			<span th:text="${p2.getNumber()+1}">현재페이지</span>
+    			/
+    			<span th:text="${p2.getTotalPages()}">총페이지수</span> 
+    			<a th:if="${p2.hasNext()}" th:href="|/boards?page=${p2.getNumber()+2}|">&gt;</a>
+    		</div>
+   			</div>
+ 		</main>
+</body>
+</html>
