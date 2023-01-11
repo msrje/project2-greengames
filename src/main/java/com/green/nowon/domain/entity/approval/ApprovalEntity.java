@@ -43,7 +43,7 @@ public class ApprovalEntity {
 	
 	private String content;
 	
-	private boolean status;
+	private String status;
 	
 	private Date date;
 	@OnDelete(action = OnDeleteAction.CASCADE)

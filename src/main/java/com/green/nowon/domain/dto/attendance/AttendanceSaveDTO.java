@@ -16,4 +16,6 @@ public class AttendanceSaveDTO {
 	private Date edate;
 
 	private String content;
+
+	private long mno;
 }

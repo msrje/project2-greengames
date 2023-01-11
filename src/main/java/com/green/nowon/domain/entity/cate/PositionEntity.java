@@ -30,10 +30,10 @@ public class PositionEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long pno;//직책 번호
 	
-	@Column(nullable = true)
+	@Column(nullable = false)
 	private String pName;//직책 이름
 	
-	@Column(nullable = true)
-	private String normalSalary;//기본금
+	@Column(nullable = false)
+	private int normalSalary;//기본금
 	
 }
