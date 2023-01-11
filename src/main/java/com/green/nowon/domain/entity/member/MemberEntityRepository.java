@@ -13,6 +13,8 @@ public interface MemberEntityRepository extends JpaRepository<MemberEntity, Long
 	MemberEntity findById(String id);
 	
 	Optional<MemberEntity> findByMno(long mno);
+
+	Optional<MemberEntity> findAllById(long mno);
 	
 }
 

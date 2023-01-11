@@ -16,8 +16,8 @@ public class SalaryController {
 	
 	
 	@GetMapping("/salary/{mno}")//급여관리 페이지에서 보이는 멤버리스트
-	public String memberList(@PathVariable long mno,Model model,Model model2) {
-		service.list(mno,model,model2);
+	public String memberList(@PathVariable long mno,Model model) {
+		service.list(mno,model);
 		return "member/salary-list";
 	}
 	
