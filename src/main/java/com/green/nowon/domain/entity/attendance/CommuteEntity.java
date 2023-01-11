@@ -17,6 +17,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.green.nowon.domain.dto.attendance.CommuteUpdateDTO;
 import com.green.nowon.domain.entity.cate.DepartmentEntity;
 import com.green.nowon.domain.entity.member.MemberEntity;
 
@@ -45,11 +46,11 @@ public class CommuteEntity {
 	@UpdateTimestamp//퇴근
 	private LocalDateTime oTime;
 
-	@Column(nullable = false)
+	@CreationTimestamp
 	private LocalDate today;
 	
-	@Column(nullable = false)
-	private String cType;
+//	@Column(nullable = false)
+//	private String cType;
 	
 	@JoinColumn(name = "mno")
 	@ManyToOne
@@ -59,6 +60,10 @@ public class CommuteEntity {
 		this.member=member;
 		return this;
 	}
-
 	
+	public CommuteEntity update(CommuteUpdateDTO dto) {
+		this.oTime = dto.getOTime();
+//		this.cType = 
+		return this;
+	}
 }
