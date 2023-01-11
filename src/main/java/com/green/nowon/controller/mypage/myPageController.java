@@ -30,9 +30,9 @@ public class myPageController {
 	private MemberService memberService;
 	
 	@GetMapping("/mypage/info/{mno}")
-	public String myPageInfo(@PathVariable long mno,@RequestParam(defaultValue = "1") int page, Model model,Model model2) {
+	public String myPageInfo(@PathVariable long mno, Model model,Model model2) {
 		service.info(mno,model,model2);
-		boardService.getListAll(page ,model);
+		boardService.getListAll02(model);
 		return"mypage/mypage";
 	}
 	

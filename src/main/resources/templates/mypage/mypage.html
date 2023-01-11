@@ -118,8 +118,9 @@
 			</div>
 		</div>
 		<div>
-				<p>내가 작성한 게시글</p>
-				<div th:if="${#authentication.name == detail.id}">
+			<p>내가 작성한 게시글</p>
+				<!-- <div th:if="${#authentication.name == list.writerId}"> -->
+			<div>	
 				<table>
 		    			<tr>
 		    				<td>No</td>
@@ -138,17 +139,7 @@
 		    					th:text="${dto.updatedDate.toLocalDate()}">날짜</span>
 		    				</td>
 		    			</tr>
-		    			<tr th:if="${p.getNumberOfElements()==0}">
-		    				<td colspan="5">존재하지 않는페이지</td>
-		    			</tr>
 		    		</table>	
-		    		<div th:if="${p.getNumberOfElements()>0}">
-		    			<a th:if="${p.hasPrevious()}" th:href="|/notice-boards?page=${p.getNumber()}|">&lt;</a>
-		    			<span th:text="${p.getNumber()+1}">현재페이지</span>
-		    			/
-		    			<span th:text="${p.getTotalPages()}">총페이지수</span> 
-		    			<a th:if="${p.hasNext()}" th:href="|/notice-boards?page=${p.getNumber()+2}|">&gt;</a>
-		    		</div>
 	    		</div>
 		</div>
 		<div>

@@ -19,6 +19,6 @@ public interface BoardService {
 
 	void update(long bno, BoardUpdateDTO dto);
 
-	void updateProc(long bno, BoardUpdateDTO dto);
+	void getListAll02(Model model);
 
 }

@@ -1,7 +1,10 @@
 package com.green.nowon.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import javax.transaction.Transactional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -84,9 +87,14 @@ public class BoardServiceProc implements BoardService{
 		
 	}
 
+	@Transactional
 	@Override
-	public void updateProc(long bno, BoardUpdateDTO dto) {
+	public void getListAll02(Model model) {
 		
+		List<BoardListDTO> result=repository.findAll().stream()
+				.map(BoardListDTO::new).collect(Collectors.toList());
+		
+		model.addAttribute("list", result);
 		
 	}
 
