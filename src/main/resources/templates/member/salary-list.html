@@ -14,25 +14,27 @@
 	    		<div class="wrap-title">
 	    			<h2>급여관리 리스트</h2>
 	    			<br>
-	    			<div class="salary-list">
-		    			<a th:href="|/salaryinfo/${#authentication.principal.mno}|"><img src="/image/test/profiletest.jpeg"></a>
+	    			<div class="salary-list" th:each="dto : ${srlist}">
+		    			<a th:href="|/salaryinfo/${#authentication.principal.mno}|">
+		    				<img th:src="${dto.plusImg}">
+		    			</a>
 		    			<br>
 		    			<ul>
 	    					<li>
 	    						<label>사번 : </label>
-	    						<span>[[${srlist.mno}]]</span>
+	    						<span>[[${dto.mno}]]</span>
 	    					</li>
 	    					<li>
 	    						<label>이름 : </label>
-	    						<span>[[${srlist.name}]]</span>
+	    						<span>[[${dto.name}]]</span>
 	    					</li>
 	    					<li>
 	    						<label>이메일 : </label>
-	    						<span>[[${srlist.id}]]</span>
+	    						<span>[[${dto.id}]]</span>
 	    					</li>
 	    					<li>
 	    						<label>연락처 : </label>
-	    						<span>[[${srlist.phone}]]</span>
+	    						<span>[[${dto.phone}]]</span>
 	    					</li>
 	    					<li>
 	    						<label>직책 : </label>

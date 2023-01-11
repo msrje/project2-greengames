@@ -9,7 +9,6 @@
 <th:block th:insert="~{admin/AdminLayout :: header}" />
 <link rel="stylesheet" href="/css/member/mypage.css">
 <script type="text/javascript">
-
 	document.addEventListener('DOMContentLoaded', function() {
 		var calendarEl = document.getElementById('calendar');
 		var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -36,7 +35,7 @@
 				</div>
 				<div class="mypage-info">
 					<div class="mypage-img">
-						<img  align="left" th:src="${infoimg.plusImg}">
+						<img align="left" th:src="${infoimg.plusImg}">
 					</div>
 					<br>
 					<div class="member-info">

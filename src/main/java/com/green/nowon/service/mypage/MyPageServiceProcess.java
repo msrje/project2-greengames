@@ -37,20 +37,25 @@ public class MyPageServiceProcess implements MyPageService{
 	}
 
 
-	@Override //급여관리리스트에서 사원의 디테일페이지
-	public void salaryInfo(long mno, Model model) {
-		model.addAttribute("detail",mRepo.findById(mno)
-				.map(MemberDetailDTO::new).orElseThrow()
-				);
-	}
-
-
 	@Override//급여관리리스트 회원정보
-	public void list(long mno, Model model) {
+	public void list(long mno, Model model,Model model2) {
 		model.addAttribute("srlist",mRepo.findById(mno)
-				.map(MemberDetailDTO::new).orElseThrow()
-				);
+				.map(MemberDetailDTO::new).orElseThrow());
+		model2.addAttribute("srlist",proRepo.findById(mno)
+				.map(ProfileDTO::new).orElseThrow());
 	}
+	
+
+	@Override //급여관리리스트에서 사원의 디테일페이지
+	public void salaryInfo(long mno, Model model ,Model model2) {
+		model.addAttribute("detail",mRepo.findById(mno)
+				.map(MemberDetailDTO::new).orElseThrow());
+		model2.addAttribute("deImg",proRepo.findById(mno)
+				.map(ProfileDTO::new).orElseThrow());
+	}
+
+
+
 
 
 

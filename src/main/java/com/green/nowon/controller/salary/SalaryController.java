@@ -16,14 +16,14 @@ public class SalaryController {
 	
 	
 	@GetMapping("/salary/{mno}")//급여관리 페이지에서 보이는 멤버리스트
-	public String memberList(@PathVariable long mno,Model model) {
-		service.list(mno,model);
+	public String memberList(@PathVariable long mno,Model model,Model model2) {
+		service.list(mno,model,model2);
 		return "member/salary-list";
 	}
 	
 	@GetMapping("/salaryinfo/{mno}")
-	public String salaryDetail(@PathVariable long mno, Model model) {
-		service.salaryInfo(mno,model);
+	public String salaryDetail(@PathVariable long mno, Model model,Model model2) {
+		service.salaryInfo(mno,model, model2);
 		return "member/salary-detail";
 	}
 	
