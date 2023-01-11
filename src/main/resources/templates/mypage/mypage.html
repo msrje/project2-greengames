@@ -9,7 +9,6 @@
 <th:block th:insert="~{admin/AdminLayout :: header}" />
 <link rel="stylesheet" href="/css/member/mypage.css">
 <script type="text/javascript">
-
 	document.addEventListener('DOMContentLoaded', function() {
 		var calendarEl = document.getElementById('calendar');
 		var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -36,7 +35,7 @@
 				</div>
 				<div class="mypage-info">
 					<div class="mypage-img">
-						<img src="/image/test/profiletest.jpeg" align="left">
+						<img align="left" th:src="${infoimg.plusImg}">
 					</div>
 					<br>
 					<div class="member-info">
@@ -95,8 +94,8 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td>사번</td>
-						<td>이름</td>
+						<td>[[${detail.mno}]]</td>
+						<td>[[${detail.name}]]</td>
 						<td>직책</td>
 						<td>기본급여</td>
 						<td>변동금액</td>

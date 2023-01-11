@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.green.nowon.domain.dto.memberDTO.AddressDetailDTO;
 import com.green.nowon.domain.dto.memberDTO.AddressInsertDTO;
 import com.green.nowon.domain.dto.memberDTO.MemberInsertDTO;
 import com.green.nowon.domain.dto.memberDTO.MemberUpdateDTO;
@@ -14,6 +15,5 @@ public interface MemberService {
 	void detail(long mno, Model model ,Model model2) ;
 	Map<String, String> fileTempUpload(MultipartFile img);
 	void update(long mno, MemberUpdateDTO dto);
-  void list(Model model);
-
+	void list(Model model);
 }

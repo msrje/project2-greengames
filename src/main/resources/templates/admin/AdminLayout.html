@@ -37,14 +37,8 @@
    				<li>
    					<dl>
    						<dt>인사관리</dt>
-   						<dd><a href="/employee">사원정보관리</a></dd>
-   						<dd><a href="/salary">급여관리</a></dd>
-   					</dl>
-   				</li>
-   				<li>
-   					<dl>
-   						<dt>조직도</dt>
-   						<dd><a href="/">사원정보</a></dd>
+   						<dd><a href="/employee">조직도</a></dd>
+   						<dd><a th:href="|/salary/${#authentication.principal.mno}|">사원정보관리</a></dd>
    					</dl>
    				</li>
    				<li>
