@@ -30,16 +30,15 @@ public class MyPageServiceProcess implements MyPageService{
 	
 	
 
-
+	
+	@Transactional
 	@Override
-	public void info(long mno, Model model,Model model2,Model model3) {
-		model.addAttribute("detail",mRepo.findById(mno)
-				.map(MemberDetailDTO::new).orElseThrow());
+	public void info(long mno, Model model,Model model2) {
+		model.addAttribute("detail",mRepo.findById(mno).map(SalaryListDTO::new)
+				.orElseThrow());
 		model2.addAttribute("mpageaddr",aRepo.findByMember_mno(mno)
 				.map(AddressDetailDTO::new)
 				.orElseThrow());
-		model3.addAttribute("infoimg",proRepo.findById(mno)
-				.map(ProfileDTO::new).orElseThrow());
 	}
 
 	
