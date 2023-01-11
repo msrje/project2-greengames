@@ -2,7 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" 
 xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <th:block th:insert="~{layout/default::head}" />
+    <th:block th:insert="~{admin/AdminLayout :: head}"/>
+	<link rel="stylesheet" href="/css/commons/common.css">
     <style type="text/css">
     	#edit-mode{display: none;}
     </style>
@@ -23,41 +24,51 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     
     </script>
 </head>
-<body>
-    <th:block th:insert="layout/default::header"/>
+<body class="flex">
+	<th:block th:insert="~{admin/AdminLayout :: header}"/>
     <main>
     	<h1>메인영역</h1>
     	<div class="wrap view-size">
     	
     		<!-- ROLE_USER 인경우만 -->
-    		<div sec:authorize="hasRole('USER')">
-    			<!-- 현재접속유저의 username == 작성자email일치한 경우 수정버튼 활성화 -->
-    			<!-- 현재 #authentication.name , #authentication.principal.email 일치하는데이터 -->
-    			<span th:if="${#authentication.name == detail.writerEmail}">
-    				<button type="button" id="btn-edit">수정</button>
+    		<div sec:authorize="hasRole('ROLE_USER')">
+    			<!-- 현재유저의 username = 작성자ID일치한 경우 수정버튼 활성화 -->
+    			<!-- 현재 #authentication.name , #authentication.principal. 일치하는데이터 -->
+    			<span th:if="${#authentication.name == detail.writerId}">
+    				<button type="button" id="btn-edit">게시물 수정</button>
     			</span>
     		</div>
-    		<div sec:authorize="hasRole('USER')">
-    			<th:block th:if="${#authentication.name == detail.writerEmail or #authorization.expr('hasRole(''ADMIN'')')}">
-    			<form th:action="|/boards/${detail.bno}|" method="post">
+    		<div sec:authorize="hasRole('ROLE_USER')">
+    			<th:block th:if="${#authentication.name == detail.writerId or #authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+    			<form th:action="|/notice-boards/${detail.bno}|" method="post">
 					<input type="hidden" name="_method" value="DELETE">
-					<button>삭제1</button>
+					<button>게시물 삭제</button>
 				</form>
 				</th:block>
     		</div>
-    		<form id="edit-mode" th:action="|/boards/${detail.bno}|" method="post">
+    		<form id="edit-mode" th:action="|/notice-boards/${detail.bno}|" method="post">
     			<table border="1" >
 	    			<tr>
-	    				<td>글번호</td>
+	    				<td>No</td>
 	    				<td th:text="${detail.bno}"></td>
 	    			</tr>
 	    			<tr>
 	    				<td>작성일</td>
-	    				<td th:text="${detail.createdDate}"></td>
+	    				<td>
+    					<span th:if="${detail.updatedDate.toLocalDate() eq detail.toDay}"
+    					th:text="${detail.updatedDate.toLocalDate()}">날짜</span>
+    					<span th:if="${detail.updatedDate.toLocalDate() eq detail.toDay}" 
+    					th:text="${#temporals.format(detail.updatedDate, 'HH시 mm분 ss초')}">시간</span>
+    					</td>
 	    			</tr>
 	    			<tr>
 	    				<td>최종수정일</td>
-	    				<td th:text="${detail.updatedDate}"></td>
+	    				<td>
+    					<span th:if="${detail.updatedDate.toLocalDate() eq detail.toDay}"
+    					th:text="${detail.updatedDate.toLocalDate()}">날짜</span>
+    					<span th:if="${detail.updatedDate.toLocalDate() eq detail.toDay}" 
+    					th:text="${#temporals.format(detail.updatedDate, 'HH시 mm분 ss초')}">시간</span>
+    					</td>
 	    			</tr>
 	    			<tr>
 	    				<td>조회수</td>
@@ -65,7 +76,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	    			</tr>
 	    			<tr>
 	    				<td>작성자</td>
-	    				<td  th:text="${detail.writerNickName}"></td>
+	    				<td  th:text="${detail.writerName}"></td>
 	    			</tr>
 	    			<tr>
 	    				<td>제목</td>
@@ -95,20 +106,30 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     				<td th:text="${detail.bno}"></td>
     			</tr>
     			<tr>
-    				<td>작성일</td>
-    				<td th:text="${detail.createdDate}"></td>
-    			</tr>
-    			<tr>
-    				<td>최종수정일</td>
-    				<td th:text="${detail.updatedDate}"></td>
-    			</tr>
+	    			<td>작성일</td>
+	    				<td>
+    					<span th:if="${detail.createdDate.toLocalDate() eq detail.toDay}"
+    					th:text="${detail.createdDate.toLocalDate()}">날짜</span>
+    					<span th:if="${detail.createdDate.toLocalDate() eq detail.toDay}" 
+    					th:text="${#temporals.format(detail.createdDate, 'HH시 mm분 ss초')}">시간</span>
+    					</td>
+	    			</tr>
+	    			<tr>
+	    				<td>최종수정일</td>
+	    				<td>
+    					<span th:if="${detail.updatedDate.toLocalDate() eq detail.toDay}"
+    					th:text="${detail.updatedDate.toLocalDate()}">날짜</span>
+    					<span th:if="${detail.updatedDate.toLocalDate() eq detail.toDay}" 
+    					th:text="${#temporals.format(detail.updatedDate, 'HH시 mm분 ss초')}">시간</span>
+    					</td>
+	    			</tr>
     			<tr>
     				<td>조회수</td>
     				<td  th:text="${detail.readCount}"></td>
     			</tr>
     			<tr>
     				<td>작성자</td>
-    				<td  th:text="${detail.writerNickName}"></td>
+    				<td  th:text="${detail.writerName}"></td>
     			</tr>
     			<tr>
     				<td>제목</td>
@@ -120,24 +141,6 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     			</tr>
     			
     		</table>
-    		<div>
-    			<p>댓글</p>
-    			<hr>
-    			<table>
-    				<tr>
-    					<td>댓글번호</td>
-    					<td>내용</td>
-    					<td>작성자</td>
-    					<td>작성일</td>
-    				</tr>
-    				<tr th:each="r :${replies}">
-    					<td th:text="${r.rno}">댓글번호</td>
-    					<td>[[${r.text}]]</td>
-    					<td th:utext="${r.writer}">작성자</td>
-    					<td>[(${r.updatedDate.toLocalDate()})]</td>
-    				</tr>
-    			</table>
-    		</div>
     	</div>
     </main>
 </body>

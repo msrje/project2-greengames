@@ -49,18 +49,18 @@ public class BoardController {
 	}
 	
 	//삭제
-	@DeleteMapping("/boards/{bno}")
+	@DeleteMapping("/notice-boards/{bno}")
 	public String delete(@PathVariable long bno) {
 		
 		service.delete(bno);
-		return "redirect:/boards";
+		return "redirect:/notice-boards";
 	}
 	
 	//수정
-	@PutMapping("/boards/{bno}")                 //setter 있어야함.
+	@PutMapping("/notice-boards/{bno}")                 //setter 있어야함.
 	public String update(@PathVariable long bno, BoardUpdateDTO dto) {
-		service.updateProc(bno, dto);
-		return "redirect:/boards/{bno}";
+		service.update(bno, dto);
+		return "redirect:/notice-boards/{bno}";
 	}
 	
 	

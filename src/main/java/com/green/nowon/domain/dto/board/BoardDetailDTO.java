@@ -1,5 +1,6 @@
 package com.green.nowon.domain.dto.board;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import com.green.nowon.domain.entity.board.BoardEntity;
@@ -14,8 +15,10 @@ public class BoardDetailDTO {
 	private String content;
 	private int readCount;
 	private String writerName;
+	private String writerId;
 	private LocalDateTime createdDate;
 	private LocalDateTime updatedDate;
+	private LocalDate toDay;
 	
 	public BoardDetailDTO(BoardEntity ent) {
 		this.bno = ent.getBno();
@@ -23,8 +26,10 @@ public class BoardDetailDTO {
 		this.content = ent.getContent();
 		this.readCount = ent.getReadCount();
 		this.writerName =ent.getMember().getName();
+		this.writerId =ent.getMember().getId();
 		this.createdDate = ent.getCreatedDate();
 		this.updatedDate = ent.getUpdatedDate();
+		toDay=LocalDate.now();
 	}
 	
 	

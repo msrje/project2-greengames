@@ -47,7 +47,6 @@ public class BoardEntity extends BaseDateTimeColumns{
 	@Column(nullable = false)
 	private String content;
 	private int readCount;
-	private String cate;
 	//작성자 - MemeberEntity
 	
 	
