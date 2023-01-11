@@ -11,9 +11,9 @@
     <main>
 	    <div>
 	    	<div class="mypage">
-	    		<div class="mypage-info">
+	    		<div class="mypage-info" style="top: 100px; position: relative;">
 	    			<div class="mypage-img">
-	    				<img src="/image/test/profiletest.jpeg" align="left">
+	    				<img th:src="${deImg.plusImg}" align="left">
 	    			</div>
 	    			<br>
 	    			<div class="member-info">
@@ -24,45 +24,61 @@
 	    							<span>[[${detail.name}]]</span>
 	    						</li>
 	    						<li>
-	    							<label for="name">사번 -</label>
+	    							<label for="mno">사번 -</label>
 	    							<span>[[${detail.mno}]]</span>
 	    						</li>
 	    						<li>
-	    							<label for="name">전화번호 -</label>
+	    							<label for="phone">전화번호 -</label>
 	    							<span>[[${detail.phone}]]</span>
 	    							
 	    						</li>
 	    						<li>
-	    							<label for="name">id=email -</label>
+	    							<label for="id">id=email -</label>
 	    							<span>[[${detail.id}]]</span>
 	    							
 	    						</li>
 	    						<li>
-	    							<label for="name">직책 -</label>
+	    							<label for="ran">직책 -</label>
 	    							<span></span>
-	    							
 	    						</li>
 	    					</ul>
 	    				</form>
+	    				<div>
+		    				<select>
+		    					<option value="1">부서1</option>
+		    					<option value="2">부서2</option>
+		    					<option value="3">부서3</option>
+		    					<option value="4">부서4</option>
+		    					<option value="5">부서5</option>
+		    				</select>
+		    				<select>
+		    					<option value="1">직책1</option>
+		    					<option value="2">직책2</option>
+		    					<option value="3">직책3</option>
+		    					<option value="4">직책4</option>
+		    					<option value="5">직책5</option>
+		    				</select>
+		    				<button>등록</button>
+		    			</div>
 		    		</div>
 	    		</div>
 	    	</div>
 		</div>
-		<div class="salary-info">
-		<p>이번달 내 급여정보</p>
+		<div class="salary-info" style="top: 100px; position: relative;">
+		<p>해당직원 급여 정보 및 관리</p>
 			<table>
 				<thead>
 				<!-- thymleaf사용 -->
 					<tr class="salary-info-1">
-						<td>사원번호</td>
-						<td>이름</td>
+						<td>[[${detail.mno}]]</td>
+						<td>[[${detail.name}]]</td>
 						<td>직책</td>
 						<td>기본급여</td>
 						<td>변동금액</td>
 						<td>이번 달 급여</td>
 					</tr>
 				</thead>
-				<tbody>
+				<!-- <tbody>
 					<tr>
 						<td>사번</td>
 						<td>이름</td>
@@ -71,7 +87,7 @@
 						<td>변동금액</td>
 						<td>이번 달 급여</td>
 					</tr>
-				</tbody>
+				</tbody> -->
 			</table>
 		</div>
     </main>

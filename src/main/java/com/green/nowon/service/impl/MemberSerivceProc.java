@@ -73,13 +73,15 @@ public class MemberSerivceProc implements MemberService {
 		return MyFileUtils.fileUpload(img, locationTemp);
 	}
 
+	@Transactional
 	@Override
 	public void update(long mno, MemberUpdateDTO dto) {
 		MemberEntity entityImg=null;
-		Optional<MemberEntity> result= memberRepo.findById(mno);
+		Optional<MemberEntity> result= memberRepo.findByMno(mno);
+		System.err.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+result);
 		if(result.isPresent()) {
 			MemberEntity entity=result.get();
-			entity.update(dto);
+			entity.update(dto).setPass(pe.encode(dto.getPass()));
 			entityImg =memberRepo.save(entity);
 			ProfileRepo.deleteByMember_mno(mno);
 			dto.toItemListImgs(entityImg, locationUpload).forEach(ProfileRepo::save);

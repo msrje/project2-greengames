@@ -1,6 +1,7 @@
 package com.green.nowon.security;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
@@ -20,6 +21,13 @@ public class SecurityConfig {
  				.antMatchers("/css/**","/images/**","/js/**").permitAll()
  				.antMatchers("/log/signup").permitAll()
  				.antMatchers("/**").permitAll()
+ 				.antMatchers(HttpMethod.PUT ,"/notice-boards/**", "/boards/**").hasRole("USER")
+				.antMatchers(HttpMethod.DELETE ,"/notice-boards/**", "/boards/**").hasRole("USER")
+				.antMatchers(HttpMethod.POST,"/notice-boards", "/boards").hasRole("USER")
+				.antMatchers(HttpMethod.GET,"/admin/boards-registration").hasRole("ADMIN")
+				.antMatchers(HttpMethod.GET,"/general/boards-registration").hasRole("USER")
+				.antMatchers("/","/notice-boards/**", "/boards/**").permitAll()
+				
  				
  				
  				.anyRequest().authenticated()
