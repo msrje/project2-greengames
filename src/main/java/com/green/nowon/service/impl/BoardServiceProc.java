@@ -95,6 +95,12 @@ public class BoardServiceProc implements BoardService{
 		
 	}
 	
+	//조회수
+    @Transactional
+    public int updateReadCount(Long bno) {
+        return repository.updateReadCount(bno);
+    }
+	
 	
 	
 	//자유게시판

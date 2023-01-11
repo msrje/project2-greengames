@@ -48,6 +48,7 @@ public class BoardController {
 	//공지사항 상세페이지
 	@GetMapping("/notice-boards/{bno}")
 	public String detail(@PathVariable long bno, Model model) {
+		service.updateReadCount(bno);  //조회수
 		service.sendDetail(bno, model);
 		return "board/noticeDetail";
 	}
