@@ -4,6 +4,8 @@ import org.springframework.ui.Model;
 
 import com.green.nowon.domain.dto.board.BoardSaveDTO;
 import com.green.nowon.domain.dto.board.BoardUpdateDTO;
+import com.green.nowon.domain.dto.board.GenBoardSaveDTO;
+import com.green.nowon.domain.dto.board.GenBoardUpdateDTO;
 
 public interface BoardService {
 
@@ -19,6 +21,20 @@ public interface BoardService {
 
 	void update(long bno, BoardUpdateDTO dto);
 
-	void getListAll02(Model model);
+	void myGetListAll(Model model);
+
+	void getListAll02(int page, Model model);
+
+	void sendDetail02(long bno, Model model);	
+	
+	void save02(GenBoardSaveDTO dto, String name);
+
+	void save02(GenBoardSaveDTO dto);
+
+	void delete02(long bno);
+
+	void update02(long bno, GenBoardUpdateDTO dto);
+
+	void myGetListAll02(Model model);
 
 }

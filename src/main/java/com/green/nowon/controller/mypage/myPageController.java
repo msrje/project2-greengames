@@ -25,14 +25,16 @@ public class myPageController {
 	
 	@Autowired
 	private BoardService boardService;
+	
 
 	@Autowired
 	private MemberService memberService;
 	
 	@GetMapping("/mypage/info/{mno}")
-	public String myPageInfo(@PathVariable long mno, Model model,Model model2) {
+	public String myPageInfo(@PathVariable long mno ,Model model,Model model2) {
 		service.info(mno,model,model2);
-		boardService.getListAll02(model);
+		boardService.myGetListAll(model);
+		boardService.myGetListAll02(model);
 		return"mypage/mypage";
 	}
 	

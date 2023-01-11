@@ -2,10 +2,12 @@
 
 
 header>.wrap{
-	background-color: #464964;
+	background-color: #03bb85;
 	color: #fff;
 	padding: 10px 20px;
 	height: auto;
+	height: 100vh;
+	min-width:200px;
 }
 header>.wrap a{
 	color: #fff;

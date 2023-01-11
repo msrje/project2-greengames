@@ -8,14 +8,12 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body class="flex">
 	<th:block th:insert="~{admin/AdminLayout :: header}"/>
     	<main>
-	    	<h1>공지사항 게시판</h1>
+	    	<h1>자유 게시판</h1>
 	    	<div class="wrap">
 	    		<div>
-	    		<!-- admin만 글쓰기 버튼 활성화 -->
-	    			<th:block th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
-					<a href="/admin/boards-registration">글쓰기</a>
+					<a href="/general/boards-registration">글쓰기</a>
 				</div>
-		   		<p>공지사항</p>
+		   		<p>자유게시판</p>
 				<table border="1" >
 	    			<tr>
 	    				<td>No</td>
@@ -24,9 +22,9 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	    				<td>작성자</td>
 	    				<td>작성일</td>
 	    			</tr>
-	    			<tr th:each="dto : ${list}">
+	    			<tr th:each="dto : ${list2}">
 	    				<td th:text="${dto.bno}">No</td>
-	    				<td><a th:href="|/notice-boards/${dto.bno}|">[[${dto.title}]]</a></td>
+	    				<td><a th:href="|/boards/${dto.bno}|">[[${dto.title}]]</a></td>
 	    				<td th:text="${dto.readCount}">조회수</td>
 	    				<td>[[${dto.writer}]]</td>
 	    				<td>
@@ -34,16 +32,16 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	    					th:text="${dto.updatedDate.toLocalDate()}">날짜</span>
 	    				</td>
 	    			</tr>
-	    			<tr th:if="${p.getNumberOfElements()==0}">
+	    			<tr th:if="${p2.getNumberOfElements()==0}">
 	    				<td colspan="5">존재하지 않는페이지</td>
 	    			</tr>
 	    		</table>
-    		<div th:if="${p.getNumberOfElements()>0}">
-    			<a th:if="${p.hasPrevious()}" th:href="|/notice-boards?page=${p.getNumber()}|">&lt;</a>
-    			<span th:text="${p.getNumber()+1}">현재페이지</span>
+    		<div th:if="${p2.getNumberOfElements()>0}">
+    			<a th:if="${p2.hasPrevious()}" th:href="|/boards?page=${p2.getNumber()}|">&lt;</a>
+    			<span th:text="${p2.getNumber()+1}">현재페이지</span>
     			/
-    			<span th:text="${p.getTotalPages()}">총페이지수</span> 
-    			<a th:if="${p.hasNext()}" th:href="|/notice-boards?page=${p.getNumber()+2}|">&gt;</a>
+    			<span th:text="${p2.getTotalPages()}">총페이지수</span> 
+    			<a th:if="${p2.hasNext()}" th:href="|/boards?page=${p2.getNumber()+2}|">&gt;</a>
     		</div>
    			</div>
  		</main>

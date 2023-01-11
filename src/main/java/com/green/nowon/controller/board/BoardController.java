@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.green.nowon.domain.dto.board.BoardUpdateDTO;
+import com.green.nowon.domain.dto.board.GenBoardSaveDTO;
+import com.green.nowon.domain.dto.board.GenBoardUpdateDTO;
 import com.green.nowon.domain.dto.board.BoardSaveDTO;
 import com.green.nowon.security.MyUserDetails;
 import com.green.nowon.service.BoardService;
@@ -22,6 +24,8 @@ public class BoardController {
 	@Autowired
 	private BoardService service;
 
+	//공지사항 게시판
+	
 	@GetMapping("/notice-boards")
 	public String board(@RequestParam(defaultValue = "1") int page , Model model) {//문자열로 파라미터 매핑--> int형 parse
 		service.getListAll(page ,model);
@@ -65,11 +69,47 @@ public class BoardController {
 	
 	
 	
-	//일반게시판
+	//자유게시판
 	
 	@GetMapping("/boards")
-	public String secBoard() {
-		return "board/boardList";
+	public String genBoard(@RequestParam(defaultValue = "1") int page , Model model) {
+		service.getListAll02(page ,model);
+		return "board/generalList";
+	}
+	
+	@GetMapping("/general/boards-registration")
+	public String genBoardReg() {
+		return "board/generalWrite";
+	}
+	
+	@PostMapping("/boards")        
+	public String genWrite(GenBoardSaveDTO dto, Authentication auth) {
+		MyUserDetails myUserDetails=(MyUserDetails)auth.getPrincipal();
+		dto.setMno(myUserDetails.getMno());
+		service.save02(dto);		
+		return "redirect:/boards";
+	}
+	
+	//자유게시판 상세페이지
+	@GetMapping("/boards/{bno}")
+	public String genDetail(@PathVariable long bno, Model model) {
+		service.sendDetail02(bno, model);
+		return "board/generalDetail";
+	}
+	
+	//삭제
+	@DeleteMapping("/boards/{bno}")
+	public String genDelete(@PathVariable long bno) {
+		
+		service.delete02(bno);
+		return "redirect:/boards";
+	}
+	
+	//수정
+	@PutMapping("/boards/{bno}")                 //setter 있어야함.
+	public String genUpdate(@PathVariable long bno, GenBoardUpdateDTO dto) {
+		service.update02(bno, dto);
+		return "redirect:/boards/{bno}";
 	}
 	
 }

@@ -24,7 +24,8 @@ public class SecurityConfig {
  				.antMatchers(HttpMethod.PUT ,"/notice-boards/**", "/boards/**").hasRole("USER")
 				.antMatchers(HttpMethod.DELETE ,"/notice-boards/**", "/boards/**").hasRole("USER")
 				.antMatchers(HttpMethod.POST,"/notice-boards", "/boards").hasRole("USER")
-				.antMatchers(HttpMethod.GET,"/admin/boards-registration","/user/boards-registration").hasRole("USER")
+				.antMatchers(HttpMethod.GET,"/admin/boards-registration").hasRole("ADMIN")
+				.antMatchers(HttpMethod.GET,"/general/boards-registration").hasRole("USER")
 				.antMatchers("/","/notice-boards/**", "/boards/**").permitAll()
 				
  				
