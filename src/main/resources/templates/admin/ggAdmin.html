@@ -4,11 +4,63 @@
  	<th:block th:insert="~{admin/AdminLayout :: head}"/>
 	<link rel="stylesheet" href="/css/default.css">
 	<th:block th:insert="~{admin/AdminLayout :: header}"/>
+	<script type="text/javascript">
+	$(function(){
+		$(".go").click(go);
+		$(".off").click(off);
+	});
+	//출근 버튼 누르면 출근시간 보여주고 db저장
+	function go(){
+		var mno = $(".mno").val();
+		alert(mno);
+		$.ajax({
+			url:`/admin/commute/go/${mno}`,
+			type:"post",
+			success:function(olTag){
+				$(".goTime").html(olTag);
+			},
+			error:function(){
+				alert("go error");	
+			}
+		});
+		
+		
+	}
+	//퇴근 버튼 누르면 출근시간 수정시간 보여주고 db업데이트
+	function off(){
+		var mno = $(".mno").val();
+		alert("퇴근");
+		$.ajax({
+			url:`/admin/commute/off/${mno}`,
+			type:"post",
+			success:function(olTag){
+				alert("off success");
+				$(".offTime").html(olTag);
+			},
+			error:function(){
+				alert("off error");	
+			}
+		});
+	}
+	</script>
 </head>
 <body class="flex">
     <main>
     	<div class="wrap">
+    		<input class="mno" type="hidden" th:value="${#authentication.principal.mno}">
     		<p>GreenGames의 관리페이지 입니다.</p>
+    		<div class="flex"><!-- 네모네모 상자 -->
+    			<div><!-- 출근 상자 -->
+    				<p class="goTime">출근시간</p>
+    				<button class="go">출근</button>
+    			</div>
+    			<div><!-- 퇴근 상자 -->
+    				<p class="offTime">퇴근시간</p>
+    				<button class="off">퇴근</button>
+    			</div>
+    		</div>
+    		
+    		
     	</div>
     </main>
 </body>
