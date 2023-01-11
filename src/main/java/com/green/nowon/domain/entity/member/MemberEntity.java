@@ -92,4 +92,7 @@ public class MemberEntity extends BaseDateEntity{
 		}
 		return profile.get(0);
 	}
+	
+	
+	
 }

@@ -27,7 +27,7 @@
    					<!--접속한 사원의 이미지-->
    					
    					<p th:text="${#authentication.principal.name}"></p>
-   					<p th:text="${#authentication.principal.mno}">
+   					<p th:text="${#authentication.principal.mno}"></p>
    				</div>
    				<div style="text-align: center;">
    					<a th:href="|/mypage/info/${#authentication.principal.mno}|" class="test">내정보</a>
