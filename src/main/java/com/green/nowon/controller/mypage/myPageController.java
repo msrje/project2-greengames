@@ -26,10 +26,12 @@ public class myPageController {
 	private MemberService memberService;
 	
 	@GetMapping("/mypage/info/{mno}")
-	public String myPageInfo(@PathVariable long mno,Model model,Model model2) {
-		service.info(mno,model,model2);
+	public String myPageInfo(@PathVariable long mno,Model model,Model model2,Model model3) {
+		service.info(mno,model,model2,model3);
 		return"mypage/mypage";
 	}
+	
+
 	
 	@PatchMapping("/mypage/{id}/update")
 	public String update(@PathVariable long id, MemberUpdateDTO dto) {
