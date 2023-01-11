@@ -55,7 +55,7 @@ public class DepartmentController {
 		return "admin/departmentList/departmentList";
 	}
 	/**
-	 * 부서 리스트 띄어주는 메서드
+	 * 부서 리스트 띄어주는 메서드 ajax
 	 * @param parentDno
 	 * @param model
 	 * @return
@@ -63,6 +63,7 @@ public class DepartmentController {
 	@GetMapping("/admin/departmentsList/{parentDno}")
 	public String category(@PathVariable long parentDno, Model model) {
 		departmentService.departmentList(parentDno, model);
+		System.out.println(1);
 		return "admin/departmentCate/ol-category";
 	}
 	

@@ -10,9 +10,9 @@ import org.springframework.stereotype.Repository;
 import com.green.nowon.domain.entity.board.BoardEntity;
 
 @Repository
-public interface BoardEntityRepository extends JpaRepository<BoardEntity, Long>{
+public interface GenBoardEntityRepository extends JpaRepository<GeneralBoardEntity, Long>{
 
-	List<BoardEntity> findAllByOrderByBnoDesc();
+	List<GeneralBoardEntity> findAllByOrderByBnoDesc();
 
-	Page<BoardEntity> findAllByOrderByBnoDesc(Pageable pageable);
+	Page<GeneralBoardEntity> findAllByOrderByBnoDesc(Pageable pageable);
 }

@@ -21,6 +21,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.DynamicUpdate;
 
 import com.green.nowon.domain.dto.board.BoardUpdateDTO;
+import com.green.nowon.domain.dto.board.GenBoardUpdateDTO;
 import com.green.nowon.domain.entity.member.MemberEntity;
 
 import lombok.AllArgsConstructor;
@@ -33,14 +34,14 @@ import lombok.NoArgsConstructor;
 @DynamicUpdate
 @AllArgsConstructor
 @NoArgsConstructor
-@SequenceGenerator(name = "gg_gen_board_seq",
-		sequenceName = "gg_board_seq", initialValue = 1, allocationSize = 1)
-@Table(name = "gg_board")
+@SequenceGenerator(name = "gg_gen_general_board_seq",
+		sequenceName = "gg_general_board_seq", initialValue = 1, allocationSize = 1)
+@Table(name = "gg_general_board")
 @Entity
-public class BoardEntity extends BaseDateTimeColumns{
+public class GeneralBoardEntity extends BaseDateTimeColumns{
 
 	@Id
-	@GeneratedValue(generator = "gg_gen_board_seq", strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(generator = "gg_gen_general_board_seq", strategy = GenerationType.SEQUENCE)
 	private long bno;
 	@Column(nullable = false)
 	private String title;
@@ -55,7 +56,7 @@ public class BoardEntity extends BaseDateTimeColumns{
 	private MemberEntity member;//작성자
 
 	//편의메서드
-	public BoardEntity update(BoardUpdateDTO dto) {
+	public GeneralBoardEntity update(GenBoardUpdateDTO dto) {
 		this.title=dto.getTitle();
 		this.content=dto.getContent();
 		return this;

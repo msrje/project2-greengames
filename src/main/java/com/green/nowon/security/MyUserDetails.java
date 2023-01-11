@@ -19,6 +19,7 @@ public class MyUserDetails extends User{
 	private String id;
 	private String name;
 	private long mno;
+	private boolean admin;
 	
 	public MyUserDetails(String username, String password, Collection<? extends GrantedAuthority> authorities) {
 		super(username, password, authorities);
@@ -33,6 +34,11 @@ public class MyUserDetails extends User{
 		this.id=entity.getId();
 		this.name=entity.getName();
 		this.mno=entity.getMno();
+		for(MyRole role:entity.getRoles()) {
+			if(role.name().equals("ADMIN")) {
+				admin=true;
+			}
+		}
 	}
 	
 
