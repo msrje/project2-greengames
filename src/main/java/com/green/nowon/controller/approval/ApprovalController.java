@@ -21,25 +21,27 @@ public class ApprovalController {
 	
 	
 	@GetMapping("/approval")
-	public String approval() {
+	public String approval(Model model) {
+		approvalService.findMax(model);
 		return "/approval/approval";
 	}
 	
 	@PostMapping("/approval/save")
 	public String save(ApprovalSaveDTO dto) {
 		approvalService.save(dto);
-		return "redirect:/approval/check";
+		return "redirect:/approval/check/"+dto.getMno();
 	}
 	
 	@PostMapping("/approval/vacation")
 	public String vacation(AttendanceSaveDTO dto) {
 		approvalService.save(dto);
-		return "redirect:/approval/check";
+		
+		return "redirect:/approval/check/"+dto.getMno();
 	}
 	
-	@GetMapping("/approval/check")
-	public String list(Model model) {
-		approvalService.list(model);
+	@GetMapping("/approval/check/{mno}")
+	public String list(Model model,@PathVariable long mno) {
+		approvalService.list(model,mno);
 		return "/approval/check";
 	}
 	
@@ -49,7 +51,7 @@ public class ApprovalController {
 		return "/approval/sure";
 	}
 	
-	@GetMapping("/approval/detail/{ano}")  //마무리합시다 .
+	@GetMapping("/approval/detail/{ano}")  
 	public String detail(@PathVariable long ano,Model model) {
 		approvalService.detail(ano,model);
 		return "/approval/detail";
@@ -64,6 +66,12 @@ public class ApprovalController {
 	@PatchMapping("/approval/ok/{ano}")
 	public String ok(@PathVariable long ano) {
 		approvalService.ok(ano);
-		return "redirect:/approval/check";
+		return "redirect:/approval/sure";
+	}
+	
+	@PatchMapping("/approval/refuse/{ano}")
+	public String refuse(@PathVariable long ano) {
+		approvalService.refuse(ano);
+		return "redirect:/approval/sure";
 	}
 }

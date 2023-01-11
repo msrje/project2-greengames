@@ -18,4 +18,10 @@ public interface ApprovalService {
 
 	void save(AttendanceSaveDTO dto);
 
+	void findMax(Model model);
+
+	void list(Model model, long mno);
+
+	void refuse(long ano);
+
 }

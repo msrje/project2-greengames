@@ -7,6 +7,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
+import com.green.nowon.domain.entity.approval.ApprovalEntity;
+import com.green.nowon.domain.entity.cate.PositionEntity;
 import com.green.nowon.domain.entity.member.MemberEntity;
 
 import lombok.Getter;
@@ -32,4 +34,6 @@ public class MyUserDetails extends User{
 		this.name=entity.getName();
 		this.mno=entity.getMno();
 	}
+	
+
 }
