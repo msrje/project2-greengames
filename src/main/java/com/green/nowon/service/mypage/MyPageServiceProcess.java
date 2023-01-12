@@ -53,13 +53,13 @@ public class MyPageServiceProcess implements MyPageService{
 		model.addAttribute("srlist", result);
 	}
 	
-
+	@Transactional
 	@Override //급여관리리스트에서 사원의 디테일페이지
 	public void salaryInfo(long mno, Model model ,Model model2) {
 		model.addAttribute("detail",mRepo.findById(mno)
-				.map(MemberDetailDTO::new).orElseThrow());
-		model2.addAttribute("deImg",proRepo.findById(mno)
-				.map(ProfileDTO::new).orElseThrow());
+				.map(SalaryListDTO::new).orElseThrow());
+//		model2.addAttribute("deImg",proRepo.findById(mno)
+//				.map(ProfileDTO::new).orElseThrow());
 	}
 
 

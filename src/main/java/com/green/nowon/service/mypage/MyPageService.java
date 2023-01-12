@@ -11,7 +11,7 @@ public interface MyPageService {
 
 	void list(long mno, Model model);
 
-	//void imgsave(long mno, Model model);
+	
 
 	
 }
