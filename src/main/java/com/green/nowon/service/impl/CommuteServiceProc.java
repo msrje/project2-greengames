@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.green.nowon.domain.dto.attendance.CommuteInsertDTO;
 import com.green.nowon.domain.dto.attendance.CommuteUpdateDTO;
@@ -53,7 +54,7 @@ public class CommuteServiceProc implements CommuteService {
 		}
 	}
 	/**
-	 * 오늘자 출근이 있는지 확인하세요.
+	 * 오늘자 출근이 있는지 확인하는 메소드
 	 */
 	@Override
 	public Optional<CommuteEntity> findGoTime(long mno) {
@@ -72,5 +73,9 @@ public class CommuteServiceProc implements CommuteService {
 	}
 	
 	
+	@Override
+	public void showGTime(Model model, Long mno) {
+		model.addAttribute("time",findGoTime(mno).get());
+	}
 	
 }
