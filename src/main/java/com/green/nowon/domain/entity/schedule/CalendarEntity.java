@@ -1,9 +1,6 @@
 package com.green.nowon.domain.entity.schedule;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Map;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,7 +15,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicUpdate;
 
-import com.green.nowon.domain.dto.schedule.calendarDTO;
+import com.green.nowon.domain.dto.schedule.CalendarDTO;
 import com.green.nowon.domain.entity.member.MemberEntity;
 
 import lombok.AllArgsConstructor;
@@ -38,7 +35,7 @@ sequenceName = "gg_calendar_seq", initialValue = 1, allocationSize = 1)
 public class CalendarEntity {
 	
 	@Id
-	@GeneratedValue(generator = "gg_gen_board_seq", strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(generator = "gg_gen_calendar_seq", strategy = GenerationType.SEQUENCE)
 	private long cno;
 	
 	@Column(nullable = false)
@@ -54,12 +51,14 @@ public class CalendarEntity {
 	@ManyToOne(cascade = CascadeType.DETACH)
 	private MemberEntity member;
 	
-	public CalendarEntity save(calendarDTO dto){
+	public CalendarEntity save(CalendarDTO dto){
 		this.cTitle =  dto.getCTitle();
 		this.cStartTime = dto.getCStartTime();
 		this.cEndTime = dto.getCEndTime();
 		return this;
 	}
+	
+	
 	
 	
 }
