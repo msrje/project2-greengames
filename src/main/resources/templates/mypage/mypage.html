@@ -17,11 +17,14 @@
 		});
 		calendar.render();
 	});
+
+	
 </script>
 </head>
 <body class="flex">
 	<main>
 		<div>
+			<input id="mno" type="hidden" th:value="${#authentication.principal.mno}">
 			<div class="mypage">
 				<div class="wrap-title">
 					<h2 class="mypage-title">
@@ -36,7 +39,9 @@
 				</div>
 				<div class="mypage-info">
 					<div class="mypage-img">
-						<img align="left" th:src="${detail.profileUrl}">
+					 	<!--ajax 추가-->
+					 	<img align="left" th:if="${#strings.isEmpty(detail.profileUrl)}" src="/image/test/profiletest.jpeg">
+					 	<img align="left" th:if="${!#strings.isEmpty(detail.profileUrl)}" th:src="${detail.profileUrl}">
 					</div>
 					<br>
 					<div class="member-info">
