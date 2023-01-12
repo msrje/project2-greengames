@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -15,7 +16,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -62,9 +66,9 @@ public class MemberEntity extends BaseDateEntity{
 	
 	@Column(nullable = false)
 	private String phone;//번호
-	
+
 	@Builder.Default
-	@OneToMany(mappedBy = "member")
+	@OneToMany(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	List<ProfileEntity> profile=new ArrayList<>();
 	
 	@Builder.Default
@@ -90,9 +94,7 @@ public class MemberEntity extends BaseDateEntity{
 		for(ProfileEntity pimg:profile) {
 			return pimg;
 		}
-		return profile.get(0);
+		return null;
 	}
-	
-	
 	
 }
