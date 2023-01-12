@@ -32,7 +32,7 @@ body {
 .branch:before {
   content: "";
   width: 50px;
-  border-top: 2px solid #eee9dc;
+  border-top: 2px solid black;
   position: absolute;
   left: -100px;
   top: 50%;
@@ -46,14 +46,14 @@ body {
 .entry:before {
   content: "";
   height: 100%;
-  border-left: 2px solid #eee9dc;
+  border-left: 2px solid black;
   position: absolute;
   left: -50px;
 }
 .entry:after {
   content: "";
   width: 50px;
-  border-top: 2px solid #eee9dc;
+  border-top: 2px solid black;
   position: absolute;
   left: -50px;
   top: 50%;
@@ -78,7 +78,7 @@ body {
 .entry:last-child:after {
   height: 10px;
   border-top: none;
-  border-bottom: 2px solid #eee9dc;
+  border-bottom: 2px solid black;
   border-radius: 0 0 0 10px;
   margin-top: -9px;
 }
@@ -98,7 +98,7 @@ body {
   padding: 5px 10px;
   line-height: 20px;
   text-align: center;
-  border: 2px solid #eee9dc;
+  border: 2px solid black;
   border-radius: 5px;
   position: absolute;
   left: 0;
