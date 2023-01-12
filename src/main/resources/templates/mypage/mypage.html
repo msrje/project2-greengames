@@ -35,7 +35,8 @@
 				</div>
 				<div class="mypage-info">
 					<div class="mypage-img">
-						<img align="left" th:src="${infoimg.plusImg}">
+						<img align="left" th:if="${#strings.isEmpty(detail.profileUrl)}" src="/image/test/profiletest.jpeg">
+						<img align="left" th:if="${!#strings.isEmpty(detail.profileUrl)}" th:src="${detail.profileUrl}">
 					</div>
 					<br>
 					<div class="member-info">

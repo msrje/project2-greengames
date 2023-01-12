@@ -1,5 +1,7 @@
 package com.green.nowon.controller.board;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.green.nowon.domain.dto.board.BoardUpdateDTO;
 import com.green.nowon.domain.dto.board.GenBoardSaveDTO;
@@ -44,6 +48,14 @@ public class BoardController {
 		service.save(dto);		
 		return "redirect:/notice-boards";
 	}
+	
+	@ResponseBody//응답데이터를 json타입으로 리턴
+	@PostMapping("/admin-notice/temp-upload")
+	public Map<String,String> tempUpload(MultipartFile bimg) {
+		return service.fileTempUpload(bimg);
+	}
+	
+	
 	
 	//공지사항 상세페이지
 	@GetMapping("/notice-boards/{bno}")

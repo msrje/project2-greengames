@@ -1,11 +1,14 @@
 package com.green.nowon.service.impl;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -13,6 +16,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.green.nowon.domain.dto.board.BoardDetailDTO;
 import com.green.nowon.domain.dto.board.BoardListDTO;
@@ -23,11 +27,13 @@ import com.green.nowon.domain.dto.board.GenBoardListDTO;
 import com.green.nowon.domain.dto.board.GenBoardSaveDTO;
 import com.green.nowon.domain.dto.board.GenBoardUpdateDTO;
 import com.green.nowon.domain.entity.board.BoardEntityRepository;
+import com.green.nowon.domain.entity.board.BoardImgEntityRepository;
 import com.green.nowon.domain.entity.board.GenBoardEntityRepository;
 import com.green.nowon.domain.entity.board.GeneralBoardEntity;
 import com.green.nowon.domain.entity.board.BoardEntity;
 import com.green.nowon.domain.entity.member.MemberEntity;
 import com.green.nowon.service.BoardService;
+import com.green.nowon.util.MybFileUtils;
 
 import lombok.RequiredArgsConstructor;
 
@@ -35,10 +41,21 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class BoardServiceProc implements BoardService{
 
+	@Value("${file.location.noticetemp}")
+	private String locationTemp;
+	
+	@Value("${file.location.noticeupload}")
+	private String locationUpload;
+	
+	@Autowired
 	private final BoardEntityRepository repository;
+	@Autowired
 	private final GenBoardEntityRepository repo;
+	@Autowired
+	private final BoardImgEntityRepository imgRepo; //이미지
 	
 	
+	@Transactional
 	@Override
 	public void getListAll(int page, Model model) {
 		//board list를 페이지로 전송
@@ -53,6 +70,7 @@ public class BoardServiceProc implements BoardService{
 				.collect(Collectors.toList()));
 	}
 
+	@Transactional
 	@Override
 	public void sendDetail(long bno, Model model) {
 		model.addAttribute("detail", repository.findById(bno)
@@ -65,6 +83,7 @@ public class BoardServiceProc implements BoardService{
 	public void save(BoardSaveDTO dto, String name) {
 	}
 	
+	@Transactional
 	@Override
 	public void save(BoardSaveDTO dto) {
 		
@@ -74,6 +93,14 @@ public class BoardServiceProc implements BoardService{
 				.build();
 		repository.save(entity);
 		
+		dto.toBoardListImgs(entity, locationUpload).forEach(imgRepo::save); //이미지
+		
+	}
+	
+	@Override //이미지
+	public Map<String, String> fileTempUpload(MultipartFile bimg) {
+		
+		return MybFileUtils.fileUpload(bimg, locationTemp);
 	}
 
 	@Override

@@ -90,6 +90,6 @@ public class MemberEntity extends BaseDateEntity{
 		for(ProfileEntity pimg:profile) {
 			return pimg;
 		}
-		return profile.get(0);
+		return null;
 	}
 }
