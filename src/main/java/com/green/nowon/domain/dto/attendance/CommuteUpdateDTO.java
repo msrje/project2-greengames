@@ -10,13 +10,16 @@ import lombok.Data;
 @Data
 public class CommuteUpdateDTO {
 	
+	private LocalDateTime gTime;
 	private LocalDateTime oTime;
-//	private String cType;
+	private String cType;
 	
 	
 	public CommuteEntity updateEntity() {
 		return CommuteEntity.builder()
+				.gTime(gTime)
 				.oTime(oTime)
+				.cType(cType)
 				.build();
 	}
 	

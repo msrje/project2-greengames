@@ -1,6 +1,8 @@
 package com.green.nowon.service.impl;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,8 +15,6 @@ import com.green.nowon.domain.dto.attendance.CommuteInsertDTO;
 import com.green.nowon.domain.dto.attendance.CommuteUpdateDTO;
 import com.green.nowon.domain.entity.attendance.CommuteEntity;
 import com.green.nowon.domain.entity.attendance.CommuteEntityRepository;
-import com.green.nowon.domain.entity.member.MemberEntity;
-import com.green.nowon.domain.entity.member.MemberEntityRepository;
 import com.green.nowon.domain.entity.member.MemberEntityRepository2;
 import com.green.nowon.service.attendance.CommuteService;
 
@@ -37,8 +37,19 @@ public class CommuteServiceProc implements CommuteService {
 			commuteRepo.save(idto.entity().fkSaver(memberRepo.findByMno(mno)));
 		}else {
 			CommuteEntity entity = result.get();
-			entity.update(udto);
+			LocalDateTime start = entity.getGTime();
+			LocalDateTime end = LocalDateTime.now();
+			long timeset = start.until(end, ChronoUnit.HOURS);
+			System.out.println(">>>>>>>>>>>>>>>>>>>>"+timeset);
+			entity.update(udto,timeset);
+			
 			commuteRepo.save(entity);
+			
+			
+			
+			/**
+			 * 근무시간 계산
+			 */
 		}
 	}
 	/**
@@ -55,8 +66,11 @@ public class CommuteServiceProc implements CommuteService {
 			}
 		}
 		Optional<CommuteEntity> CommuteToday = commuteRepo.findById(cno);
+		
 		//System.out.println(CommuteToday.get().getGTime());
 		return commuteRepo.findById(cno);
 	}
+	
+	
 	
 }

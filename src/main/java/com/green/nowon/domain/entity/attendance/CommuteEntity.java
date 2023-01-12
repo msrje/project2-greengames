@@ -1,8 +1,11 @@
 package com.green.nowon.domain.entity.attendance;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Optional;
 
 import javax.persistence.Column;
@@ -12,15 +15,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.green.nowon.domain.dto.attendance.CommuteUpdateDTO;
 import com.green.nowon.domain.entity.cate.DepartmentEntity;
 import com.green.nowon.domain.entity.member.MemberEntity;
 
+import ch.qos.logback.core.util.Duration;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -49,8 +56,8 @@ public class CommuteEntity {
 	@CreationTimestamp
 	private LocalDate today;
 	
-//	@Column(nullable = false)
-//	private String cType;
+	@Column(columnDefinition = "VARCHAR(255) default '출근'")
+	private String cType;
 	
 	@JoinColumn(name = "mno")
 	@ManyToOne
@@ -61,9 +68,20 @@ public class CommuteEntity {
 		return this;
 	}
 	
-	public CommuteEntity update(CommuteUpdateDTO dto) {
+	public CommuteEntity update(CommuteUpdateDTO dto,long cType) {
 		this.oTime = dto.getOTime();
-//		this.cType = 
+		if(cType <8L) {
+			this.cType = "조퇴";
+		}else {
+			this.cType = "퇴근";
+		}
 		return this;
 	}
+	
+	@PrePersist
+	public void ctype() {
+		this.cType = this.cType == null ? "출근" : this.cType;
+	}
+
+	
 }

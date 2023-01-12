@@ -1,5 +1,6 @@
 package com.green.nowon.service.attendance;
 
+import java.time.LocalTime;
 import java.util.Optional;
 
 import com.green.nowon.domain.dto.attendance.CommuteInsertDTO;
@@ -11,6 +12,5 @@ public interface CommuteService {
 	Optional<CommuteEntity> findGoTime(long mno);
 
 	void save(long mno, CommuteInsertDTO idto, CommuteUpdateDTO udto);
-
 
 }
