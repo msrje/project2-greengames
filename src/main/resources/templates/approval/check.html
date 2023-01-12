@@ -21,8 +21,7 @@
    					<td>[[${dto.title}]]</td>
    					<td>[[${dto.date}]]</td>
    					<td>
-   						<div th:if="${dto.status == false}">결재 대기중</div>
-   						<div th:if="${dto.status == true}">결재 승인</div>
+   						[[${dto.status}]]
    					</td>
    					
    				</tr>	

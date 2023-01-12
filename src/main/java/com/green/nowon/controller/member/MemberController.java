@@ -2,10 +2,7 @@ package com.green.nowon.controller.member;
 
 import java.util.Map;
 
-import javax.websocket.server.PathParam;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.green.nowon.security.MyUserDetails;
+import com.green.nowon.domain.dto.memberDTO.MemberUpdateDTO;
 import com.green.nowon.service.MemberService;
 
 @Controller
@@ -37,8 +34,10 @@ public class MemberController {
 	}
 	
 	@PostMapping("/mypage/{mno}/update")
-	public String update() {
-		return "redirect:/mypage";
+	public String update(@PathVariable long mno,MemberUpdateDTO dto) {
+		System.err.println(">>>>>>>>>>>update : "+mno);
+		memberService.update(mno,dto);
+		return "redirect:/mypage/info/{mno}";
 	}
 	
 	@GetMapping("/employee")//카테고리 리스트롤 사용할 예정
@@ -48,10 +47,6 @@ public class MemberController {
 	}
 
 	
-	@GetMapping("/salary")//급여관리 페이지에서 보이는 멤버리스트
-	public String memberList(Model model) {
-		memberService.list(model);
-		return"member/salary-list";
-	}
+	
 	
 }

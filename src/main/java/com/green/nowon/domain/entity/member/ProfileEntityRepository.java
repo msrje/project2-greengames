@@ -7,5 +7,7 @@ import org.springframework.stereotype.Repository;
 public interface ProfileEntityRepository extends JpaRepository<ProfileEntity, Long>{
 
 	void deleteByMember_mno(long mno);
+	
+	
 
 }

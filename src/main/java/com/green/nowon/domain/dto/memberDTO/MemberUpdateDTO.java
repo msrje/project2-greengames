@@ -14,9 +14,9 @@ import lombok.Data;
 @Data
 public class MemberUpdateDTO {
 
-	private String id;
+	
+	
 	private String pass;
-	private String name;
 	private String phone;
 	
 	private String[] newName;
@@ -40,11 +40,9 @@ public class MemberUpdateDTO {
 		return imgs;
 	}
 	
-	public MemberEntity update(PasswordEncoder pe) {
+	public MemberEntity updateEntity() {
 		return MemberEntity.builder()
-					.id(id)
-					.name(name)
-					.pass(pe.encode(pass))//비밀번호 암호화
+					.pass(pass)//비밀번호 암호화
 					.phone(phone)
 				.build();
 	}

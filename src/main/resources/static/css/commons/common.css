@@ -1,5 +1,11 @@
 @charset "UTF-8";
 @import url("reset.css");
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400&display=swap');
+
+body{
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
 .flex{display: flex;}
 .row{flex-direction: row;}
 .column{flex-direction: column;}
@@ -57,60 +63,7 @@
 	cursor: pointer;
 	color: #27c700;
 }
-.padding-h-1{
-	padding: 0.5em 1em;
-}
 
-.delivery-shop{
-	display:inline-block;
-	font-size: 11px;
-	padding: 0 5px;
-	height: 20px;
-	line-height:20px;
-	color: rgba(255,255,255,1);
-	background-color: #6ba543;
-	border-radius: 2px;
-}
-.delivery-lowest{
-	display:inline-block;
-	font-size: 11px;
-	padding: 0 5px;
-	height: 20px;
-	line-height:20px;
-	color: rgba(255,0,0,1);
-	border: 1px solid rgba(255,0,0,1);
-	border-radius: 2px;
-}
-.goods-name{
-	font-size: 18px;
-	color: #333; /* #333333 */ /* rba(51,51,51) */
-}
-
-.sale-rate{
-	color: #6ba543;
-	font-size: 18px;
-}
-.buying-price{
-	color: #333;
-	font-size: 18px;
-}
-.selling-price{
-	color: #828282;
-	font-size: 15px;
-	text-decoration: line-through;
-}
-.goods-price{
-	padding-top:15px;
-	font-size: 15px;
-}
-.star-point{
-	height: 18px;
-	font-size: 12px;
-	color: #333;
-	margin-top: 15px;
-	padding-left: 15px;
-	background: url("/images/icon/icon_star_yellow.png") no-repeat left center / 12px 12px;
-}
 /* ////모든체크박스 + label인경우 사용자 이미지를 박스이미지로 적용할때 ///////////////////////// */
 input[type=checkbox]{
 	display: none;

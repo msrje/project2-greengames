@@ -21,21 +21,11 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	    });
 	});
 	
-	function YnCheck(cate){
-		
-		var checked=cate.checked;
-		if(checked){
-			cate.value="Y";
-		}else{
-			cate.value="N";
-		}
-	};
-	
 	function btn_click(str){                             
         if(str=="notice"){                                 
-            frm1.action="/notice-boards";      
+            frm.action="/notice-boards";      
         } else if(str=="normal"){      
-            frm1.action="/boards";      
+            frm.action="/boards";      
         }
 	};
         
@@ -47,17 +37,11 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     	<h1>메인컨텐츠</h1>
     	<div class="wrap">
 		<p class="pagetitle">게시물 작성</p>
-    		<form class="form" method="post"> <!-- 관리자 목록으로..?  -->
+    		<form class="form" method="post" name="frm"> <!-- 관리자 목록으로..?  -->
 	    		<table class="all">
 	    			<tr>
 	    				<td>제목</td>
 	    				<td><input type="text" name="title" placeholder="제목을 입력하세요"></td>
-	    			</tr>
-	    			<tr>
-	    				<td class="notice-check">
-	    					<input type="checkbox" name="check" id="check" onchange="YnCheck(this);">
-	    					<label for="check">공지사항 여부</label>
-	    				</td>
 	    			</tr>
 	    			<tr>
 	    				<td colspan="2">내용</td>

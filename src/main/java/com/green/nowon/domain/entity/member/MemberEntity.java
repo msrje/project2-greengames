@@ -1,6 +1,8 @@
 package com.green.nowon.domain.entity.member;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CollectionTable;
@@ -13,17 +15,26 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import com.green.nowon.domain.dto.memberDTO.MemberUpdateDTO;
 import com.green.nowon.domain.entity.BaseDateEntity;
+import com.green.nowon.domain.entity.cate.PositionEntity;
 import com.green.nowon.security.MyRole;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 /**
  * @author LeeYongJu
  * 직원 관련 DB
@@ -36,6 +47,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Setter
 @SequenceGenerator(name = "seq_gen_GgMember", 
 		sequenceName = "seq_GgMember", initialValue = 1, allocationSize = 1)
 @Table(name = "GgMember")
@@ -46,7 +58,7 @@ public class MemberEntity extends BaseDateEntity{
 	@Id
 	private long mno;//사원번호
 	
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false)
 	private String name;
 	
 	@Column(nullable = false, unique = true)
@@ -57,6 +69,15 @@ public class MemberEntity extends BaseDateEntity{
 	
 	@Column(nullable = false)
 	private String phone;//번호
+	
+	@ManyToOne
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JoinColumn
+	private PositionEntity pno;
+	
+	@Builder.Default
+	@OneToMany(mappedBy = "member")
+	List<ProfileEntity> profile=new ArrayList<>();
 	
 	@Builder.Default
 	@CollectionTable(name = "GgDeploy")
@@ -70,12 +91,20 @@ public class MemberEntity extends BaseDateEntity{
 	}
 	
 	public MemberEntity update(MemberUpdateDTO dto) {
-		this.id=dto.getId();
-		this.pass=dto.getPass();
-		this.name = dto.getName();
 		this.phone = dto.getPhone();
 		return this;
 	}
+	/**
+	 * 대표이미지 없는데 없으면 @builder가 안먹힘
+	 * @return
+	 */
+	public ProfileEntity defImg() {
+		for(ProfileEntity pimg:profile) {
+			return pimg;
+		}
+		return profile.get(0);
+	}
+	
 	
 	
 }
