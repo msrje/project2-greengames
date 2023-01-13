@@ -21,11 +21,11 @@ public class SalaryListDTO {
 		this.name = e.getName();
 		this.pass = e.getPass();
 		this.phone=e.getPhone();
+		this.profileUrl=e.defImg().getUrl()+e.defImg().getNewName();
 		if(e.defImg()!=null) {
 			this.profileUrl=e.defImg().getUrl()+e.defImg().getNewName();
 		}
-		
-		
+
 	}
 	
 }
