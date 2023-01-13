@@ -16,6 +16,7 @@ import com.green.nowon.domain.dto.attendance.CommuteInsertDTO;
 import com.green.nowon.domain.dto.attendance.CommuteUpdateDTO;
 import com.green.nowon.domain.entity.attendance.CommuteEntity;
 import com.green.nowon.domain.entity.attendance.CommuteEntityRepository;
+import com.green.nowon.domain.entity.member.MemberEntityRepository;
 import com.green.nowon.domain.entity.member.MemberEntityRepository2;
 import com.green.nowon.service.attendance.CommuteService;
 
@@ -26,7 +27,7 @@ public class CommuteServiceProc implements CommuteService {
 	private CommuteEntityRepository commuteRepo;
 
 	@Autowired
-	private MemberEntityRepository2 memberRepo;
+	private MemberEntityRepository memberRepo;
 	/**
 	 * 저장과 동시에 업데이트 기능
 	 */
@@ -35,7 +36,7 @@ public class CommuteServiceProc implements CommuteService {
 	public void save(long mno, CommuteInsertDTO idto , CommuteUpdateDTO udto) {
 		Optional<CommuteEntity> result = findGoTime(mno);
 		if(result.isEmpty()) {
-			commuteRepo.save(idto.entity().fkSaver(memberRepo.findByMno(mno)));
+			commuteRepo.save(idto.entity().fkSaver(memberRepo.findByMno(mno).get()));
 		}else {
 			CommuteEntity entity = result.get();
 			LocalDateTime start = entity.getGTime();
