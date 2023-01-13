@@ -4,31 +4,35 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import com.green.nowon.domain.entity.board.BoardEntity;
+import com.green.nowon.domain.entity.board.GeneralBoardEntity;
 
 import lombok.Getter;
 
 @Getter
-public class BoardListDTO {
+public class GenBoardDetailDTO {
 	
 	private long bno;
 	private String title;
+	private String content;
 	private int readCount;
-	private String writer;
+	private String writerName;
+	private String writerId;
+	private LocalDateTime createdDate;
 	private LocalDateTime updatedDate;
 	private LocalDate toDay;
-	private String writerId;
 	
-	//Entity를 -> BoardListDTO(BoardEntity ent)
-	public BoardListDTO(BoardEntity ent) {
-		
+	public GenBoardDetailDTO(GeneralBoardEntity ent) {
 		this.bno = ent.getBno();
 		this.title = ent.getTitle();
+		this.content = ent.getContent();
 		this.readCount = ent.getReadCount();
-		this.writer = ent.getMember().getName(); //member의 name이 작성자임
+		this.writerName =ent.getMember().getName();
+		this.writerId =ent.getMember().getId();
+		this.createdDate = ent.getCreatedDate();
 		this.updatedDate = ent.getUpdatedDate();
 		toDay=LocalDate.now();
-		this.writerId =ent.getMember().getId();
 	}
+	
 	
 
 }

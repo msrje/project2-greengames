@@ -1,25 +1,66 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org" >
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
- 	<th:block th:insert="~{admin/AdminLayout :: head}"/>
-	<link rel="stylesheet" href="/css/default.css">
-	<th:block th:insert="~{admin/AdminLayout :: header}"/>
-	<link rel="stylesheet" href="/css/member/mypage.css">
+<th:block th:insert="~{admin/AdminLayout :: head}" />
+<link rel="stylesheet" href="/css/default.css">
+<th:block th:insert="~{admin/AdminLayout :: header}" />
+<link rel="stylesheet" href="/css/member/mypage.css">
+<link rel="stylesheet" href="/css/member/employee_list.css">
 </head>
 <body class="flex">
-    <main>
-	    <div>
-	    	<div class="mypage">
-	    		<div class="wrap-title">
-	    			<h2 class="mypage-title">
-	    				employee-list
-	    			</h2>
-	    		</div>
-	    	</div>
-	    	<div>
-	    		
-	    	</div>
-	    </div>
-    </main>
+	<main>
+		<div id="wrapper">
+			<span class="label">Green Games</span>
+			<div class="branch lv1">
+				<div class="entry">
+					<span class="label">a부서</span>
+					<div class="branch lv2">
+						<div class="entry">
+							<span class="label">a팀</span>
+						</div>
+						<div class="entry">
+							<span class="label">b팀</span>
+						</div>
+						<div class="entry">
+							<span class="label">c팀</span>
+						</div>
+					</div>
+				</div>
+				<div class="entry">
+					<span class="label">b부서</span>
+					<div class="branch lv2">
+						<div class="entry">
+							<span class="label">a팀</span>
+						</div>
+						<div class="entry">
+							<span class="label">b팀</span>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="entry">
+					<span class="label">c부서</span>
+					<div class="branch lv2">
+						<div class="entry">
+							<span class="label">a팀</span>
+						</div>
+						<div class="entry">
+							<span class="label">b팀</span>
+						</div>
+						<div class="entry">
+							<span class="label">c팀</span>
+						</div>
+					</div>
+				</div>
+				<div class="entry">
+					<span class="label">Entry-4</span>
+				</div>
+				<div class="entry">
+					<span class="label">Entry-5</span>
+				</div>
+			</div>
+		</div>
+	</main>
 </body>
 </html>

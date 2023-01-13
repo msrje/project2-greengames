@@ -4,11 +4,12 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import com.green.nowon.domain.entity.board.BoardEntity;
+import com.green.nowon.domain.entity.board.GeneralBoardEntity;
 
 import lombok.Getter;
 
 @Getter
-public class BoardListDTO {
+public class GenBoardListDTO {
 	
 	private long bno;
 	private String title;
@@ -19,7 +20,7 @@ public class BoardListDTO {
 	private String writerId;
 	
 	//Entity를 -> BoardListDTO(BoardEntity ent)
-	public BoardListDTO(BoardEntity ent) {
+	public GenBoardListDTO(GeneralBoardEntity ent) {
 		
 		this.bno = ent.getBno();
 		this.title = ent.getTitle();
