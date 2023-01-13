@@ -2,64 +2,44 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <th:block th:insert="~{admin/AdminLayout :: head}" />
-<link rel="stylesheet" href="/css/default.css">
 <th:block th:insert="~{admin/AdminLayout :: header}" />
-<link rel="stylesheet" href="/css/member/mypage.css">
 <link rel="stylesheet" href="/css/member/employee_list.css">
+<script type="text/javascript">
+	$(function (){
+		employeeList($(".gnb"));
+	});
+	function employeeList(target){
+		var parentDno = $(target).attr("value");
+		console.log(parentDno);
+		$.ajax({
+			url:`/employee/${parentDno}`,
+			success:function(olTag){
+				$(target).children(".cate-wrap").html(olTag);
+				var sub=$(target).find(".cate");
+				$.each(sub, subCategory);
+			},
+			error:function(){
+				alert("실패");
+			}
+		});
+		
+	}
+	function subCategory(){
+		employeeList($(this));
+	}
+</script>
 </head>
 <body class="flex">
-	<main>
-		<div id="wrapper">
-			<span class="label">Green Games</span>
-			<div class="branch lv1">
-				<div class="entry">
-					<span class="label">a부서</span>
-					<div class="branch lv2">
-						<div class="entry">
-							<span class="label">a팀</span>
-						</div>
-						<div class="entry">
-							<span class="label">b팀</span>
-						</div>
-						<div class="entry">
-							<span class="label">c팀</span>
-						</div>
+	<main>	
+		<div class="wrap">
+		<p>조직도</p>
+			<ol class="flex">
+				<li value="0" class="gnb cate">
+					<div class="cate-wrap entry">
+						<!-- 카테고리 출력 장소 -->
 					</div>
-				</div>
-				<div class="entry">
-					<span class="label">b부서</span>
-					<div class="branch lv2">
-						<div class="entry">
-							<span class="label">a팀</span>
-						</div>
-						<div class="entry">
-							<span class="label">b팀</span>
-						</div>
-						
-					</div>
-					
-				</div>
-				<div class="entry">
-					<span class="label">c부서</span>
-					<div class="branch lv2">
-						<div class="entry">
-							<span class="label">a팀</span>
-						</div>
-						<div class="entry">
-							<span class="label">b팀</span>
-						</div>
-						<div class="entry">
-							<span class="label">c팀</span>
-						</div>
-					</div>
-				</div>
-				<div class="entry">
-					<span class="label">Entry-4</span>
-				</div>
-				<div class="entry">
-					<span class="label">Entry-5</span>
-				</div>
-			</div>
+				</li>
+			</ol>
 		</div>
 	</main>
 </body>

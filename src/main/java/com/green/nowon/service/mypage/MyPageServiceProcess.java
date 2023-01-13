@@ -34,11 +34,11 @@ public class MyPageServiceProcess implements MyPageService{
 	@Transactional
 	@Override
 	public void info(long mno, Model model,Model model2) {
-
+		//로그인한 회원의 정보 + 회원이 등록한 이미지
 		model.addAttribute("detail",mRepo.findById(mno)
 				.map(SalaryListDTO::new)
 				.orElseThrow());
-		
+		//로그인한 회원의 주소정보
 		model2.addAttribute("mpageaddr",aRepo.findByMember_mno(mno)
 				.map(AddressDetailDTO::new)
 				.orElseThrow());
