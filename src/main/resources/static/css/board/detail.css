@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+.defImg{
+	width:200px;
+	height:200px;
+	background-repeat:no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.addImg{
+	width:200px;
+	height:200px;
+	background-repeat:no-repeat;
+    background-position: center;
+    background-size: contain;
+}

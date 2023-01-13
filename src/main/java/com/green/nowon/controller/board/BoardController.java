@@ -56,11 +56,10 @@ public class BoardController {
 	}
 	
 	
-	
 	//공지사항 상세페이지
 	@GetMapping("/notice-boards/{bno}")
 	public String detail(@PathVariable long bno, Model model) {
-		service.updateReadCount(bno);  //조회수
+		service.updateReadCount(bno);  //조회수(레포지토리에 쿼리추가후)
 		service.sendDetail(bno, model);
 		return "board/noticeDetail";
 	}
@@ -79,6 +78,7 @@ public class BoardController {
 		service.update(bno, dto);
 		return "redirect:/notice-boards/{bno}";
 	}
+	
 	
 	
 	
@@ -106,6 +106,7 @@ public class BoardController {
 	//자유게시판 상세페이지
 	@GetMapping("/boards/{bno}")
 	public String genDetail(@PathVariable long bno, Model model) {
+		service.genUpdateReadCount(bno);  //조회수(레포지토리에 쿼리추가후)
 		service.sendDetail02(bno, model);
 		return "board/generalDetail";
 	}

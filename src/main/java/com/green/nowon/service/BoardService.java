@@ -44,4 +44,6 @@ public interface BoardService {
 	
 	int updateReadCount(Long bno); //조회수
 
+	int genUpdateReadCount(Long bno); //자유게시판 조회수
+
 }

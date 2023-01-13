@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" 
-xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+xmlns:sec="http://www.thymeleaf.org/exdivas/spring-security">
 <head>
     <th:block th:insert="~{admin/AdminLayout :: head}"/>
 	<link rel="stylesheet" href="/css/commons/common.css">
+	<link rel="stylesheet" href="/css/board/detail.css">
     <style type="text/css">
     	#edit-mode{display: none;}
     </style>
@@ -47,100 +48,104 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				</th:block>
     		</div>
     		<form id="edit-mode" th:action="|/notice-boards/${detail.bno}|" method="post">
-    			<table>
-	    			<tr>
-	    				<td>No</td>
-	    				<td th:text="${detail.bno}"></td>
-	    			</tr>
-	    			<tr>
-	    				<td>작성일</td>
-	    				<td>
+	    			<div>
+	    				<span>No</span>
+	    				<span th:text="${detail.bno}"></span>
+	    			</div>
+	    			<div>
+	    				<span>작성일</span>
+	    				<span>
     					<span
     					th:text="${detail.updatedDate.toLocalDate()}">날짜</span>
     					<span 
     					th:text="${#temporals.format(detail.updatedDate, 'HH시 mm분 ss초')}">시간</span>
-    					</td>
-	    			</tr>
-	    			<tr>
-	    				<td>최종수정일</td>
-	    				<td>
+    					</span>
+	    			</div>
+	    			<div>
+	    				<span>최종수정일</span>
+	    				<span>
     					<span
     					th:text="${detail.updatedDate.toLocalDate()}">날짜</span>
     					<span
     					th:text="${#temporals.format(detail.updatedDate, 'HH시 mm분 ss초')}">시간</span>
-    					</td>
-	    			</tr>
-	    			<tr>
-	    				<td>조회수</td>
-	    				<td  th:text="${detail.readCount}"></td>
-	    			</tr>
-	    			<tr>
-	    				<td>작성자</td>
-	    				<td  th:text="${detail.writerName}"></td>
-	    			</tr>
-	    			<tr>
-	    				<td>제목</td>
-	    				<td>
+    					</span>
+	    			</div>
+	    			<div>
+	    				<span>조회수</span>
+	    				<span  th:text="${detail.readCount}"></span>
+	    			</div>
+	    			<div>
+	    				<span>작성자</span>
+	    				<span  th:text="${detail.writerName}"></span>
+	    			</div>
+	    			<div>
+	    				<span>제목</span>
+	    				<span>
 	    					<input type="text" name="title" th:value="${detail.title}">
-	    				</td>
-	    			</tr>
-	    			<tr>
-	    				<td>내용</td>
-	    				<td >
+	    				</span>
+	    			</div>
+	    			<div>
+	    				<span>내용</span>
+	    				<span >
 	    					<textarea rows="5" cols="50" name="content">[[${detail.content}]]</textarea>
-	    				</td>
-	    			</tr>
-	    			<tr>
-	    				<td colspan="2">
+	    				</span>
+	    			</div>
+	    			<div>
+	    				<span>
 	    					<input type="hidden" name="_method" value="PUT">
 	    					<button type="submit">수정완료</button>
 	    					<button type="button" id="btn-cancel">취소</button>
-	    				</td>
-	    			</tr>
-	    		</table>
+	    				</span>
+	    			</div>
     		</form>
     		<!-- //////////////////////////////////////// -->
-    		<table id="def-mode">
-    			<tr>
-    				<td>No</td>
-    				<td th:text="${detail.bno}"></td>
-    			</tr>
-    			<tr>
-	    			<td>작성일</td>
-	    				<td>
+    		<div id="def-mode">
+    			<div>
+    				<span>No</span>
+    				<span th:text="${detail.bno}"></span>
+    			</div>
+    			<div>
+	    			<span>작성일</span>
+	    				<span>
     					<span
     					th:text="${detail.createdDate.toLocalDate()}">날짜</span>
     					<span 
     					th:text="${#temporals.format(detail.createdDate, 'HH시 mm분 ss초')}">시간</span>
-    					</td>
-	    			</tr>
-	    			<tr>
-	    				<td>최종수정일</td>
-	    				<td>
+    					</span>
+	    			</div>
+	    			<div>
+	    				<span>최종수정일</span>
+	    				<span>
     					<span
     					th:text="${detail.updatedDate.toLocalDate()}">날짜</span>
     					<span
     					th:text="${#temporals.format(detail.updatedDate, 'HH시 mm분 ss초')}">시간</span>
-    					</td>
-	    			</tr>
-    			<tr>
-    				<td>조회수</td>
-    				<td  th:text="${detail.readCount}"></td>
-    			</tr>
-    			<tr>
-    				<td>작성자</td>
-    				<td  th:text="${detail.writerName}"></td>
-    			</tr>
-    			<tr>
-    				<td>제목</td>
-    				<td  th:text="${detail.title}"></td>
-    			</tr>
-    			<tr>
-    				<td>내용</td>
-    				<td th:utext="${detail.content}"></td>
-    			</tr>
-    			
-    		</table>
+    					</span>
+	    			</div>
+    			<div>
+    				<span>조회수</span>
+    				<span  th:text="${detail.readCount}"></span>
+    			</div>
+    			<div>
+    				<span>작성자</span>
+    				<span  th:text="${detail.writerName}"></span>
+    			</div>
+    			<div>
+    				<span>제목</span>
+    				<span  th:text="${detail.title}"></span>
+    			</div>
+    			<div class="img-area">
+					<ul class="addImg-wrap flex">
+						<th:block th:each="idto:${detail.imgs}">
+							<li class="addImg" th:style="|background-image: url('${idto.imgUrl}');|"></li>
+						</th:block>
+					</ul>
+				</div>
+    			<div>
+    				<span>내용</span>
+    				<span th:utext="${detail.content}"></span>
+    			</div>
+    		</div>
     	</div>
     </main>
 </body>

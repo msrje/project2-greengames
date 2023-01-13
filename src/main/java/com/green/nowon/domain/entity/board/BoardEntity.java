@@ -57,12 +57,19 @@ public class BoardEntity extends BaseDateTimeColumns{
 	@ManyToOne(cascade = CascadeType.DETACH)
 	private MemberEntity member;//작성자
 	
+	
 	@Builder.Default
 	@OneToMany(mappedBy = "board")
 	List<BoardImgEntity> imgs=new ArrayList<>();
 	
 	public String defImgUrl() {
-		BoardImgEntity def=imgs.get(0);
+
+		BoardImgEntity def = null;
+		
+		if(imgs.size()!=0) {
+		def=imgs.get(0);
+		};
+		
 		return def.getUrl()+def.getNewName();
 	}
 	
@@ -78,7 +85,13 @@ public class BoardEntity extends BaseDateTimeColumns{
 			if(bimg.isDef()==true)
 				return bimg;
 		}
-		return imgs.get(0);
+		BoardImgEntity def = null;
+		if(imgs.size()!=0) {
+		def=imgs.get(0);
+		};
+		return def;
+		
+		//이미지 없으면(사이즈 0) null
 	}
 	
 	//편의메서드

@@ -122,7 +122,7 @@ public class BoardServiceProc implements BoardService{
 		
 	}
 	
-	//조회수
+	//공지사항 조회수
     @Transactional
     public int updateReadCount(Long bno) {
         return repository.updateReadCount(bno);
@@ -187,11 +187,20 @@ public class BoardServiceProc implements BoardService{
 		}
 		
 	}
+	
+	//자유조회수
+    @Transactional
+    public int genUpdateReadCount(Long bno) {
+        return repo.genUpdateReadCount(bno);
+    }
 
 	
 	
 
+    
+    
 	//mypage에 띄우는 리스트
+    
 	@Transactional
 	@Override
 	public void myGetListAll(Model model) {
