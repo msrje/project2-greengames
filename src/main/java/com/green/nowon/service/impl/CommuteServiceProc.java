@@ -54,7 +54,7 @@ public class CommuteServiceProc implements CommuteService {
 		}
 	}
 	/**
-	 * 오늘자 출근이 있는지 확인하는 메소드
+	 * 오늘자 출근이 있는지 확인하는 메소드 -> 오늘자에서 가장 최근의 근무일자
 	 */
 	@Override
 	public Optional<CommuteEntity> findGoTime(long mno) {
@@ -72,10 +72,22 @@ public class CommuteServiceProc implements CommuteService {
 		return commuteRepo.findById(cno);
 	}
 	
-	
+	/**
+	 * 가장 최근이 근무한 날짜 조회
+	 */
 	@Override
-	public void showGTime(Model model, Long mno) {
-		model.addAttribute("time",findGoTime(mno).get());
+	public void showGTime(Long mno,Model model) {
+		List<CommuteEntity> result = commuteRepo.findAllByMember_mno(mno);
+		long cno = 0L;
+		for(CommuteEntity i:result) {
+			cno = i.getCno();
+		}
+		Optional<CommuteEntity> CommuteLastDay = commuteRepo.findById(cno);
+		System.out.println("최근날짜 확인>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+CommuteLastDay.get().getToday());
+		
+		
+		model.addAttribute("time",commuteRepo.findAllByCno(cno));
+		
 	}
 	
 }

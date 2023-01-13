@@ -13,4 +13,6 @@ public interface CommuteEntityRepository extends JpaRepository<CommuteEntity, Lo
 
 	List<CommuteEntity> findAllByMember_mno(long mno);
 
+	Object findAllByCno(long cno);
+
 }

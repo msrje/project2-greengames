@@ -14,10 +14,16 @@ public class amdinController {
 	
 	@Autowired
 	private CommuteService commuteService;
-
+	
+	
+	@GetMapping("/admin/")
+	public String admin() {
+		return "admin/ggAdmin";
+	}
+	
 	@GetMapping("/admin/{mno}")
-	public String admin(Model model,@PathVariable Long mno) {
-//		commuteService.showGTime(model,mno);
+	public String admin2(@PathVariable long mno,Model model) {
+		commuteService.showGTime(mno,model);
 		return "admin/ggAdmin";
 	}
 	

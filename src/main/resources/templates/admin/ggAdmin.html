@@ -11,13 +11,13 @@
 		var goTime = $(".goTime");
 		var offTime= $(".offTime");
 		if(goTime.text()!=""){
-			dateFormat(goTime);
+			dateFormat(goTime);//시작시간 이쁘게
 		}
 		if(offTime.text()!=""){
-			dateFormat(offTime);
+			dateFormat(offTime);//끝시간 이쁘게
 		}
 	});
-	function dateFormat(target){
+	function dateFormat(target){//시간 이쁘게 메소드
 		var time= $(target).text();
 		var today = new Date(time);
 		var hours = ('0' + today.getHours()).slice(-2);
@@ -25,9 +25,9 @@
 		var timeString = "";
 		if(hours>12) {
 			hours = hours-12;
-			timeString = "오후 "+ hours + '시' + minutes  + '분';
+			timeString = "오후 "+ hours + '시 ' + minutes  + '분';
 		}else{
-			timeString = "오전 " +hours + '시' + minutes  + '분';
+			timeString = "오전 " +hours + '시 ' + minutes  + '분';
 		}
 		target.text(timeString);
 	}
@@ -72,13 +72,13 @@
     		<p>GreenGames의 관리페이지 입니다.</p>
     		<div class="flex"><!-- 네모네모 상자 -->
     			<div><!-- 출근 상자 -->
-    				<p class="goTime" if="${#strings.isEmpty(time.gTime)}">출근시간</p>
-    				<p class="goTime" if="${!#strings.isEmpty(time.gTime)}" text="${time.gTime}">출근시간</p>
+    				<p class="goTime" th:if="${#strings.isEmpty(time.gTime)}">출근시간</p>
+    				<p class="goTime" th:if="${!#strings.isEmpty(time.gTime)}" th:text="${time.gTime}">출근시간</p>
     				<button class="go">출근</button>
     			</div>
     			<div><!-- 퇴근 상자 -->
-    				<p class="offTime" if="${#strings.isEmpty(time.oTime)}">퇴근시간</p>
-    				<p class="offTime" if="${!#strings.isEmpty(time.oTime)}" text="${time.oTime}">퇴근시간</p>
+    				<p class="offTime" th:if="${#strings.isEmpty(time.oTime)}">퇴근시간</p>
+    				<p class="offTime" th:if="${!#strings.isEmpty(time.oTime)}" th:text="${time.oTime}">퇴근시간</p>
     				<button class="off">퇴근</button>
     			</div>
     		</div>

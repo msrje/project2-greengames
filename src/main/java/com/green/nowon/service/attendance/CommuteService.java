@@ -15,6 +15,6 @@ public interface CommuteService {
 
 	void save(long mno, CommuteInsertDTO idto, CommuteUpdateDTO udto);
 
-	void showGTime(Model model, Long mno);
+	void showGTime(Long mno, Model model);
 
 }
