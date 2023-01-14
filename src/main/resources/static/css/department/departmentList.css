@@ -1,8 +1,0 @@
-@charset "UTF-8";
-.cate-2{
-	visibility: hidden;
-}
-/* 앙댐 */
-.cate-1:hover{
-	visibility: visible;
-}

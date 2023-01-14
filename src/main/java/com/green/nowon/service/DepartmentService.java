@@ -10,6 +10,6 @@ public interface DepartmentService {
 
 	void departmentList(Long parentDno, Model model);
 
-	void firstDepartment(Model model);
+	void departmentMemberList(Long dno, Model model);
 
 }
