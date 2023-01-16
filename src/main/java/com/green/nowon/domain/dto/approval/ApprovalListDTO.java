@@ -17,7 +17,7 @@ public class ApprovalListDTO {
 	
 	private Date date;
 		
-	private boolean status;
+	private String status;
 	
 	
 	public ApprovalListDTO(ApprovalEntity e) {
@@ -25,7 +25,7 @@ public class ApprovalListDTO {
 		this.ano=e.getAno();
 		this.title=e.getTitle();
 		this.content=e.getContent();
-		this.status=e.isStatus();
+		this.status=e.getStatus();
 		
 	}
 	

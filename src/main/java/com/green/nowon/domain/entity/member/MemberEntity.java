@@ -16,11 +16,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import com.green.nowon.domain.dto.memberDTO.MemberUpdateDTO;
 import com.green.nowon.domain.entity.BaseDateEntity;
+import com.green.nowon.domain.entity.cate.PositionEntity;
 import com.green.nowon.security.MyRole;
 
 import lombok.AllArgsConstructor;
@@ -36,6 +44,7 @@ import lombok.Setter;
  * , mem_img(프로필)
  * myRole : user(사원) , admin(팀장)
  */
+@DynamicUpdate
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -62,6 +71,11 @@ public class MemberEntity extends BaseDateEntity{
 	
 	@Column(nullable = false)
 	private String phone;//번호
+	
+	@ManyToOne
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JoinColumn
+	private PositionEntity pno;
 	
 	@Builder.Default
 	@OneToMany(mappedBy = "member")
@@ -92,4 +106,7 @@ public class MemberEntity extends BaseDateEntity{
 		}
 		return null;
 	}
+	
+	
+	
 }

@@ -4,7 +4,8 @@
 <head>
 <link rel="stylesheet" href="/css/admin/main.css">
 <script src='/js/main.js'></script>
-<th:block th:insert="~{admin/AdminLayout :: head}" />
+<th:block th:insert="~{admin/AdminLayout :: head}" /> 
+<link rel="stylesheet" href="/css/default.css">
 <link rel="stylesheet" href="/css/commons/common.css">
 <th:block th:insert="~{admin/AdminLayout :: header}" />
 <link rel="stylesheet" href="/css/member/mypage.css">
@@ -12,15 +13,53 @@
 	document.addEventListener('DOMContentLoaded', function() {
 		var calendarEl = document.getElementById('calendar');
 		var calendar = new FullCalendar.Calendar(calendarEl, {
-			initialView : 'dayGridMonth'
+			headerToolbar : {
+				left : 'prev,next today',
+				center : 'title',
+				right : 'dayGridMonth,timeGridWeek,timeGridDay'
+			},
+			initialDate : '2023-01-10', 
+			navLinks : true, 
+			selectable : true,
+			selectMirror : true,
+			select : function(arg) {
+				console.log(arg);
+
+				var title = prompt('입력할 일정:');
+				if (title) {
+					calendar.addEvent({
+						title : title,
+						start : arg.start,
+						end : arg.end,
+						allDay : arg.allDay,
+						backgroundColor : "#009900",
+						textColor : "white"
+					})
+				}
+				calendar.unselect()
+			},
+			eventClick : function(arg) {
+				console.log("#등록된 일정 클릭#");
+				console.log(arg.event);
+
+				if (confirm('일정을 지우시겠습니까?')) {
+					arg.event.remove()
+				}
+			},
+			editable : true,
+			dayMaxEvents : true, 
+	
 		});
 		calendar.render();
 	});
+
+	
 </script>
 </head>
 <body class="flex">
 	<main>
 		<div>
+			<input id="mno" type="hidden" th:value="${#authentication.principal.mno}">
 			<div class="mypage">
 				<div class="wrap-title">
 					<h2 class="mypage-title">
@@ -28,15 +67,16 @@
 					</h2>
 				</div>
 				<div style="text-align: right;">
-					<a style="position: relative; left: 122px; top:-20px; font-weight: bold; font-size: 20px">캘린더</a>
-					<div style="width: 500px; position: relative; left: 900px;">
+					<a style="position: relative; left: 152px; top:10px; font-weight: bold; font-size: 20px">캘린더</a>
+					<div style="width: 800px; position: relative; left: 780px; top: 40px;" >
 						<div id='calendar'></div>
 					</div>
 				</div>
 				<div class="mypage-info">
 					<div class="mypage-img">
-						<img align="left" th:if="${#strings.isEmpty(detail.profileUrl)}" src="/image/test/profiletest.jpeg">
-						<img align="left" th:if="${!#strings.isEmpty(detail.profileUrl)}" th:src="${detail.profileUrl}">
+					 	<!--ajax 추가-->
+					 	<img align="left" th:if="${#strings.isEmpty(detail.profileUrl)}" src="/image/test/profiletest.jpeg">
+					 	<img align="left" th:if="${!#strings.isEmpty(detail.profileUrl)}" th:src="${detail.profileUrl}">
 					</div>
 					<br>
 					<div class="member-info">
@@ -78,7 +118,6 @@
 				</div>
 			</div>
 		</div>
-
 		<div class="salary-info">
 			<p>이번달 내 급여정보</p>
 			<table>
@@ -105,6 +144,7 @@
 				</tbody>
 			</table>
 		</div>
+	
 		<div class="approval-1">
 			<div class="approval-2">
 				<div class="approval-3">

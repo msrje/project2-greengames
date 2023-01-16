@@ -15,4 +15,5 @@ public class ApprovalSaveDTO {
 	
 	private Date date;
 	
+	private long mno;
 }

@@ -1,18 +1,13 @@
 package com.green.nowon.controller.mypage;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
 import org.springframework.web.bind.annotation.PatchMapping;
-
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.green.nowon.domain.dto.memberDTO.MemberUpdateDTO;
-import com.green.nowon.security.MyUserDetails;
 import com.green.nowon.service.BoardService;
 import com.green.nowon.service.MemberService;
 import com.green.nowon.service.mypage.MyPageService;
@@ -45,6 +40,5 @@ public class myPageController {
 		memberService.update(id, dto);
 		return "redirect:/admin/goods/list";
 	}
-	
-	
+
 }
