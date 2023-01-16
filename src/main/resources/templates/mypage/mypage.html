@@ -13,7 +13,42 @@
 	document.addEventListener('DOMContentLoaded', function() {
 		var calendarEl = document.getElementById('calendar');
 		var calendar = new FullCalendar.Calendar(calendarEl, {
-			initialView : 'dayGridMonth'
+			headerToolbar : {
+				left : 'prev,next today',
+				center : 'title',
+				right : 'dayGridMonth,timeGridWeek,timeGridDay'
+			},
+			initialDate : '2023-01-10', 
+			navLinks : true, 
+			selectable : true,
+			selectMirror : true,
+			select : function(arg) {
+				console.log(arg);
+
+				var title = prompt('입력할 일정:');
+				if (title) {
+					calendar.addEvent({
+						title : title,
+						start : arg.start,
+						end : arg.end,
+						allDay : arg.allDay,
+						backgroundColor : "#009900",
+						textColor : "white"
+					})
+				}
+				calendar.unselect()
+			},
+			eventClick : function(arg) {
+				console.log("#등록된 일정 클릭#");
+				console.log(arg.event);
+
+				if (confirm('일정을 지우시겠습니까?')) {
+					arg.event.remove()
+				}
+			},
+			editable : true,
+			dayMaxEvents : true, 
+	
 		});
 		calendar.render();
 	});
@@ -32,8 +67,8 @@
 					</h2>
 				</div>
 				<div style="text-align: right;">
-					<a style="position: relative; left: 122px; top:-20px; font-weight: bold; font-size: 20px">캘린더</a>
-					<div style="width: 500px; position: relative; left: 900px;">
+					<a style="position: relative; left: 152px; top:10px; font-weight: bold; font-size: 20px">캘린더</a>
+					<div style="width: 800px; position: relative; left: 780px; top: 40px;" >
 						<div id='calendar'></div>
 					</div>
 				</div>

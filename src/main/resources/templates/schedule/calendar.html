@@ -3,60 +3,202 @@
 <head>
 <th:block th:insert="~{admin/AdminLayout :: head}" />
 <link rel="stylesheet" href="/css/admin/main.css">
+      
 <script src='/js/main.js'></script>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 
 <script type="text/javascript">
+	var calendarEl;
+	var calendar;
 	document.addEventListener('DOMContentLoaded', function() {
-		var calendarEl = document.getElementById('calendar');
-		var calendar = new FullCalendar.Calendar(calendarEl, {
-			headerToolbar : {
-				left : 'prev,next today',
-				center : 'title',
-				right : 'dayGridMonth,timeGridWeek,timeGridDay'
-			},
-			initialDate : '2023-01-10', 
-			navLinks : true, 
-			selectable : true,
-			selectMirror : true,
-			select : function(arg) {
-				console.log(arg);
 
-				var title = prompt('입력할 일정:');
-				if (title) {
-					calendar.addEvent({
-						title : title,
-						start : arg.start,
-						end : arg.end,
-						allDay : arg.allDay,
-						backgroundColor : "#009900",
-						textColor : "white"
+		calendarEl = document.getElementById('calendar');
+		calendar = new FullCalendar.Calendar(calendarEl, {
+			timeZone : 'UTC',
+			initialView : 'dayGridMonth', // 홈페이지에서 다른 형태의 view를 확인할  수 있다.
+			events : //getMapCalender// 일정 데이터 추가 , DB의 event를 가져오려면 JSON 형식으로 변환해 events에 넣어주면된다.
+			$.ajax({
+				url : "/schedule/calendar/" + $('#userMno').val(),
+				method : "GET",  
+				dataType : "JSON",
+				headers : {
+					"Accept" : "application/json",
+					"Content-Type" : "application/json"
+				},
+				success : function(list, status) {
+
+					$.each(list, function(index, dto) {
+						var obj = {
+							"title" : dto.ctitle,
+							"start" : dto.cstartTime,
+							"end" : dto.cendTime,
+							"cno" :  dto.cno,
+							"color": "rgb(3, 187, 133)"
+						}
+						calendar.addEvent(obj);
 					})
-				}
-				calendar.unselect()
-			},
-			eventClick : function(arg) {
-				console.log("#등록된 일정 클릭#");
-				console.log(arg.event);
 
-				if (confirm('일정을 지우시겠습니까?')) {
-					arg.event.remove()
+				},
+				error : function(request, status, error) {
+					alert("경고")
 				}
+
+			})
+
+			,
+			headerToolbar : {
+				center : 'addEventButton' // headerToolbar에 버튼을 추가
 			},
-			editable : true,
-			dayMaxEvents : true, 
-	
+			customButtons : {
+				addEventButton : { // 추가한 버튼 설정
+					text : "일정 추가", // 버튼 내용
+					click : function() { // 버튼 클릭 시 이벤트 추가
+						$("#calendarModal").modal("show"); // modal 나타내기
+
+						$("#addCalendar").on(
+								"click",
+								function() { // modal의 추가 버튼 클릭 시
+									var content = $("#calendar_content").val();
+									var start_date = $("#calendar_start_date")
+											.val();
+									var end_date = $("#calendar_end_date")
+											.val();
+									var userMno = $('#userMno').val();
+									//내용 입력 여부 확인
+									if (content == null || content == "") {
+										alert("내용을 입력하세요.");
+									} else if (start_date == ""
+											|| end_date == "") {
+										alert("날짜를 입력하세요.");
+									} else if (new Date(end_date)
+											- new Date(start_date) < 0) { // date 타입으로 변경 후 확인
+										alert("종료일이 시작일보다 먼저입니다.");
+									} else { // 정상적인 입력 시
+										var obj = {
+											"ctitle" : content,
+											"cstartTime" : start_date,
+											"cendTime" : end_date
+										}//전송할 객체 생성
+										$.ajax({
+											url : "/schedule/calendar/"
+													+ userMno,
+											type : "post",
+											dataType : "JSON",
+											contentType : "application/json",
+											processData : false,
+											data : JSON.stringify(obj),
+											success : function(map) {
+												console.log("인설트>>>>" + map);
+												
+												$("#calendar_content").val("");
+												$("#calendar_start_date").val("");
+												$("#calendar_end_date").val("");
+											}
+										});
+
+										var obj2 = {
+											"title" : content,
+											"start" : start_date,
+											"end" : end_date,
+											"color": "rgb(3, 187, 133)"
+										}
+										calendar.addEvent(obj2);
+
+										console.log(obj); //서버로 해당 객체를 전달해서 DB 연동 가능
+										$("#calendarModal").modal("hide"); // modal 숨기기
+									}//else
+								});//on
+					}//click-func
+				}
+			}, 
+			//삭제
+			eventClick: function (info){
+                if(confirm("'"+ info.event.title +"'\n일정을 삭제하시겠습니까 ?")){
+                    // 확인 클릭 시
+                    info.event.remove();
+                    var events = new Array(); // Json 데이터를 받기 위한 배열 선언
+                    var obj = new Object();
+                        obj.title = info.event._def.title;
+                        obj.start = info.event._instance.range.start;
+                        obj.cno = info.event.extendedProps.cno;
+                        events.push(obj);
+
+                    
+                        $.ajax({
+                        	url : "/schedule/calendar/" + $('#userMno').val(),
+                            type: "DELETE",
+                            dataType: "json",
+                            data: JSON.stringify(events),
+                            contentType: 'application/json',
+                        });
+                }
+
+            }, 
+            eventDrop: function (info) {
+            	console.log("143>>>"+info);
+            	 var events = new Array(); // Json 데이터를 받기 위한 배열 선언
+                 var obj = new Object();
+                     obj.title = info.event._def.title;
+                     obj.start = info.event._instance.range.start;
+                     obj.cno = info.event.extendedProps.cno;
+                     events.push(obj);
+                     console.log("150>>>"+event);
+            },
+			editable : true, // false로 변경 시 draggable 작동 x 
+			displayEventTime : false
+		// 시간 표시 x
 		});
 		calendar.render();
 	});
 </script>
-
-
+<style type="text/css">
+    .fc-day-number.fc-sat.fc-past { color:#0000FF; }     /* 토요일 */
+    .fc-day-number.fc-sun.fc-past { color:#FF0000; }    /* 일요일 */
+</style>
 </head>
 <body class="flex">
 	<th:block th:insert="~{admin/AdminLayout :: header}" />
-	<div style="width: 1000px; height: 1000px; margin: auto; position: relative; top: 90px;">
+	<div style="width: 1000px; height: 1000px; margin: auto;">
 		<div id='calendar'></div>
 	</div>
+	<input type="hidden" id="userMno"
+		th:value="${#authentication.principal.mno}">
+	<div class="modal fade" id="calendarModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">일정을 입력하세요.</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="taskId" class="col-form-label">일정 내용</label> <input
+							type="text" class="form-control" id="calendar_content"
+							name="calendar_content"> <label for="taskId"
+							class="col-form-label">시작 날짜</label> <input type="date"
+							class="form-control" id="calendar_start_date"
+							name="calendar_start_date"> <label for="taskId"
+							class="col-form-label">종료 날짜</label> <input type="date"
+							class="form-control" id="calendar_end_date"
+							name="calendar_end_date">
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-warning" id="addCalendar">추가</button>
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal" id="sprintSettingModalClose">취소</button>
+				</div>
 
+			</div>
+		</div>
+	</div>
 </body>
 </html>

@@ -9,6 +9,11 @@
 	height: auto;
 	margin: 5%;
 }
+
+.mypage-title{
+	position: relative;
+	left: 190px;
+}
 .mypage-addr>li{
 	list-style: none;
 }
@@ -19,7 +24,7 @@
 	height: 420px;
 	border-radius: 30px;
 	position: relative;
-	top: -400px;
+	top: -650px;
 }
 .member-info>p{
 	font-size: 15px;
@@ -47,7 +52,7 @@
 .approval-1{
 	margin:5% 12% 5% 12%;
 	position: relative;
-	top: -400px;
+	top: -770px;
 	left: -120px;
 }
 .approval-2{
@@ -76,7 +81,7 @@
 	margin:5% 5% 5% 5%;
 	text-align: center;
 	position: relative;
-	top: -400px;
+	top: -500px;
 }
 .salary-info p{
 	border-bottom: 1px solid #a9a9a9;
