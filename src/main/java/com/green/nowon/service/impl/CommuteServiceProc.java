@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -15,6 +16,7 @@ import org.springframework.ui.Model;
 
 import com.green.nowon.domain.dto.attendance.CommuteInsertDTO;
 import com.green.nowon.domain.dto.attendance.CommuteUpdateDTO;
+import com.green.nowon.domain.dto.commuteMember.CommuteMemberListDTO;
 import com.green.nowon.domain.entity.attendance.CommuteEntity;
 import com.green.nowon.domain.entity.attendance.CommuteEntityRepository;
 import com.green.nowon.domain.entity.member.MemberEntity;
@@ -100,6 +102,16 @@ public class CommuteServiceProc implements CommuteService {
 		long mNo =result.get().getMno();
 //		System.err.println(mNo);
 		return mNo;
+	}
+	
+	@Override
+	public void showListTime(long memberMno, Model model2 , CommuteMemberListDTO dto) {
+		 /*List<CommuteMemberListDTO> list = 
+				 commuteRepo.findAllByMember_mno(memberMno)
+				 .stream()
+				 .map(CommuteMemberListDTO::new)
+				 .collect(Collectors.toList());
+		 model2.addAttribute("list", list);*/
 	}
 	
 	

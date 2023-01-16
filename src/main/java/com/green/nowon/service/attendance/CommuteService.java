@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 
 import com.green.nowon.domain.dto.attendance.CommuteInsertDTO;
 import com.green.nowon.domain.dto.attendance.CommuteUpdateDTO;
+import com.green.nowon.domain.dto.commuteMember.CommuteMemberListDTO;
 import com.green.nowon.domain.entity.attendance.CommuteEntity;
 
 public interface CommuteService {
@@ -19,5 +20,7 @@ public interface CommuteService {
 	void showGTime(Long mno, Model model);
 
 	long MemberMno(Principal principal);
+
+	void showListTime(long memberMno, Model model2, CommuteMemberListDTO dto);
 
 }
