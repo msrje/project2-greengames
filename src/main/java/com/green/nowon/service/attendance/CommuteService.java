@@ -1,5 +1,6 @@
 package com.green.nowon.service.attendance;
 
+import java.security.Principal;
 import java.time.LocalTime;
 import java.util.Optional;
 
@@ -16,5 +17,7 @@ public interface CommuteService {
 	void save(long mno, CommuteInsertDTO idto, CommuteUpdateDTO udto);
 
 	void showGTime(Long mno, Model model);
+
+	long MemberMno(Principal principal);
 
 }

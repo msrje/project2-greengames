@@ -1,5 +1,6 @@
 package com.green.nowon.service.impl;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -16,6 +17,7 @@ import com.green.nowon.domain.dto.attendance.CommuteInsertDTO;
 import com.green.nowon.domain.dto.attendance.CommuteUpdateDTO;
 import com.green.nowon.domain.entity.attendance.CommuteEntity;
 import com.green.nowon.domain.entity.attendance.CommuteEntityRepository;
+import com.green.nowon.domain.entity.member.MemberEntity;
 import com.green.nowon.domain.entity.member.MemberEntityRepository;
 import com.green.nowon.domain.entity.member.MemberEntityRepository2;
 import com.green.nowon.service.attendance.CommuteService;
@@ -88,7 +90,17 @@ public class CommuteServiceProc implements CommuteService {
 		
 		
 		model.addAttribute("time",commuteRepo.findAllByCno(cno));
-		
 	}
+	
+	@Override
+	public long MemberMno(Principal principal) {
+		String email = principal.getName();
+		
+		Optional<MemberEntity> result = memberRepo.findAllById(email);
+		long mNo =result.get().getMno();
+//		System.err.println(mNo);
+		return mNo;
+	}
+	
 	
 }

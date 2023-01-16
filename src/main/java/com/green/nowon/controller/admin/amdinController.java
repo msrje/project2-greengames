@@ -1,5 +1,7 @@
 package com.green.nowon.controller.admin;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -25,17 +27,12 @@ public class amdinController {
 	@Autowired
 	private CommuteService commuteService;
 
-  @Autowired
-	PositionService service;
-
-	@GetMapping("/admin")
-	public String admin() {
-		return "admin/ggAdmin";
-	}
+	@Autowired
+	private PositionService service;
 	
-	@GetMapping("/admin/{mno}")
-	public String admin2(@PathVariable long mno,Model model) {
-		commuteService.showGTime(mno,model);
+	@GetMapping("/admin")
+	public String admin(Model model,Principal principal) {
+		commuteService.showGTime(commuteService.MemberMno(principal),model);
 		return "admin/ggAdmin";
 	}
 	
