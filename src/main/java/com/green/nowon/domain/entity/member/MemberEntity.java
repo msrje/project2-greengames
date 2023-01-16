@@ -22,6 +22,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -43,6 +44,7 @@ import lombok.Setter;
  * , mem_img(프로필)
  * myRole : user(사원) , admin(팀장)
  */
+@DynamicUpdate
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -102,7 +104,7 @@ public class MemberEntity extends BaseDateEntity{
 		for(ProfileEntity pimg:profile) {
 			return pimg;
 		}
-		return profile.get(0);
+		return null;
 	}
 	
 	
