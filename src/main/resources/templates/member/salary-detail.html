@@ -46,21 +46,20 @@
 	    					</ul>
 	    				</form>
 	    				<div>
-		    				<select>
-		    					<option value="1">부서1</option>
-		    					<option value="2">부서2</option>
-		    					<option value="3">부서3</option>
-		    					<option value="4">부서4</option>
-		    					<option value="5">부서5</option>
+	    				<form th:action="|/salary/department/${detail.mno}|" method="post">
+		    				<select name="dno">
+		    				<th:block th:each="department:${department}">
+		    					<option th:value="${department.dno}">[[${department.dname}]]</option>
+		    					</th:block>
 		    				</select>
-		    				<select>
-		    					<option value="1">직책1</option>
-		    					<option value="2">직책2</option>
-		    					<option value="3">직책3</option>
-		    					<option value="4">직책4</option>
-		    					<option value="5">직책5</option>
+		    				<select name="pno">
+		    				<th:block th:each="position:${position}">
+		    					<option th:value="${position.pno}">[[${position.pName}]]</option>
+		    					</th:block>
 		    				</select>
 		    				<button>등록</button>
+		    				
+		    				</form>
 		    			</div>
 		    		</div>
 	    		</div>
@@ -74,7 +73,7 @@
 					<tr class="salary-info-1">
 						<td>[[${detail.mno}]]</td>
 						<td>[[${detail.name}]]</td>
-						<td>직책</td>
+						<td>[[${detail.pname}]]</td>
 						<td>기본급여</td>
 						<td>변동금액</td>
 						<td>이번 달 급여</td>
