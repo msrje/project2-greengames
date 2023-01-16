@@ -1,17 +1,64 @@
 @charset "UTF-8";
 
+.b-view-size{
+	width: 1200px;
+	margin: 0 40px;
+}
+
 .defImg{
-	width:200px;
-	height:200px;
+	width:500px;
+	height:500px;
 	background-repeat:no-repeat;
     background-position: center;
     background-size: contain;
 }
 
 .addImg{
-	width:200px;
-	height:200px;
+	width:500px;
+	height:500px;
 	background-repeat:no-repeat;
     background-position: center;
     background-size: contain;
+}
+
+button{
+	background-color: #037e51;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    display: inline-block;
+    width: 120px;
+    height: 35px;
+    border-radius: 5px;
+	margin-top: 7px;
+	border: 0;
+	outline: 0;
+	
+}
+
+.update_date{
+	margin-left: 200px;
+}
+
+.title{
+	font-size: 16px;
+	font-weight: bold;
+	margin-right: 5px;
+}
+
+.section{
+	margin-top: 10px;
+}
+
+.section{
+	border-bottom: #c9c9c9;
+	border-bottom-style: solid;
+	border-bottom-width: thin;
+}
+.no{
+	margin-top: 45px;
+}
+.content{
+	margin-top: 30px;
 }
