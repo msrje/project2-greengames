@@ -35,5 +35,7 @@ public class SalaryListDTO {
 		if(e.defImg()!=null) {
 			this.profileUrl=e.defImg().getUrl()+e.defImg().getNewName();
 		}
+
 	}	
+
 }
