@@ -9,5 +9,7 @@ import org.springframework.stereotype.Repository;
 public interface MemberEntityRepository2 extends JpaRepository<MemberEntity, Long>{
 
 	Optional<MemberEntity> findById(String id);
+
+	MemberEntity findByMno(long mno);
 	
 }
