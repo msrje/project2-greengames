@@ -4,18 +4,19 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
  	<th:block th:insert="~{admin/AdminLayout :: head}"/>
 	<link rel="stylesheet" href="/css/commons/common.css">
+	<link rel="stylesheet" href="/css/board/board-list.css">
 </head>
 <body class="flex">
 	<th:block th:insert="~{admin/AdminLayout :: header}"/>
-    	<main>
+    	<main class="board-list">
 	    	<h1>자유 게시판</h1>
 	    	<div class="wrap">
 	    		<div>
 					<a href="/general/boards-registration">글쓰기</a>
 				</div>
-		   		<p>자유게시판</p>
-				<table border="1" >
-	    			<tr>
+		   		<p class="title">자유게시판</p>
+				<table>
+	    			<tr class="board-title">
 	    				<td>No</td>
 	    				<td>제목</td>
 	    				<td>조회수</td>

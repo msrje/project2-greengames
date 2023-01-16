@@ -43,7 +43,7 @@ public class MyPageServiceProcess implements MyPageService{
 	private PositionRepository pRepo;
 	@Autowired
 	private DepartmentMemberEntityRepository dmRepo;
-	
+
 
 	
 	@Transactional

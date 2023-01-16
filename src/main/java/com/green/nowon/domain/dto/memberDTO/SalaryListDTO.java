@@ -25,6 +25,7 @@ public class SalaryListDTO {
 		this.name = e.getName();
 		this.pass = e.getPass();
 		this.phone=e.getPhone();
+
 		if(e.getPno()!=null) {	
 			this.pname=e.getPno().getPName();
 		}else{

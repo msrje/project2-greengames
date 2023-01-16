@@ -1,5 +1,7 @@
 package com.green.nowon.domain.entity.board;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -15,6 +17,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -28,9 +31,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Builder
+
 @Getter
 @DynamicUpdate
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @SequenceGenerator(name = "gg_gen_board_seq",
@@ -49,11 +53,47 @@ public class BoardEntity extends BaseDateTimeColumns{
 	private int readCount;
 	//작성자 - MemeberEntity
 	
-	
 	@JoinColumn(name = "mno")
 	@ManyToOne(cascade = CascadeType.DETACH)
 	private MemberEntity member;//작성자
+	
+	
+	@Builder.Default
+	@OneToMany(mappedBy = "board")
+	List<BoardImgEntity> imgs=new ArrayList<>();
+	
+	public String defImgUrl() {
 
+		BoardImgEntity def = null;
+		
+		if(imgs.size()!=0) {
+		def=imgs.get(0);
+		};
+		
+		return def.getUrl()+def.getNewName();
+	}
+	
+	//이미지 삽입 편의메서드
+	public BoardEntity addImg(BoardImgEntity bimg) {
+		imgs.add(bimg);
+		return this;
+	}
+	
+	//대표이미지만 추출하는 편의메서드
+	public BoardImgEntity defImg() {
+		for(BoardImgEntity bimg:imgs) {
+			if(bimg.isDef()==true)
+				return bimg;
+		}
+		BoardImgEntity def = null;
+		if(imgs.size()!=0) {
+		def=imgs.get(0);
+		};
+		return def;
+		
+		//이미지 없으면(사이즈 0) null
+	}
+	
 	//편의메서드
 	public BoardEntity update(BoardUpdateDTO dto) {
 		this.title=dto.getTitle();
