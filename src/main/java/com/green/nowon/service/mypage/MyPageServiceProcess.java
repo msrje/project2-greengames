@@ -30,16 +30,18 @@ public class MyPageServiceProcess implements MyPageService{
 	
 	
 
-
+	
+	@Transactional
 	@Override
-	public void info(long mno, Model model,Model model2,Model model3) {
+	public void info(long mno, Model model,Model model2) {
+		//로그인한 회원의 정보 + 회원이 등록한 이미지
 		model.addAttribute("detail",mRepo.findById(mno)
-				.map(MemberDetailDTO::new).orElseThrow());
+				.map(SalaryListDTO::new)
+				.orElseThrow());
+		//로그인한 회원의 주소정보
 		model2.addAttribute("mpageaddr",aRepo.findByMember_mno(mno)
 				.map(AddressDetailDTO::new)
 				.orElseThrow());
-		model3.addAttribute("infoimg",proRepo.findById(mno)
-				.map(ProfileDTO::new).orElseThrow());
 	}
 
 	
@@ -51,14 +53,15 @@ public class MyPageServiceProcess implements MyPageService{
 		model.addAttribute("srlist", result);
 	}
 	
-
+	@Transactional
 	@Override //급여관리리스트에서 사원의 디테일페이지
 	public void salaryInfo(long mno, Model model ,Model model2) {
 		model.addAttribute("detail",mRepo.findById(mno)
-				.map(MemberDetailDTO::new).orElseThrow());
-		model2.addAttribute("deImg",proRepo.findById(mno)
-				.map(ProfileDTO::new).orElseThrow());
+				.map(SalaryListDTO::new).orElseThrow());
+//		model2.addAttribute("deImg",proRepo.findById(mno)
+//				.map(ProfileDTO::new).orElseThrow());
 	}
+
 
 
 

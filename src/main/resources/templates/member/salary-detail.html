@@ -14,7 +14,8 @@
 	    	<div class="mypage">
 	    		<div class="mypage-info" style="top: 100px; position: relative;">
 	    			<div class="mypage-img">
-	    				<img th:src="${deImg.plusImg}" align="left">
+	    				<img align="left" th:if="${#strings.isEmpty(detail.profileUrl)}" src="/image/test/profiletest.jpeg">
+					 	<img align="left" th:if="${!#strings.isEmpty(detail.profileUrl)}" th:src="${detail.profileUrl}">
 	    			</div>
 	    			<br>
 	    			<div class="member-info">

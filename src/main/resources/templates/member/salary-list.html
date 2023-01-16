@@ -16,7 +16,8 @@
 	    			<br>
 	    			<div class="salary-list" th:each="dto : ${srlist}">
 		    			<a th:href="|/salaryinfo/${dto.mno}|">
-		    				<img th:src="${dto.profileUrl}">
+		    				<img align="left" th:if="${#strings.isEmpty(dto.profileUrl)}" src="/image/test/profiletest.jpeg">
+					 		<img align="left" th:if="${!#strings.isEmpty(dto.profileUrl)}" th:src="${dto.profileUrl}">
 		    			</a>
 		    			<br>
 		    			<ul>

@@ -40,11 +40,7 @@ public class MemberController {
 		return "redirect:/mypage/info/{mno}";
 	}
 	
-	@GetMapping("/employee")//카테고리 리스트롤 사용할 예정
-	public String employeeList() {
-
-		return"member/employee-list";
-	}
+	
 
 	
 	
