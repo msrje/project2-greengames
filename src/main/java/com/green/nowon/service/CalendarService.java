@@ -11,5 +11,8 @@ public interface CalendarService {
 	// 캘린더 select
 	List<CalendarDTO> getList(long userMno);
 
+	// 캘린더 Delete
+	void delete(long cno);
+
 
 }
