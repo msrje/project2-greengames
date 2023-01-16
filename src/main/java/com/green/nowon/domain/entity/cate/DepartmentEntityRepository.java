@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.green.nowon.domain.dto.memberDTO.DepartmentDTO;
+
 @Repository
 public interface DepartmentEntityRepository extends JpaRepository<DepartmentEntity, Long>{
 
@@ -17,5 +19,7 @@ public interface DepartmentEntityRepository extends JpaRepository<DepartmentEnti
 
 
 	List<DepartmentEntity> findAllByParentDno(Long parentDno);
+
+	List<DepartmentEntity> findAllByDepth(int i);
 	
 }

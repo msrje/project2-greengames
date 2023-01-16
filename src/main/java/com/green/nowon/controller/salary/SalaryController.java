@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.green.nowon.service.mypage.MyPageService;
 
@@ -22,10 +23,15 @@ public class SalaryController {
 	}
 	
 	@GetMapping("/salaryinfo/{mno}")
-	public String salaryDetail(@PathVariable long mno, Model model,Model model2) {
-		service.salaryInfo(mno,model, model2);
+	public String salaryDetail(@PathVariable long mno, Model model,Model model2,Model model3) {
+		service.salaryInfo(mno,model, model2, model3);
 		return "member/salary-detail";
 	}
-	
+	@PostMapping("/salary/department/{mno}")
+	public String salaryDepartment(@PathVariable long mno,long dno,long pno, Model model,Model model2,Model model3) {
+		service.update(mno,pno,dno);
+		service.salaryInfo(mno,model, model2, model3);
+		return "member/salary-detail";
+	}
 
 }
