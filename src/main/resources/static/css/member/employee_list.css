@@ -50,8 +50,8 @@ body {
 
 .entry {
   position: relative;
-  /* min-height: 60px;
-   */
+  min-height: 60px;
+  
 }
 
 
