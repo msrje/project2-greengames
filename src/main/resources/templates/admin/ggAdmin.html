@@ -18,14 +18,24 @@
 			dateFormat(offTime);//끝시간 이쁘게
 		}
 		gotoworkcheck(goTime);
+		
 	});
 	function gotoworkcheck(target){
 		var time= $(target).text();
-		var gotoworkcheck = new Date(time);
-		var date = ('0' + gotoworkcheck.getDate()).slice(-2);
-		
-		if(date!=today){
+		var gotoworkcheck = time.substr(0, 2);
+		var today = new Date();
+		var todate = ('0' + today.getDate()).slice(-2);
+		if(todate!=gotoworkcheck){
 			$(".goTime").text("출근시간");
+			$(".offTime").text("퇴근시간");
+		}
+		endworkcheck();
+	}
+	function endworkcheck(){
+		var goTime= $(".goTime").text();
+		var offTime = $(".offTime");
+		if(goTime==offTime.text()){
+			$(".offTime").text("퇴근시간");
 		}
 	}
 	function dateFormat(target){//시간 이쁘게 메소드
@@ -47,8 +57,10 @@
 	}
 	//출근 버튼 누르면 출근시간 보여주고 db저장
 	function go(){
+		var goTime= $(".goTime").text();
+		if(goTime=="출근시간")return;
+		
 		var mno = $(".mno").val();
-		alert(mno);
 		$.ajax({
 			url:`/admin/commute/go/${mno}`,
 			type:"post",
