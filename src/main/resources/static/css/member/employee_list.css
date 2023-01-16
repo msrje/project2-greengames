@@ -43,11 +43,9 @@ body {
   content: "";
   width: 100px;
   position: absolute;
-  left: -150px;
-  top: 0;
+  left:-80px;
+  top: 55px;
   border: 1px solid black;
-  margin-top: 55px;
-  margin-left: 70px;
 }
 
 .entry {
