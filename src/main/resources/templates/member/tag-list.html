@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<ol class="cate-ol" th:unless="${#lists.isEmpty(list)}">
+	<div class="cate-ol" th:unless="${#lists.isEmpty(list)}">
+		<div class="cover flex">
 		<th:block th:each="dto:${list}">
-		<li th:value="${dto.dno}"  th:class="|branch sub cate ${'cate-'+dto.depth}|">
-			<div>
-				<div th:unless="${dto.dname==''}" class="label" th:text="${dto.dname}">카테고리명</div>
-			</div>
-			<div class="entry cate-wrap">
+		<li th:value="${dto.dno}"  th:class="|tree sub cate ${'cate-'+dto.depth}|">
+			<ol>
+				<li th:unless="${dto.dname==''}" class="tree-2" >
+					<p th:text="${dto.dname}">카테고리명</p>
+				</li>
+			</ol>
+			<ol class="entry cate-wrap">
 				
-			</div>
+			</ol>
 		</li>
 		</th:block>
-	</ol>
+		</div>
+	</div>
 </html>

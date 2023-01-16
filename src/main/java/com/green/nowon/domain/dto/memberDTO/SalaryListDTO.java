@@ -19,15 +19,20 @@ public class SalaryListDTO {
 	private PositionEntity pno;
 	private String pname;
 	
+	private int normalSalary;
+	
 	public SalaryListDTO(MemberEntity e){
 		this.mno=e.getMno();
 		this.id=e.getId();
 		this.name = e.getName();
 		this.pass = e.getPass();
 		this.phone=e.getPhone();
-
+		
+		this.normalSalary=e.getPno().getNormalSalary();
+		
 		if(e.getPno()!=null) {	
 			this.pname=e.getPno().getPName();
+			
 		}else{
 			this.pname="없음";
 		}
