@@ -37,6 +37,14 @@ public class CalendarServiceProc implements CalendarService {
 				.map(CalendarDTO::new)
 				.collect(Collectors.toList());
 	}
+
+	// 캘린더 Delete
+	@Override
+	public void delete(long cno) {
+		crepo.deleteById(cno);
+		
+	}
+	
 	
 
 }
