@@ -11,7 +11,7 @@ import com.green.nowon.domain.dto.schedule.CalendarDTO;
 public interface CalendarEntityRepository extends JpaRepository<CalendarEntity, Long>{
 
 	// 캘린더 insert
-	void save(CalendarDTO dto);
+	long save(CalendarDTO dto);
 	
 	// 캘린더 select
 	List<CalendarEntity> findAllByMember_mno(long userMno);
