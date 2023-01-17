@@ -1,6 +1,9 @@
 package com.green.nowon.service;
 
+import java.util.Map;
+
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.green.nowon.domain.dto.board.BoardSaveDTO;
 import com.green.nowon.domain.dto.board.BoardUpdateDTO;
@@ -8,6 +11,8 @@ import com.green.nowon.domain.dto.board.GenBoardSaveDTO;
 import com.green.nowon.domain.dto.board.GenBoardUpdateDTO;
 
 public interface BoardService {
+	
+	Map<String,String> fileTempUpload(MultipartFile bimg);
 
 	void getListAll(int page, Model model);
 
@@ -36,5 +41,9 @@ public interface BoardService {
 	void update02(long bno, GenBoardUpdateDTO dto);
 
 	void myGetListAll02(Model model);
+	
+	int updateReadCount(Long bno); //조회수
+
+	int genUpdateReadCount(Long bno); //자유게시판 조회수
 
 }

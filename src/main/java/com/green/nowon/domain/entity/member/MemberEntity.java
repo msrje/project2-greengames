@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -15,13 +16,18 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -43,6 +49,7 @@ import lombok.Setter;
  * , mem_img(프로필)
  * myRole : user(사원) , admin(팀장)
  */
+@DynamicUpdate
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -69,14 +76,14 @@ public class MemberEntity extends BaseDateEntity{
 	
 	@Column(nullable = false)
 	private String phone;//번호
-	
+
 	@ManyToOne
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn
 	private PositionEntity pno;
 	
 	@Builder.Default
-	@OneToMany(mappedBy = "member")
+	@OneToMany(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	List<ProfileEntity> profile=new ArrayList<>();
 	
 	@Builder.Default
@@ -104,7 +111,5 @@ public class MemberEntity extends BaseDateEntity{
 		}
 		return null;
 	}
-	
-	
 	
 }
