@@ -14,7 +14,9 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.green.nowon.domain.dto.schedule.CalendarDTO;
 import com.green.nowon.domain.entity.member.MemberEntity;
 
@@ -41,9 +43,13 @@ public class CalendarEntity {
 	@Column(nullable = false)
 	private String cTitle;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+9")
 	@Column(nullable = false)
 	private Date cStartTime;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+9")
 	@Column(nullable = false)
 	private Date cEndTime;
 	
