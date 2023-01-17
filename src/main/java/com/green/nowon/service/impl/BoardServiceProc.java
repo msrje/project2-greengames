@@ -61,8 +61,17 @@ public class BoardServiceProc implements BoardService{
 		//board list를 페이지로 전송
 		int size=10;
 		Sort sort=Sort.by(Direction.DESC, "bno");
-		Pageable pageable=PageRequest.of(page-1, size, sort);
+		
+		Pageable pageable=PageRequest.of(page-1, size ,sort);
 		Page<BoardEntity> result=repository.findAll(pageable);
+		
+		int nowPage = result.getNumber()+1;
+		int startPage = Math.max(nowPage -4, 1);
+		int endPage = Math.min(nowPage +5, result.getTotalPages());
+		
+		model.addAttribute("nowPage", nowPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
 		
 		model.addAttribute("p", result);
 		model.addAttribute("list", result.stream()
@@ -70,6 +79,16 @@ public class BoardServiceProc implements BoardService{
 				.collect(Collectors.toList()));
 	}
 
+    //검색
+    @Transactional
+	@Override
+	public void search(String keyword,  Model model) {
+    	 List<BoardListDTO> searchList = repository.findByTitleContaining(keyword).stream().map(BoardListDTO::new)
+ 				.collect(Collectors.toList());
+    	 model.addAttribute("searchList", searchList);
+		
+	}
+	
 	@Transactional
 	@Override
 	public void sendDetail(long bno, Model model) {
@@ -78,6 +97,7 @@ public class BoardServiceProc implements BoardService{
 				.orElseThrow());
 		
 	}
+	
 
 	@Override
 	public void save(BoardSaveDTO dto, String name) {
@@ -127,6 +147,8 @@ public class BoardServiceProc implements BoardService{
     public int updateReadCount(Long bno) {
         return repository.updateReadCount(bno);
     }
+    
+
 	
 	
 	
@@ -221,5 +243,7 @@ public class BoardServiceProc implements BoardService{
 		model.addAttribute("list2", result);
 		
 	}
+
+
 
 }

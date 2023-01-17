@@ -46,4 +46,6 @@ public interface BoardService {
 
 	int genUpdateReadCount(Long bno); //자유게시판 조회수
 
+	void search(String keyword,  Model model);
+
 }

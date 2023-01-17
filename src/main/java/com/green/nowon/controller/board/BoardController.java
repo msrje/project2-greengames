@@ -79,6 +79,12 @@ public class BoardController {
 		return "redirect:/notice-boards/{bno}";
 	}
 	
+	//검색
+	@GetMapping("/notice-boards/search")
+    public String search(String keyword, Model model) {
+        service.search(keyword, model);
+        return "board/noticeSearchPage";
+    }
 	
 	
 	
