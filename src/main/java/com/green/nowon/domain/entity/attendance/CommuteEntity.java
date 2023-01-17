@@ -70,7 +70,7 @@ public class CommuteEntity {
 	
 	public CommuteEntity update(CommuteUpdateDTO dto,long cType) {
 		this.oTime = dto.getOTime();
-		if(cType <8L) {
+		if(cType <9L) {
 			this.cType = "조퇴";
 		}else {
 			this.cType = "퇴근";

@@ -63,8 +63,12 @@ public class DepartmentController {
 	@GetMapping("/admin/departmentsList/{parentDno}")
 	public String category(@PathVariable long parentDno, Model model) {
 		departmentService.departmentList(parentDno, model);
-		System.out.println(1);
 		return "admin/departmentCate/ol-category";
 	}
 	
+	@GetMapping("/member/departmentMemberList/{dno}")
+	public String departmentMemberList(@PathVariable long dno, Model model) {
+		departmentService.departmentMemberList(dno , model);
+		return "admin/departmentList/department_member-list";
+	}
 }
