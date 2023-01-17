@@ -37,7 +37,7 @@ public class CommuteController {
 	public String goTime(@PathVariable long mno, CommuteInsertDTO dto, CommuteUpdateDTO udto) {
 		commuteService.save(mno,dto,udto);
 		
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("a HH시 mm분");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd일 a h시 mm분");
 		String today = commuteService.findGoTime(mno).get().getGTime().format(formatter);
 		System.err.println(commuteService.findGoTime(mno).get().getGTime().toLocalTime());
 		
@@ -52,7 +52,7 @@ public class CommuteController {
 	@ResponseBody
 	@PostMapping("/admin/commute/off/{mno}")
 	public String offTime(@PathVariable long mno,CommuteInsertDTO dto, CommuteUpdateDTO udto) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("a HH시 mm분");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd일 a h시 mm분");
 		commuteService.save(mno,dto,udto);//update기능도 포함되어 있습니다.
 		String todayUpdateDate = commuteService.findGoTime(mno).get().getOTime().format(formatter);
 		return todayUpdateDate;

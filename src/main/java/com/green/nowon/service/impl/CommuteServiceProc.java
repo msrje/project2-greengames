@@ -1,10 +1,12 @@
 package com.green.nowon.service.impl;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -14,8 +16,10 @@ import org.springframework.ui.Model;
 
 import com.green.nowon.domain.dto.attendance.CommuteInsertDTO;
 import com.green.nowon.domain.dto.attendance.CommuteUpdateDTO;
+import com.green.nowon.domain.dto.commuteMember.CommuteMemberListDTO;
 import com.green.nowon.domain.entity.attendance.CommuteEntity;
 import com.green.nowon.domain.entity.attendance.CommuteEntityRepository;
+import com.green.nowon.domain.entity.member.MemberEntity;
 import com.green.nowon.domain.entity.member.MemberEntityRepository;
 import com.green.nowon.domain.entity.member.MemberEntityRepository2;
 import com.green.nowon.service.attendance.CommuteService;
@@ -74,21 +78,44 @@ public class CommuteServiceProc implements CommuteService {
 	}
 	
 	/**
-	 * 가장 최근이 근무한 날짜 조회
+	 * 가장 최근에 근무한 날짜 조회
 	 */
 	@Override
-	public void showGTime(Long mno,Model model) {
+	public void showGTime(Long mno,Model model,CommuteInsertDTO idto) {
 		List<CommuteEntity> result = commuteRepo.findAllByMember_mno(mno);
 		long cno = 0L;
-		for(CommuteEntity i:result) {
-			cno = i.getCno();
+		if(!result.isEmpty()) {//값이 있으면 실행
+			for(CommuteEntity i:result) {
+				cno = i.getCno();
+			}
+			Optional<CommuteEntity> CommuteLastDay = commuteRepo.findById(cno);
+	//		System.out.println("최근날짜 확인>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+CommuteLastDay.get().getToday());
+			
+			
+			model.addAttribute("time",commuteRepo.findAllByCno(cno));
+		}else {//값이 없으면 새로 저장
+			commuteRepo.save(idto.entity().fkSaver(memberRepo.findByMno(mno).get()));
+			model.addAttribute("time",commuteRepo.findAllByCno(cno));
 		}
-		Optional<CommuteEntity> CommuteLastDay = commuteRepo.findById(cno);
-		System.out.println("최근날짜 확인>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+CommuteLastDay.get().getToday());
-		
-		
-		model.addAttribute("time",commuteRepo.findAllByCno(cno));
-		
 	}
+	
+	@Override
+	public long MemberMno(Principal principal) {
+		String email = principal.getName();
+		
+		Optional<MemberEntity> result = memberRepo.findAllById(email);
+		long mNo =result.get().getMno();
+//		System.err.println(mNo);
+		return mNo;
+	}
+	
+	@Override
+	public void showListTime(long memberMno, Model model2) {
+		 model2.addAttribute("list", commuteRepo.findAllByMember_mno(memberMno)
+				 .stream()
+				 .map(CommuteMemberListDTO::new)
+				 .collect(Collectors.toList()));
+	}
+	
 	
 }
