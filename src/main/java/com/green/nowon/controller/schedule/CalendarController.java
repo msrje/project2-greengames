@@ -49,6 +49,7 @@ public class CalendarController {
 		model.addAttribute("cno", cno);
 		System.out.println("cno : " + cno);
 		return cno;
+
 	}
 
 	// 캘린더 Delete

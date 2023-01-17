@@ -4,12 +4,133 @@
  	<th:block th:insert="~{admin/AdminLayout :: head}"/>
 	<link rel="stylesheet" href="/css/default.css">
 	<th:block th:insert="~{admin/AdminLayout :: header}"/>
+
+	<script type="text/javascript">
+	$(function(){
+		$(".go").click(go);
+		$(".off").click(off);
+		var goTime = $(".goTime");
+		var offTime= $(".offTime");
+		
+		if(goTime.text()!="" ){
+			dateFormat(goTime);//시작시간 이쁘게
+		}//|| !goTime.text().equals("출근시간")
+		if(offTime.text()!=""){
+			dateFormat(offTime);//끝시간 이쁘게
+		}
+		gotoworkcheck(goTime);
+		
+	});
+	function gotoworkcheck(target){
+		var time= $(target).text();
+		var gotoworkcheck = time.substr(0, 2);
+		var today = new Date();
+		var todate = ('0' + today.getDate()).slice(-2);
+		if(todate!=gotoworkcheck){
+			$(".goTime").text("출근시간");
+			$(".offTime").text("퇴근시간");
+		}
+		endworkcheck();
+	}
+	function endworkcheck(){
+		var goTime= $(".goTime").text();
+		var offTime = $(".offTime");
+		if(goTime==offTime.text()){
+			$(".offTime").text("퇴근시간");
+		}
+	}
+	function dateFormat(target){//시간 이쁘게 메소드
+		var time= $(target).text();
+		var today = new Date(time);//일자 받아서 쪼개기
+		var date = ('0' + today.getDate()).slice(-2);
+		var hours = ('0' + today.getHours()).slice(-2);
+		var minutes = ('0' + today.getMinutes()).slice(-2);
+		var timeString = "";
+		if(hours>12) {
+			hours = hours-12;
+			timeString = date +"일 " +"오후 "+ hours + '시 ' + minutes  + '분';
+		}else if(hours==12){
+			timeString = date +"일 " +"오후 "+ hours + '시 ' + minutes  + '분';
+		}else{
+			timeString = date +"일 " + "오전 " +hours + '시 ' + minutes  + '분';
+		}
+		target.text(timeString);
+	}
+	//출근 버튼 누르면 출근시간 보여주고 db저장
+	function go(){
+		var goTime= $(".goTime").text();
+		if(goTime!="출근시간")return;
+		
+		var mno = $(".mno").val();
+		$.ajax({
+			url:`/admin/commute/go/${mno}`,
+			type:"post",
+			success:function(olTag){
+				$(".goTime").html(olTag);
+			},
+			error:function(){
+				alert("go error");	
+			}
+		});
+		
+	}
+	//퇴근 버튼 누르면 출근시간 수정시간 보여주고 db업데이트
+	function off(){
+		var mno = $(".mno").val();
+		alert("퇴근");
+		$.ajax({
+			url:`/admin/commute/off/${mno}`,
+			type:"post",
+			success:function(olTag){
+				$(".offTime").html(olTag);
+			},
+			error:function(){
+				alert("off error");	
+			}
+		});
+	}
+	</script>
+
 </head>
 <body class="flex">
     <main>
     	<div class="wrap">
+    		<input class="mno" type="hidden" th:value="${#authentication.principal.mno}">
     		<p>GreenGames의 관리페이지 입니다.</p>
+    		<div class="flex"><!-- 네모네모 상자 -->
+    			<div><!-- 출근 상자 -->
+    				<p class="goTime" th:if="${#strings.isEmpty(time.gTime)}">출근시간</p>
+    				<p class="goTime" th:if="${!#strings.isEmpty(time.gTime)}" th:text="${time.gTime}"></p>
+    				<button class="go">출근</button>
+    			</div>
+    			<div><!-- 퇴근 상자 -->
+    				<p class="offTime" th:if="${#strings.isEmpty(time.gTime)}">퇴근시간</p>
+    				<p class="offTime" th:if="${!#strings.isEmpty(time.gTime)}" th:text="${time.oTime}"></p>
+    				<button class="off">퇴근</button>
+    			</div>
+    		</div>
     	</div>
+    	
+    	<table>
+			<thead>
+				<tr>
+					<td>이름</td>
+					<td>날짜</td>
+					<td>출근시간</td>
+					<td>퇴근시간</td>
+					<td>근무형태</td>
+				</tr>				
+			</thead>
+			<tbody>
+				<tr th:each="lists : ${list}">
+					<td th:text="${lists.name}"></td>
+					<td th:text="${lists.today}"></td>
+					<td th:text="${lists.gTime}"></td>
+					<td th:text="${lists.oTime}"></td>
+					<td th:text="${lists.cType}"></td>
+				</tr>
+			</tbody>
+		</table>
     </main>
 </body>
 </html>

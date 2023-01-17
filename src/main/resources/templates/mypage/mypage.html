@@ -52,11 +52,14 @@
 		});
 		calendar.render();
 	});
+
+	
 </script>
 </head>
 <body class="flex">
 	<main>
 		<div>
+			<input id="mno" type="hidden" th:value="${#authentication.principal.mno}">
 			<div class="mypage">
 				<div class="wrap-title">
 					<h2 class="mypage-title">
@@ -71,7 +74,9 @@
 				</div>
 				<div class="mypage-info">
 					<div class="mypage-img">
-						<img align="left" th:src="${infoimg.plusImg}">
+					 	<!--ajax 추가-->
+					 	<img align="left" th:if="${#strings.isEmpty(detail.profileUrl)}" src="/image/test/profiletest.jpeg">
+					 	<img align="left" th:if="${!#strings.isEmpty(detail.profileUrl)}" th:src="${detail.profileUrl}">
 					</div>
 					<br>
 					<div class="member-info">
@@ -87,7 +92,7 @@
 								<li><label for="name">id=email -</label> <span>[[${detail.id}]]</span>
 
 								</li>
-								<li><label for="name">직책 -</label> <span></span></li>
+								<li><label for="name">직책 -</label> <span>[[${detail.pname}]]</span></li>
 							</ul>
 						</form>
 					</div>
@@ -113,7 +118,6 @@
 				</div>
 			</div>
 		</div>
-
 		<div class="salary-info">
 			<p>이번달 내 급여정보</p>
 			<table>
@@ -132,14 +136,15 @@
 					<tr>
 						<td>[[${detail.mno}]]</td>
 						<td>[[${detail.name}]]</td>
-						<td>직책</td>
-						<td>기본급여</td>
+						<td>[[${detail.pname}]]</td>
+						<td>[[${detail.normalSalary}]]</td>
 						<td>변동금액</td>
 						<td>이번 달 급여</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
+	
 		<div class="approval-1">
 			<div class="approval-2">
 				<div class="approval-3">

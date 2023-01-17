@@ -2,7 +2,7 @@
 <html  xmlns:th="http://www.thymeleaf.org" >
 <head>
  	<th:block th:insert="~{admin/AdminLayout :: head}"/>
-	<link rel="stylesheet" href="/css/default.css">
+	<link rel="stylesheet" href="/css/commons/common.css">
 	<th:block th:insert="~{admin/AdminLayout :: header}"/>
 	<link rel="stylesheet" href="/css/member/mypage.css">
 	<link rel="stylesheet" href="/css/member/salarylist.css">
@@ -14,9 +14,11 @@
 	    		<div class="wrap-title">
 	    			<h2>급여관리 리스트</h2>
 	    			<br>
+	    			<div class="flex">
 	    			<div class="salary-list" th:each="dto : ${srlist}">
 		    			<a th:href="|/salaryinfo/${dto.mno}|">
-		    				<img th:src="${dto.profileUrl}">
+		    				<img align="left" th:if="${#strings.isEmpty(dto.profileUrl)}" src="/image/test/profiletest.jpeg">
+					 		<img align="left" th:if="${!#strings.isEmpty(dto.profileUrl)}" th:src="${dto.profileUrl}">
 		    			</a>
 		    			<br>
 		    			<ul>
@@ -41,6 +43,7 @@
 	    						<span></span>
 	    					</li>
 	    				</ul>
+	    			</div>
 	    			</div>
 	    		</div>
 	    	</div>
