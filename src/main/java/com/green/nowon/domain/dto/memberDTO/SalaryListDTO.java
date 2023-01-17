@@ -21,6 +21,11 @@ public class SalaryListDTO {
 	
 	private int normalSalary;
 	
+	
+	int none;
+	double minSal;
+	int totSal;
+	
 	public SalaryListDTO(MemberEntity e){
 		this.mno=e.getMno();
 		this.id=e.getId();
@@ -28,14 +33,24 @@ public class SalaryListDTO {
 		this.pass = e.getPass();
 		this.phone=e.getPhone();
 		
-		
-		if(e.getPno()!=null) {	
+		if(e.getPno()!=null) {	//직책,기본금,마이너스,플러스금액 계산
 			this.pname=e.getPno().getPName();
 			this.normalSalary=e.getPno().getNormalSalary();
+			
+			this.minSal=e.getPno().getNormalSalary()*0.16;//-금액 은 고정(ex)세금)
+			this.none=0;
+			
+			this.totSal=(int) (e.getPno().getNormalSalary()-minSal);
+			
 		}else{
 			this.pname="없음";
 			this.normalSalary=0;
+			
+			this.minSal=0;//세금
+			
+			this.totSal=0;
 		}
+		
 		
 		if(e.defImg()!=null) {
 			this.profileUrl=e.defImg().getUrl()+e.defImg().getNewName();

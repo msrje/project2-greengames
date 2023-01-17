@@ -1,5 +1,10 @@
 @charset "UTF-8";
-
+body{
+	-ms-overflow-style: none;
+}
+::-webkit-scrollbar {
+  display: none;
+}
 .emimg{
 	width: 250px;
 	position: absolute;
@@ -50,4 +55,12 @@
 	color: #FAFAD2;
 	letter-spacing: 2px;
 	box-shadow:3px 3px 0px 0px #ffffe0 ;
+}
+
+.departmentMemberList{
+	position: absolute;
+	top: 50%;
+	left: 15%;
+	scrollbar-width: none;
+	width: auto;
 }
