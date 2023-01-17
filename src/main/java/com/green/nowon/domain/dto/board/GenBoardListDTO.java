@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 
 import com.green.nowon.domain.entity.board.BoardEntity;
 import com.green.nowon.domain.entity.board.GeneralBoardEntity;
+import com.green.nowon.domain.entity.member.MemberEntity;
 
 import lombok.Getter;
 
@@ -31,5 +32,4 @@ public class GenBoardListDTO {
 		this.writerId =ent.getMember().getId();
 	}
 	
-
 }

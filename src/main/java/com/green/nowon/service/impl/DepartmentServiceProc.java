@@ -2,13 +2,19 @@ package com.green.nowon.service.impl;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.green.nowon.domain.dto.memberDTO.DepartmentMemberListDTO;
 import com.green.nowon.domain.entity.cate.DepartmentEntity;
 import com.green.nowon.domain.entity.cate.DepartmentEntityRepository;
+import com.green.nowon.domain.entity.cate.DepartmentMemberRepository;
+import com.green.nowon.domain.entity.member.MemberEntityRepository;
 import com.green.nowon.service.DepartmentService;
 
 @Service
@@ -16,6 +22,12 @@ public class DepartmentServiceProc implements DepartmentService {
 
 	@Autowired
 	private DepartmentEntityRepository departmentRepo;
+	
+	@Autowired
+	private DepartmentMemberRepository departmentMemberRepo;
+	
+	@Autowired
+	private MemberEntityRepository memberRepo;
 	
 	@Override
 	public boolean isReg(String text) {
@@ -50,11 +62,19 @@ public class DepartmentServiceProc implements DepartmentService {
 //		model.addAttribute("list", departmentRepo.findByParentDnoOrderByDnameAsc(parentDno));
 		model.addAttribute("list", result);
 	}
-
+	/**
+	 * 부서에 존재하는 유저 리스트
+	 */
+	@Transactional
 	@Override
-	public void firstDepartment(Model model) {
-		// TODO Auto-generated method stub
+	public void departmentMemberList(Long dno, Model model) {//dno -> department_dno
+		System.out.println("department member List 작동여부");
+		List<DepartmentMemberListDTO> list = 
+				departmentMemberRepo.findAllByDepartment_dno(dno)
+				.stream().map(DepartmentMemberListDTO::new)
+				.collect(Collectors.toList());
+		
+		model.addAttribute("srlist",list);
 		
 	}
-
 }
