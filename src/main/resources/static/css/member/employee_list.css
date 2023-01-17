@@ -1,125 +1,53 @@
 @charset "UTF-8";
-*,
-*:before,
-*:after {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
+
+.emimg{
+	width: 250px;
+	position: absolute;
+	top: 3%;
+	left: 50%;
+
+}
+.cate-ol{
+	margin: 10px;
 }
 
-body {
-  min-width: 1200px;
-  margin: 0;
-  color: black;
-  font: 16px Verdana, sans-serif;
-  background: #fff;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+.cover{
+	text-align: center;
+}
+
+
+.tree-2 > p{
+	font-size: 15px;
+	letter-spacing: 2px;
+}
+.tree-2{
+	margin: 10px;
+	text-align: center;
+	font-weight: bold;
+	
 }
 .cate-1{
-	right: 20%;
-}
-.cate-1 >.branch:before{
-	border: none;
+	color: #333333;
+	letter-spacing: 5px;
+	position: absolute;
+	top: 15%;
+	left: 250px;
+	
 }
 .cate-2{
-	width: auto;
-	height: auto;
+	margin:  15px;
+	border: 2px solid yellow;
+	border-radius: 20px;
+	background-color:#90ee90;
+	color: #333333;
+	
 }
-#wrapper {
-  position: relative;
-  margin-left: 100px;
-  margin-top: 100px;
-}
-
-.branch {
-  position: relative;
-  margin-left: 250px;
-}
-
-.branch:before {
-  content: "";
-  width: 100px;
-  position: absolute;
-  left:-80px;
-  top: 55px;
-  border: 1px solid black;
-}
-
-.entry {
-  position: relative;
-  min-height: 60px;
-  
-}
-
-
-.entry:before {
-  content: "";
-  height: 100%;
-  position: absolute;
-  left: -50px;
-}
-
-.entry:after {
-  content: "";
-  width: 50px;
-  position: absolute;
-  left: -50px;
-  top: 50%;
-  margin-top: 1px;
-}
-
-.entry:first-child:before {
-  width: 10px;
-  height: 50%;
-  top: 50%;
-  margin-top: 2px;
-  border-radius: 10px 0 0 0;
-}
-
-.entry:first-child:after {
-  height: 10px;
-  border-radius: 10px 0 0 0;
-}
-.entry:last-child:before {
-  width: 10px;
-  height: 50%;
-  border-radius: 0 0 0 10px;
-}
-
-.entry:last-child:after {
-  height: 10px;
-  border-top: none;
-  border-radius: 0 0 0 10px;
-  margin-top: -9px;
-}
- 
-
-.entry.sole:before {
-  display: none;
-}
-
-.entry.sole:after {
-  width: 50px;
-  height: 0;
-  margin-top: 1px;
-  border-radius: 0;
-}
-
-.label {
-  display: block;
-  min-width: 150px;
-  padding: 5px 10px;
-  line-height: 20px;
-  text-align: center;
-  border: 2px solid black;
-  border-radius: 5px;
-  position: absolute;
-  left: 0;
-  top: auto;
-  margin-top: 40px;
-  margin-left: 20px;
-  font-size:17px;
+.cate-3{
+	margin: 10px;
+	border: 2px solid yellow;
+	border-radius: 10px;
+	background-color:  #03bb85;
+	color: #FAFAD2;
+	letter-spacing: 2px;
+	box-shadow:3px 3px 0px 0px #ffffe0 ;
 }
