@@ -36,11 +36,13 @@ public class MyUserDetails extends User{
 		this.id=entity.getId();
 		this.name=entity.getName();
 		this.mno=entity.getMno();
+		
 		for(MyRole role:entity.getRoles()) {
 			if(role.name().equals("ADMIN")) {
 				admin=true;
 			}
 		}
+		
 		this.profile = entity.getProfile();
 	}
 	
