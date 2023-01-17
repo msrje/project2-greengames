@@ -14,11 +14,16 @@
 	<tr th:if="${#lists.isEmpty(list)}">
 		<td>값이 없습니다.</td>
 	</tr>
+	
 	<div th:if="${p.getNumberOfElements()>0}">
-		<a th:if="${p.hasPrevious()}"
-			th:href="|/notice-boards?page=${p.getNumber()}|">&lt;</a> <span
-			th:text="${p.getNumber()+1}">현재페이지</span> / <span
-			th:text="${p.getTotalPages()}">총페이지수</span> <a th:if="${p.hasNext()}"
-			th:href="|/notice-boards?page=${p.getNumber()+2}|">&gt;</a>
+		<a th:if="${p.hasPrevious()}" th:href="|/notice-boards?page=${p.getNumber()}|">&lt;</a> 
+		
+		<th:block th:each="p:${#numbers.sequence(startPage, endPage)}">
+			<a th:if="${p != nowPage}" th:href="@{notice-boards?(page=${p})}" th:text="${p}"></a>
+			<a th:if="${p == nowPage}" th:text="${p}" class="active"></a>
+		</th:block>
+		
+		<a th:if="${p.hasNext()}" th:href="|/notice-boards?page=${p.getNumber()+2}|">&gt;</a>
 	</div>
+		
 </html>

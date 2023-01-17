@@ -126,6 +126,14 @@ public class CommuteServiceProc implements CommuteService {
 		Pageable pageable=PageRequest.of(0, size, sort);
 		Page<CommuteEntity> result=commuteRepo.findAllByMember_mno(mno,pageable);
 		
+		int nowPage = result.getNumber()+1;
+		int startPage = Math.max(nowPage -4, 1);
+		int endPage = Math.min(nowPage +5, result.getTotalPages());
+		
+		model.addAttribute("nowPage", nowPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		
 		model.addAttribute("p",result);
 		model.addAttribute("list", result
 				 .stream()
