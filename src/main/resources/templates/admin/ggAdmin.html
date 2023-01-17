@@ -58,7 +58,7 @@
 	//출근 버튼 누르면 출근시간 보여주고 db저장
 	function go(){
 		var goTime= $(".goTime").text();
-		if(goTime=="출근시간")return;
+		if(goTime!="출근시간")return;
 		
 		var mno = $(".mno").val();
 		$.ajax({
@@ -121,11 +121,11 @@
 			</thead>
 			<tbody>
 				<tr th:each="lists : ${list}">
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
+					<td th:text="${lists.name}"></td>
+					<td th:text="${lists.today}"></td>
+					<td th:text="${lists.gTime}"></td>
+					<td th:text="${lists.oTime}"></td>
+					<td th:text="${lists.cType}"></td>
 				</tr>
 			</tbody>
 		</table>

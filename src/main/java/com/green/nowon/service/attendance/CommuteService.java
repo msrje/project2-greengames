@@ -17,10 +17,13 @@ public interface CommuteService {
 
 	void save(long mno, CommuteInsertDTO idto, CommuteUpdateDTO udto);
 
-	void showGTime(Long mno, Model model);
-
 	long MemberMno(Principal principal);
 
-	void showListTime(long memberMno, Model model2, CommuteMemberListDTO dto);
+	void showListTime(long memberMno, Model model2);
+
+	/**
+	 * 가장 최근에 근무한 날짜 조회
+	 */
+	void showGTime(Long mno, Model model, CommuteInsertDTO idto);
 
 }

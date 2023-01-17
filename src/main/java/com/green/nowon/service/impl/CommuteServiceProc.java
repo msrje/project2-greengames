@@ -78,20 +78,25 @@ public class CommuteServiceProc implements CommuteService {
 	}
 	
 	/**
-	 * 가장 최근이 근무한 날짜 조회
+	 * 가장 최근에 근무한 날짜 조회
 	 */
 	@Override
-	public void showGTime(Long mno,Model model) {
+	public void showGTime(Long mno,Model model,CommuteInsertDTO idto) {
 		List<CommuteEntity> result = commuteRepo.findAllByMember_mno(mno);
 		long cno = 0L;
-		for(CommuteEntity i:result) {
-			cno = i.getCno();
+		if(!result.isEmpty()) {//값이 있으면 실행
+			for(CommuteEntity i:result) {
+				cno = i.getCno();
+			}
+			Optional<CommuteEntity> CommuteLastDay = commuteRepo.findById(cno);
+	//		System.out.println("최근날짜 확인>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+CommuteLastDay.get().getToday());
+			
+			
+			model.addAttribute("time",commuteRepo.findAllByCno(cno));
+		}else {//값이 없으면 새로 저장
+			commuteRepo.save(idto.entity().fkSaver(memberRepo.findByMno(mno).get()));
+			model.addAttribute("time",commuteRepo.findAllByCno(cno));
 		}
-		Optional<CommuteEntity> CommuteLastDay = commuteRepo.findById(cno);
-		System.out.println("최근날짜 확인>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+CommuteLastDay.get().getToday());
-		
-		
-		model.addAttribute("time",commuteRepo.findAllByCno(cno));
 	}
 	
 	@Override
@@ -105,13 +110,11 @@ public class CommuteServiceProc implements CommuteService {
 	}
 	
 	@Override
-	public void showListTime(long memberMno, Model model2 , CommuteMemberListDTO dto) {
-		 /*List<CommuteMemberListDTO> list = 
-				 commuteRepo.findAllByMember_mno(memberMno)
+	public void showListTime(long memberMno, Model model2) {
+		 model2.addAttribute("list", commuteRepo.findAllByMember_mno(memberMno)
 				 .stream()
 				 .map(CommuteMemberListDTO::new)
-				 .collect(Collectors.toList());
-		 model2.addAttribute("list", list);*/
+				 .collect(Collectors.toList()));
 	}
 	
 	
