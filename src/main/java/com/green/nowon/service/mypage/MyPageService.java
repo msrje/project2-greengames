@@ -7,6 +7,7 @@ public interface MyPageService {
 
 	void info(long mno, Model model, Model model2);
 
+
 	void list(long mno, Model model);
 
 	void salaryInfo(long mno, Model model, Model model2, Model model3);

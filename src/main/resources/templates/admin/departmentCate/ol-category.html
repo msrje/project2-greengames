@@ -2,9 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<ol th:unless="${#lists.isEmpty(list)}">
 		<th:block th:each="dto:${list}">
-		<li th:value="${dto.dno}"  th:class="|sub cate ${'cate-'+dto.depth}|">
+		<li th:value="${dto.dno}"  th:class="|sub cate ${'cate-'+dto.depth}|" >
 			<div>
-				<span th:unless="${dto.dname==''}" th:text="${dto.dname}" onclick="cateShow()">카테고리명</span>
+				<span th:unless="${dto.dname==''}" th:text="${dto.dname}" onclick="onclickDepartment(this)">카테고리명</span>
+				<input th:type="hidden" th:class="${dto.depth}" th:value="${dto.dno}">
 				<span th:if="${dto.dname==''}" >분류없음</span>
 			</div>
 			<div class="cate-wrap">

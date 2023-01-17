@@ -1,6 +1,7 @@
 package com.green.nowon.security;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -10,6 +11,7 @@ import org.springframework.security.core.userdetails.User;
 import com.green.nowon.domain.entity.approval.ApprovalEntity;
 import com.green.nowon.domain.entity.cate.PositionEntity;
 import com.green.nowon.domain.entity.member.MemberEntity;
+import com.green.nowon.domain.entity.member.ProfileEntity;
 
 import lombok.Getter;
 
@@ -20,7 +22,7 @@ public class MyUserDetails extends User{
 	private String name;
 	private long mno;
 	private boolean admin;
-	
+	private List<ProfileEntity> profile;
 	public MyUserDetails(String username, String password, Collection<? extends GrantedAuthority> authorities) {
 		super(username, password, authorities);
 		
@@ -39,6 +41,7 @@ public class MyUserDetails extends User{
 				admin=true;
 			}
 		}
+		this.profile = entity.getProfile();
 	}
 	
 
