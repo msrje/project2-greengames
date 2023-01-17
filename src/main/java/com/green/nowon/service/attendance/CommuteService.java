@@ -1,5 +1,6 @@
 package com.green.nowon.service.attendance;
 
+import java.awt.print.Pageable;
 import java.security.Principal;
 import java.time.LocalTime;
 import java.util.Optional;
@@ -19,11 +20,13 @@ public interface CommuteService {
 
 	long MemberMno(Principal principal);
 
-	void showListTime(long memberMno, Model model2);
+	//void showListTime(long memberMno, Model model2);
 
 	/**
 	 * 가장 최근에 근무한 날짜 조회
 	 */
 	void showGTime(Long mno, Model model, CommuteInsertDTO idto);
+
+	void showListTime(long mno, Model model);
 
 }

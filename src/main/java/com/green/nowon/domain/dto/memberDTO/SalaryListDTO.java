@@ -28,16 +28,15 @@ public class SalaryListDTO {
 		this.pass = e.getPass();
 		this.phone=e.getPhone();
 		
-		this.normalSalary=e.getPno().getNormalSalary();
-		
 		if(e.getPno()!=null) {	
+			this.normalSalary=e.getPno().getNormalSalary();
 			this.pname=e.getPno().getPName();
 			
 		}else{
 			this.pname="없음";
+			this.normalSalary=0;
 		}
 		
-		this.profileUrl=e.defImg().getUrl()+e.defImg().getNewName();
 		if(e.defImg()!=null) {
 			this.profileUrl=e.defImg().getUrl()+e.defImg().getNewName();
 		}
