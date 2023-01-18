@@ -42,7 +42,9 @@ public class SalaryListDTO {
 		this.pass = e.getPass();
 		this.phone=e.getPhone();
 		
+
 		if(e.getPno()!=null) {	//직책,기본금,마이너스,플러스금액 계산
+
 			this.pname=e.getPno().getPName();
 			this.normalSalary=e.getPno().getNormalSalary();
 			

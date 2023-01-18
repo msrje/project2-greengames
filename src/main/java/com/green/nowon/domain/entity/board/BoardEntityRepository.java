@@ -10,8 +10,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.green.nowon.domain.entity.board.BoardEntity;
-
 @Repository
 public interface BoardEntityRepository extends JpaRepository<BoardEntity, Long>{
 

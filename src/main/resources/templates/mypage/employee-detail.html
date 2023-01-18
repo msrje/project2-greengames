@@ -91,6 +91,11 @@
 							<input type="text" id="detailAddress"  name="detailAddress" placeholder="상세주소" th:value="${aDetail.detailAddress}">
 							<input type="text" readonly="readonly" id="extraAddress" name="extraAddress" placeholder="참고항목" th:value="${aDetail.extraAddress}">
 						</li>
+						<li>
+							<label for="hireDate">입사일</label>
+							<input class="box-style-common" type="date" name="hireDate" id="hireDate" readonly="readonly">
+							<div class="msg"></div>
+						</li>
 						<li><button>수정</button></li>
 					</ul>
 				</form>
