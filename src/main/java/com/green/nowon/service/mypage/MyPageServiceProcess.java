@@ -104,6 +104,15 @@ public class MyPageServiceProcess implements MyPageService{
 	}
 
 
+	@Override
+	public void update2(long mno) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
 
 
 

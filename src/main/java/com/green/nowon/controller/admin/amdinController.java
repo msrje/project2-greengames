@@ -55,5 +55,9 @@ public class amdinController {
 		service.save(name,salary);
 		return "/admin/position";
 	}
-
+	
+	@GetMapping("/admin/bonus")
+	public String bonus() {
+		return "/admin/bonus";
+	}
 }
