@@ -22,6 +22,7 @@ public class SalaryController {
 		return "member/salary-list";
 	}
 	
+	
 	@GetMapping("/salaryinfo/{mno}")
 	public String salaryDetail(@PathVariable long mno, Model model,Model model2,Model model3) {
 		service.salaryInfo(mno,model, model2, model3);
@@ -30,6 +31,7 @@ public class SalaryController {
 	@PostMapping("/salary/department/{mno}")
 	public String salaryDepartment(@PathVariable long mno,long dno,long pno, Model model,Model model2,Model model3) {
 		service.update(mno,pno,dno);
+		service.update2(mno);
 		service.salaryInfo(mno,model, model2, model3);
 		return "member/salary-detail";
 	}

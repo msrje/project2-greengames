@@ -14,6 +14,9 @@ public interface MyPageService {
 
 	void update(long mno, long pno, long dno);
 
+
+	void update2(long mno);
+
 	
 
 	

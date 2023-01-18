@@ -8,7 +8,7 @@
     <main>
 	    <div>
 	    	<div class="mypage">
-	    		<div class="wrap-title">
+	    		<div class="wrap-title flex">
 	    			<div class="salary-list" th:each="dto : ${srlist}">
 		    				<img align="left" th:if="${#strings.isEmpty(dto.profileUrl)}" src="/image/test/profiletest.jpeg">
 					 		<img align="left" th:if="${!#strings.isEmpty(dto.profileUrl)}" th:src="${dto.profileUrl}">

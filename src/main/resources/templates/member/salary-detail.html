@@ -6,7 +6,23 @@
 	<link rel="stylesheet" href="/css/default.css">
 	<th:block th:insert="~{admin/AdminLayout :: header}"/>
 	<link rel="stylesheet" href="/css/member/mypage.css">
-	
+	<script type="text/javascript">
+		$(function(){
+			$(".sallist").change(sallaryList);
+		});
+		function sallaryList(){
+			var hid =  $(".hitot").val();
+			var bouns = $('#listsal').val();
+			test=parseInt(bouns);
+			test2=parseInt(hid);
+			var tot = test+test2;
+			console.log(tot);
+			var total = tot.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+			$(".totsal").text(total+"원");
+			console.log(total);
+		}
+		
+	</script>
 </head>
 <body class="flex">
     <main>
@@ -58,8 +74,7 @@
 		    					</th:block>
 		    				</select>
 		    				<button>등록</button>
-		    				
-		    				</form>
+		    			</form>
 		    			</div>
 		    		</div>
 	    		</div>
@@ -67,29 +82,44 @@
 		</div>
 		<div class="salary-info" style="top: 100px; position: relative;">
 		<p>해당직원 급여 정보 및 관리</p>
+		<form  th:action="|/salary/department/${detail.mno}|" method="post">
 			<table>
 				<thead>
-				<!-- thymleaf사용 -->
+					<!-- thymleaf사용 -->
 					<tr class="salary-info-1">
-						<td>[[${detail.mno}]]</td>
-						<td>[[${detail.name}]]</td>
-						<td>[[${detail.pname}]]</td>
-						<td>[[${detail.normalSalary}]]</td>
-						<td>변동금액</td>
-						<td>이번 달 급여</td>
-					</tr>
-				</thead>
-				<!-- <tbody>
-					<tr>
-						<td>사번</td>
+						<td>사원번호</td>
 						<td>이름</td>
 						<td>직책</td>
 						<td>기본급여</td>
-						<td>변동금액</td>
+						<td>세금</td>
+						<td>연차보너스</td>
 						<td>이번 달 급여</td>
 					</tr>
-				</tbody> -->
+				</thead>
+				<tbody>
+					<tr>
+						<td>[[${detail.mno}]]</td>
+						<td>[[${detail.name}]]</td>
+						<td>[[${detail.pname}]]</td>
+						<td data-th-text="${#numbers.formatInteger(detail.normalSalary, 3, 'COMMA') + '원'}">[[${detail.normalSalary}]]</td>
+						<td data-th-text="${#numbers.formatInteger(detail.minSal, 3, 'COMMA') + '원'}">[[${detail.minSal}]]</td>
+						<td>
+							<select id="listsal" class="sallist">
+								<option th:value="${detail.none}">없음 : [[${detail.none}]]</option>
+								<option th:value="${detail.sal1y}">1년차 : [[${detail.sal1y}]] </option>
+								<option th:value="${detail.sal2y}">2년차 : [[${detail.sal2y}]]</option>
+								<option th:value="${detail.sal3y}">3년차 : [[${detail.sal3y}]]</option>
+								<option th:value="${detail.sal4y}">4년차 : [[${detail.sal4y}]]</option>
+								<option th:value="${detail.sal5y}">5년차 : [[${detail.sal5y}]]</option>
+							</select>
+						</td>
+						<input type="hidden" class="hitot" th:value="${detail.minSalTot}" />
+						<td class="totsal" data-th-text="${#numbers.formatInteger(detail.minSalTot, 3, 'COMMA') + '원'}"></td>
+					</tr>
+				</tbody>
 			</table>
+			<button>등록</button>
+		</form>
 		</div>
     </main>
 </body>

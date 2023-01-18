@@ -21,12 +21,13 @@ public class CalendarServiceProc implements CalendarService {
 
 	// 캘린더 insert
 	@Override
-	public void save(long userMno, CalendarDTO dto) {
+	public long save(long userMno, CalendarDTO dto) {
 		CalendarEntity entity=CalendarEntity.builder()
-				.cTitle(dto.getCTitle()).cStartTime(dto.getCStartTime()).cEndTime(dto.getCEndTime())
+				.cTitle(dto.getCTitle()).cStartTime(dto.getCStartTime()).cEndTime(dto.getCEndTime()).cno(dto.getCno())
 				.member(MemberEntity.builder().mno(userMno).build())
 				.build();
-		crepo.save(entity);
+		
+		return crepo.save(entity).getCno();
 		
 	}
 	
@@ -42,6 +43,17 @@ public class CalendarServiceProc implements CalendarService {
 	@Override
 	public void delete(long cno) {
 		crepo.deleteById(cno);
+		
+	}
+
+	//캘린더 Update
+	@Override
+	public void update(long userMno, long cno, CalendarDTO dto) {
+		CalendarEntity entity=CalendarEntity.builder()
+				.cTitle(dto.getCTitle()).cStartTime(dto.getCStartTime()).cEndTime(dto.getCEndTime()).cno(cno)
+				.member(MemberEntity.builder().mno(userMno).build())
+				.build();
+		crepo.save(entity);
 		
 	}
 	
