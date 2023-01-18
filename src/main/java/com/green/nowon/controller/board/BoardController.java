@@ -1,5 +1,6 @@
 package com.green.nowon.controller.board;
 
+import java.lang.ProcessBuilder.Redirect;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ import com.green.nowon.service.BoardService;
 @Controller
 public class BoardController {
 	
+	private static final String String = null;
+	private static final String Model = null;
 	@Autowired
 	private BoardService service;
 
@@ -88,12 +91,23 @@ public class BoardController {
 	
 	
 	
-	//자유게시판
+	
+	/* 여기서부터 자유게시판 */
 	
 	@GetMapping("/boards")
 	public String genBoard(@RequestParam(defaultValue = "1") int page , Model model) {
 		service.getListAll02(page ,model);
 		return "board/generalList";
+	}
+	
+	//검색 ajax활용
+	@GetMapping("/boards/search")
+	public String genSearch(String keyword, Model model) {
+		
+		service.search02(keyword, model);
+		
+		return "board/generalSearchPage";
+		
 	}
 	
 	@GetMapping("/general/boards-registration")

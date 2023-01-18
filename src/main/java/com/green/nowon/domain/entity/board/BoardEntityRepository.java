@@ -19,7 +19,8 @@ public interface BoardEntityRepository extends JpaRepository<BoardEntity, Long>{
 
 	Page<BoardEntity> findAllByOrderByBnoDesc(Pageable pageable);
 	
-	List<BoardEntity> findByTitleContaining(String keyword); //검색
+	List<BoardEntity> findByTitleContaining(String keyword); //공지 검색
+
 	
 	//조회수 쿼리
 	@Modifying

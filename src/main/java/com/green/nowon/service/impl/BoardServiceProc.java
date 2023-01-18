@@ -59,6 +59,8 @@ public class BoardServiceProc implements BoardService{
 	@Override
 	public void getListAll(int page, Model model) {
 		//board list를 페이지로 전송
+		
+		//페이징 작업 pageable이용
 		int size=10;
 		Sort sort=Sort.by(Direction.DESC, "bno");
 		
@@ -150,17 +152,24 @@ public class BoardServiceProc implements BoardService{
     
 
 	
+	/* 여기서부터 자유게시판 입니다 */
 	
-	
-	//자유게시판
-	
+	@Transactional
 	@Override
 	public void getListAll02(int page, Model model) {
 		//board list를 페이지로 전송
 		int size=10;
 		Sort sort=Sort.by(Direction.DESC, "bno");
+		
 		Pageable pageable=PageRequest.of(page-1, size, sort);
 		Page<GeneralBoardEntity> result=repo.findAll(pageable);
+		int nowPage = result.getNumber()+1;
+		int startPage = Math.max(nowPage-4, 1);
+		int endPage = Math.min(nowPage+5, result.getTotalPages());
+		
+		model.addAttribute("nowPage", nowPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
 		
 		model.addAttribute("p2", result);
 		model.addAttribute("list2", result.stream()
@@ -242,6 +251,15 @@ public class BoardServiceProc implements BoardService{
 		
 		model.addAttribute("list2", result);
 		
+	}
+
+	//자유 검색
+	@Transactional
+	@Override
+	public void search02(String keyword, Model model) {
+		List<GenBoardListDTO> searchResult= repo.findByTitleContaining(keyword)
+				.stream().map(GenBoardListDTO::new).collect(Collectors.toList());
+		model.addAttribute("searchResult", searchResult);
 	}
 
 
