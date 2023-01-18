@@ -27,6 +27,9 @@ public interface CommuteService {
 	 */
 	void showGTime(Long mno, Model model, CommuteInsertDTO idto);
 
-	void showListTime(long mno, Model model);
+	/**
+	 * ajax를 사용해서 저장된 시간을 보여주기
+	 */
+	void showListTime(long mno, Model model, int page);
 
 }

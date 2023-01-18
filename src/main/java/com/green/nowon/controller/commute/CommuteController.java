@@ -65,9 +65,15 @@ public class CommuteController {
 	@GetMapping("/member/commute/list")
 	public String commuteList(Principal principal,Model model) {
 		long mno = commuteService.MemberMno(principal);
-		commuteService.showListTime(mno,model);
+		commuteService.showListTime(mno,model,0);
 		return "/member/commuteList";
 	}
 	
+	@GetMapping("/member/commute/list/?&page={page}")
+	public String commuteListPage(@PathVariable int page, Principal principal,Model model) {
+		long mno = commuteService.MemberMno(principal);
+		commuteService.showListTime(mno,model,page-1);
+		return "/member/commuteList";
+	}
 	
 }
