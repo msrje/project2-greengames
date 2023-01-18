@@ -91,7 +91,7 @@ public class MemberEntity extends BaseDateEntity{
 	@Enumerated(EnumType.STRING)//직책
 	@ElementCollection(fetch = FetchType.EAGER)
 	private Set<MyRole> roles = new HashSet<>();
-	
+
 	public MemberEntity addRole(MyRole role) {
 		roles.add(role);
 		return this;

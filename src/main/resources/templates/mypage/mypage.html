@@ -138,10 +138,10 @@
 						<td>[[${detail.mno}]]</td>
 						<td>[[${detail.name}]]</td>
 						<td>[[${detail.pname}]]</td>
-						<td>[[${detail.normalSalary}]]</td>
-						<td>[[${detail.none}]]</td>
-						<td>[[${detail.minSal}]]</td>
-						<td>[[${detail.totSal}]]</td>
+						<td data-th-text="${#numbers.formatInteger(detail.normalSalary, 3, 'COMMA') + '원'}"></td>
+						<td data-th-text="${#numbers.formatInteger(detail.none, 3, 'COMMA') + '원'}">[[${detail.none}]]</td>
+						<td data-th-text="${#numbers.formatInteger(detail.minSal, 3, 'COMMA') + '원'}">[[${detail.minSal}]]</td>
+						<td data-th-text="${#numbers.formatInteger(detail.minSalTot, 3, 'COMMA') + '원'}">[[${detail.totSal}]]</td>
 					</tr>
 				</tbody>
 			</table>

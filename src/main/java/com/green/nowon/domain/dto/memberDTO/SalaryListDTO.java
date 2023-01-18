@@ -22,9 +22,18 @@ public class SalaryListDTO {
 	private int normalSalary;
 	
 	
+	
 	int none;
 	double minSal;
-	int totSal;
+	
+	
+	double sal1y;
+	double sal2y;
+	double sal3y;
+	double sal4y;
+	double sal5y;
+	
+	int minSalTot;
 	
 	public SalaryListDTO(MemberEntity e){
 		this.mno=e.getMno();
@@ -38,9 +47,15 @@ public class SalaryListDTO {
 			this.normalSalary=e.getPno().getNormalSalary();
 			
 			this.minSal=e.getPno().getNormalSalary()*0.16;//-금액 은 고정(ex)세금)
-			this.none=0;
 			
-			this.totSal=(int) (e.getPno().getNormalSalary()-minSal);
+			this.none=0;//신입
+			this.sal1y=e.getPno().getNormalSalary()*0.05;//기본급의 3% 1년차
+			this.sal2y=e.getPno().getNormalSalary()*0.10;//기본급의 6% 2년차
+			this.sal3y=e.getPno().getNormalSalary()*0.15;//기본급의 9% 3년차
+			this.sal4y=e.getPno().getNormalSalary()*0.20;//기본급의 12% 4년차
+			this.sal5y=e.getPno().getNormalSalary()*0.25;//기본급의 15% 5년차
+			
+			this.minSalTot=(int) (e.getPno().getNormalSalary()-minSal);//세금이 포함된 월급
 			
 		}else{
 			this.pname="없음";
@@ -48,7 +63,13 @@ public class SalaryListDTO {
 			
 			this.minSal=0;//세금
 			
-			this.totSal=0;
+			this.sal1y=0;
+			this.sal2y=0;
+			this.sal3y=0;
+			this.sal4y=0;
+			this.sal5y=0;
+			
+			this.minSalTot=0;
 		}
 		
 		
