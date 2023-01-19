@@ -23,6 +23,7 @@ public class SalaryListDTO {
 	
 	
 	private int normalSalary;
+
 	
 	
 	//감소되는금액
@@ -44,12 +45,14 @@ public class SalaryListDTO {
 	private int totSal;//모든걸 계산한 후 최종급여
 	
 	
+
 	public SalaryListDTO(MemberEntity e){
 		this.mno=e.getMno();
 		this.id=e.getId();
 		this.name = e.getName();
 		this.pass = e.getPass();
 		this.phone=e.getPhone();
+
 		
 
 		if(e.getPno()!=null) {	//직책,기본금,마이너스,플러스금액 계산

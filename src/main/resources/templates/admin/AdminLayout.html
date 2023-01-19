@@ -8,7 +8,6 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="/css/commons/common.css">
 	<link rel="stylesheet" href="/css/admin/admin-layout.css">
-	
 <style type="text/css">
 	.user-profile{
 		display:block;
@@ -20,10 +19,8 @@
 		background-position: center;
 		border-radius: 50%;
 	}
-
 </style>
 </head>
-
 <body id="layout-admin">
     <header>
    		<div class="wrap">
@@ -42,12 +39,8 @@
 	   					<div th:if="${profile} != null">  						
 	   						<p class = "user-profile" th:style="|background-image: url('${profile.url}${profile.newName}');|"></p>
 	   					</div>
-	   					
 	   				</div>
-   				
-   				
    					<!-- <img src="/image/test/profiletest.jpeg" style="width: 120px; border-radius: 50%; padding-top: 10px;"> -->
-   					
    					<!--접속한 사원의 이미지-->
    					<p th:text="${#authentication.principal.name}"></p>
    					<p th:text="${#authentication.principal.mno}"></p>
@@ -76,10 +69,8 @@
    				<li>
    					<dl>
    						<dt>스케줄관리</dt>
-   						<dd><a href="/">출/퇴근 관리</a></dd>
-   						<dd><a href="/schedule/Request-for-Vacation">휴가/병가</a></dd>
-   						<dd><a href="/schedule/calendar">캘린더</a></dd>
-   						
+   						<dd><a href="/schedule/companyCalenda">회사 일정</a></dd>
+   						<dd><a href="/schedule/calendar">본인 캘린더</a></dd>
    					</dl>
    				</li>
    				<li>
