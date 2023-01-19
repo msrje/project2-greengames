@@ -120,6 +120,7 @@
 							</div>
 						</div>
 					</div>
+
 				</div>
 				<div class="mypage-info">
 					<div class="mypage-img">
@@ -179,7 +180,8 @@
 						<td>이름</td>
 						<td>직책</td>
 						<td>기본급여</td>
-						<td>변동금액</td>
+						<td>연차보너스</td>
+						<td>세금</td>
 						<td>이번 달 급여</td>
 					</tr>
 				</thead>
@@ -188,9 +190,10 @@
 						<td>[[${detail.mno}]]</td>
 						<td>[[${detail.name}]]</td>
 						<td>[[${detail.pname}]]</td>
-						<td>[[${detail.normalSalary}]]</td>
-						<td>변동금액</td>
-						<td>이번 달 급여</td>
+						<td data-th-text="${#numbers.formatInteger(detail.normalSalary, 3, 'COMMA') + '원'}"></td>
+						<td data-th-text="${#numbers.formatInteger(detail.none, 3, 'COMMA') + '원'}">[[${detail.none}]]</td>
+						<td data-th-text="${#numbers.formatInteger(detail.minSal, 3, 'COMMA') + '원'}">[[${detail.minSal}]]</td>
+						<td data-th-text="${#numbers.formatInteger(detail.minSalTot, 3, 'COMMA') + '원'}">[[${detail.totSal}]]</td>
 					</tr>
 				</tbody>
 			</table>
@@ -203,7 +206,7 @@
 						<p>전자결재</p>
 					</div>
 					<div class="text-link">
-						<a>업무</a> <a>휴가/병가</a>
+						<a href="/approval">업무</a> <a href="/approval/vacation">휴가/병가</a>
 					</div>
 				</div>
 			</div>

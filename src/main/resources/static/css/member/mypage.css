@@ -50,18 +50,16 @@
 	margin-top: 45px;
 }
 .approval-1{
-	margin:5% 12% 5% 12%;
 	position: relative;
-	top: -770px;
-	left: -120px;
-}
-.approval-2{
+	top: -820px;
+	left:90px;
 	width: auto;
+	max-width: 700px;
 }
+
 
 .approval-3{
 	border: 3px solid #a9a9a9;
-	margin: 5%;
 	border-radius: 10px;
 }
 .approval-3 p{
