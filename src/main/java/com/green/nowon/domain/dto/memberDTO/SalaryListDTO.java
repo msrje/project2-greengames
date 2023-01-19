@@ -20,14 +20,16 @@ public class SalaryListDTO {
 	private String pname;
 	
 	private int normalSalary;
-	
+	private int plussal;
+	int totsal;
 	public SalaryListDTO(MemberEntity e){
 		this.mno=e.getMno();
 		this.id=e.getId();
 		this.name = e.getName();
 		this.pass = e.getPass();
 		this.phone=e.getPhone();
-		
+		this.plussal=5000;
+		this.totsal=plussal+normalSalary;
 		
 		if(e.getPno()!=null) {	
 			this.pname=e.getPno().getPName();

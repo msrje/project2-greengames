@@ -2,6 +2,7 @@ package com.green.nowon.security;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -22,6 +23,8 @@ public class MyUserDetails extends User{
 	private String name;
 	private long mno;
 	private boolean admin;
+	private Set<MyRole> roles;
+	
 	private List<ProfileEntity> profile;
 	public MyUserDetails(String username, String password, Collection<? extends GrantedAuthority> authorities) {
 		super(username, password, authorities);
@@ -36,6 +39,7 @@ public class MyUserDetails extends User{
 		this.id=entity.getId();
 		this.name=entity.getName();
 		this.mno=entity.getMno();
+		this.roles = entity.getRoles();
 		
 		for(MyRole role:entity.getRoles()) {
 			if(role.name().equals("ADMIN")) {

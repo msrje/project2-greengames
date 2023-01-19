@@ -4,7 +4,7 @@
 <head>
 <link rel="stylesheet" href="/css/admin/main.css">
 <script src='/js/main.js'></script>
-<th:block th:insert="~{admin/AdminLayout :: head}" /> 
+<th:block th:insert="~{admin/AdminLayout :: head}" />
 <link rel="stylesheet" href="/css/default.css">
 <link rel="stylesheet" href="/css/commons/common.css">
 <th:block th:insert="~{admin/AdminLayout :: header}" />
@@ -18,8 +18,8 @@
 				center : 'title',
 				right : 'dayGridMonth,timeGridWeek,timeGridDay'
 			},
-			initialDate : '2023-01-10', 
-			navLinks : true, 
+			initialDate : '2023-01-10',
+			navLinks : true,
 			selectable : true,
 			selectMirror : true,
 			select : function(arg) {
@@ -47,19 +47,18 @@
 				}
 			},
 			editable : true,
-			dayMaxEvents : true, 
-	
+			dayMaxEvents : true,
+
 		});
 		calendar.render();
 	});
-
-	
 </script>
 </head>
 <body class="flex">
 	<main>
 		<div>
-			<input id="mno" type="hidden" th:value="${#authentication.principal.mno}">
+			<input id="mno" type="hidden"
+				th:value="${#authentication.principal.mno}">
 			<div class="mypage">
 				<div class="wrap-title">
 					<h2 class="mypage-title">
@@ -67,16 +66,68 @@
 					</h2>
 				</div>
 				<div style="text-align: right;">
-					<a style="position: relative; left: 152px; top:10px; font-weight: bold; font-size: 20px">캘린더</a>
-					<div style="width: 800px; position: relative; left: 780px; top: 40px;" >
-						<div id='calendar'></div>
+					<div
+						style="width: 800px; position: relative; left: 900px; top: 40px;">
+						<div class="flex">
+							<div class="wrap">
+								<p>내가 작성한 공지사항</p>
+								<div>
+									<table>
+										<tr>
+											<td>No</td>
+											<td>제목</td>
+											<td>조회수</td>
+											<td>작성자</td>
+											<td>작성일</td>
+										</tr>
+										<tr th:each="dto : ${list}"
+											th:if="${#authentication.name == dto.writerId}">
+											<!--유저가 내가 작성한것만 확인가능-->
+											<td th:text="${dto.bno}">No</td>
+											<td><a th:href="|/notice-boards/${dto.bno}|">[[${dto.title}]]</a></td>
+											<td th:text="${dto.readCount}">조회수</td>
+											<td>[[${dto.writer}]]</td>
+											<td><span
+												th:if="${dto.updatedDate.toLocalDate() eq dto.toDay}"
+												th:text="${dto.updatedDate.toLocalDate()}">날짜</span></td>
+										</tr>
+									</table>
+								</div>
+							</div>
+							<div class="wrap">
+								<p>내가 작성한 자유게시물</p>
+								<div>
+									<table>
+										<tr>
+											<td>No</td>
+											<td>제목</td>
+											<td>조회수</td>
+											<td>작성자</td>
+											<td>작성일</td>
+										</tr>
+										<tr th:each="dto : ${list2}"
+											th:if="${#authentication.name == dto.writerId}">
+											<td th:text="${dto.bno}">No</td>
+											<td><a th:href="|/boards/${dto.bno}|">[[${dto.title}]]</a></td>
+											<td th:text="${dto.readCount}">조회수</td>
+											<td>[[${dto.writer}]]</td>
+											<td><span
+												th:if="${dto.updatedDate.toLocalDate() eq dto.toDay}"
+												th:text="${dto.updatedDate.toLocalDate()}">날짜</span></td>
+										</tr>
+									</table>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div class="mypage-info">
 					<div class="mypage-img">
-					 	<!--ajax 추가-->
-					 	<img align="left" th:if="${#strings.isEmpty(detail.profileUrl)}" src="/image/test/profiletest.jpeg">
-					 	<img align="left" th:if="${!#strings.isEmpty(detail.profileUrl)}" th:src="${detail.profileUrl}">
+						<!--ajax 추가-->
+						<img align="left" th:if="${#strings.isEmpty(detail.profileUrl)}"
+							src="/image/test/profiletest.jpeg"> <img align="left"
+							th:if="${!#strings.isEmpty(detail.profileUrl)}"
+							th:src="${detail.profileUrl}">
 					</div>
 					<br>
 					<div class="member-info">
@@ -144,67 +195,17 @@
 				</tbody>
 			</table>
 		</div>
-	
+
 		<div class="approval-1">
 			<div class="approval-2">
 				<div class="approval-3">
-					<div>
+					<div style="">
 						<p>전자결재</p>
 					</div>
 					<div class="text-link">
 						<a>업무</a> <a>휴가/병가</a>
 					</div>
 				</div>
-			</div>
-		</div>
-		<div class="flex">
-			<div class="wrap">
-				<p>내가 작성한 공지사항</p>
-				<div>	
-					<table>
-			    			<tr>
-			    				<td>No</td>
-			    				<td>제목</td>
-			    				<td>조회수</td>
-			    				<td>작성자</td>
-			    				<td>작성일</td>
-			    			</tr>
-			    			<tr th:each="dto : ${list}" th:if="${#authentication.name == dto.writerId}"> <!--유저가 내가 작성한것만 확인가능-->
-			    				<td th:text="${dto.bno}">No</td>
-			    				<td><a th:href="|/notice-boards/${dto.bno}|">[[${dto.title}]]</a></td>
-			    				<td th:text="${dto.readCount}">조회수</td>
-			    				<td>[[${dto.writer}]]</td>
-			    				<td>
-			    					<span th:if="${dto.updatedDate.toLocalDate() eq dto.toDay}"
-			    					th:text="${dto.updatedDate.toLocalDate()}">날짜</span>
-			    				</td>
-			    			</tr>
-			    		</table>	
-		    		</div>
-			</div>
-			<div class="wrap">
-				<p>내가 작성한 자유게시물</p>
-				<div>	
-					<table>
-			    			<tr>
-			    				<td>No</td>
-			    				<td>제목</td>
-			    				<td>조회수</td>
-			    				<td>작성자</td>
-			    				<td>작성일</td>
-			    			</tr>
-			    			<tr th:each="dto : ${list2}" th:if="${#authentication.name == dto.writerId}">
-			    				<td th:text="${dto.bno}">No</td>
-			    				<td><a th:href="|/boards/${dto.bno}|">[[${dto.title}]]</a></td>
-			    				<td th:text="${dto.readCount}">조회수</td>
-			    				<td>[[${dto.writer}]]</td>
-			    				<td>
-			    					<span th:if="${dto.updatedDate.toLocalDate() eq dto.toDay}"
-			    					th:text="${dto.updatedDate.toLocalDate()}">날짜</span>
-			    				</td>
-			    			</tr>
-			    		</table>	
-		    		</div>
 			</div>
 		</div>
 		<div>
