@@ -33,9 +33,8 @@ public class amdinController {
 	private PositionService service;
 	
 	@GetMapping("/admin")
-	public String admin(Model model,Principal principal,Model model2 ,CommuteInsertDTO idto) {
-		commuteService.showGTime(commuteService.MemberMno(principal),model ,idto);
-		commuteService.showListTime(commuteService.MemberMno(principal), model2);
+	public String admin(Model model,Principal principal,CommuteInsertDTO idto) {
+		commuteService.showListTime(commuteService.MemberMno(principal), model , 1);
 		return "admin/ggAdmin";
 	}
 	
