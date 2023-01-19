@@ -22,6 +22,7 @@ public class SalaryListDTO {
 	private String pname;
 	
 	private int normalSalary;
+
 	
 	
 	
@@ -40,12 +41,14 @@ public class SalaryListDTO {
 //	double bonus;
 //	int totSal;
 	
+
 	public SalaryListDTO(MemberEntity e){
 		this.mno=e.getMno();
 		this.id=e.getId();
 		this.name = e.getName();
 		this.pass = e.getPass();
 		this.phone=e.getPhone();
+
 		
 
 		if(e.getPno()!=null) {	//직책,기본금,마이너스,플러스금액 계산
