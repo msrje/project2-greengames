@@ -35,7 +35,7 @@
 	    			</div>
 	    			<br>
 	    			<div class="member-info">
-	    				<form>
+	    				<form th:action="|/salary/department/${detail.mno}|" method="post">
 	    					<ul>
 	    						<li>
 	    							<label for="name">이름 -</label>
@@ -82,7 +82,7 @@
 		</div>
 		<div class="salary-info" style="top: 100px; position: relative;">
 		<p>해당직원 급여 정보 및 관리</p>
-		<form  th:action="|/salary/department/${detail.mno}|" method="post">
+		<form action="">
 			<table>
 				<thead>
 					<!-- thymleaf사용 -->
@@ -119,7 +119,7 @@
 				</tbody>
 			</table>
 			<button>등록</button>
-		</form>
+			</form>
 		</div>
     </main>
 </body>

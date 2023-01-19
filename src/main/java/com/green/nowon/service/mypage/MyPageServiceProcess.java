@@ -103,10 +103,10 @@ public class MyPageServiceProcess implements MyPageService{
 		
 	}
 
-
+	@Transactional
 	@Override
 	public void update2(long mno) {
-		// TODO Auto-generated method stub
+		Optional<MemberEntity> mem=mRepo.findById(mno);
 		
 	}
 
