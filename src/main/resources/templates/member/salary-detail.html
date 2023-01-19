@@ -85,7 +85,7 @@
 		<div class="salary-info" style="top: 100px; position: relative;">
 		<p>해당직원 급여 정보 및 관리</p>
 		<form action="/salary/salary" method="post">
-			<input type="hidden" name="mno" th:value="${#authentication.principal.mno}">
+			<input type="hidden" name="mno" th:value="${detail.mno}">
 			<table>
 				<thead>
 					<!-- thymleaf사용 -->
