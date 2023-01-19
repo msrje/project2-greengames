@@ -103,6 +103,15 @@ public class MyPageServiceProcess implements MyPageService{
 		
 	}
 
+	@Transactional
+	@Override
+	public void update2(long mno) {
+		Optional<MemberEntity> mem=mRepo.findById(mno);
+		
+	}
+
+
+
 
 
 

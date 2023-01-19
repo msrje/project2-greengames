@@ -14,8 +14,6 @@ import lombok.Data;
 @Data
 public class MemberUpdateDTO {
 
-	
-	
 	private String pass;
 	private String phone;
 	

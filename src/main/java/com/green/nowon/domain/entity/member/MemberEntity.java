@@ -1,6 +1,8 @@
 package com.green.nowon.domain.entity.member;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -19,11 +21,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
-
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -77,6 +74,16 @@ public class MemberEntity extends BaseDateEntity{
 	@Column(nullable = false)
 	private String phone;//번호
 
+	@Column(nullable = true)
+	private LocalDate hireDate;
+	
+	@Column(nullable = true ,columnDefinition = "0")
+	private double boList;//보너스
+	
+	@Column(nullable = true,columnDefinition = "0")
+	private Integer totSalary;//tot = nomalsal + bonus-min
+	
+	
 	@ManyToOne
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn
@@ -91,7 +98,7 @@ public class MemberEntity extends BaseDateEntity{
 	@Enumerated(EnumType.STRING)//직책
 	@ElementCollection(fetch = FetchType.EAGER)
 	private Set<MyRole> roles = new HashSet<>();
-	
+
 	public MemberEntity addRole(MyRole role) {
 		roles.add(role);
 		return this;
