@@ -1,5 +1,7 @@
 package com.green.nowon.domain.dto.memberDTO;
 
+import org.hibernate.query.criteria.internal.predicate.IsEmptyPredicate;
+
 import com.green.nowon.domain.entity.cate.PositionEntity;
 import com.green.nowon.domain.entity.member.MemberEntity;
 
@@ -35,6 +37,9 @@ public class SalaryListDTO {
 	
 	int minSalTot;
 	
+//	double bonus;
+//	int totSal;
+	
 	public SalaryListDTO(MemberEntity e){
 		this.mno=e.getMno();
 		this.id=e.getId();
@@ -59,6 +64,8 @@ public class SalaryListDTO {
 			
 			this.minSalTot=(int) (e.getPno().getNormalSalary()-minSal);//세금이 포함된 월급
 			
+			
+			
 		}else{
 			this.pname="없음";
 			this.normalSalary=0;
@@ -72,7 +79,21 @@ public class SalaryListDTO {
 			this.sal5y=0;
 			
 			this.minSalTot=0;
+			
+			
+			
+			
 		}
+		
+//		if(e.getTotSalary()!=null && e.getBoList()!=0.0) {
+//			this.totSal=e.getTotSalary();
+//			this.bonus=e.getBoList();
+//		}else {
+//			this.totSal=0;
+//			this.bonus=0.0;
+//		}
+		
+		
 		
 		
 		if(e.defImg()!=null) {

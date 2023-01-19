@@ -77,11 +77,11 @@ public class MemberEntity extends BaseDateEntity{
 	@Column(nullable = true)
 	private LocalDate hireDate;
 	
-	@Column(nullable = true)
+	@Column(nullable = true ,columnDefinition = "0")
 	private double boList;//보너스
 	
-	@Column(nullable = true)
-	private long totSalary;//tot = nomalsal + bonus-min
+	@Column(nullable = true,columnDefinition = "0")
+	private Integer totSalary;//tot = nomalsal + bonus-min
 	
 	
 	@ManyToOne
