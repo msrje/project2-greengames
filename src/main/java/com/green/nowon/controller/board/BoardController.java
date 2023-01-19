@@ -84,8 +84,8 @@ public class BoardController {
 	
 	//검색
 	@GetMapping("/notice-boards/search")
-    public String search(String keyword, Model model) {
-        service.search(keyword, model);
+    public String search(String keyword, Model model, @RequestParam(defaultValue = "1") int page) {
+        service.search(keyword, model, page);
         return "board/noticeSearchPage";
     }
 	

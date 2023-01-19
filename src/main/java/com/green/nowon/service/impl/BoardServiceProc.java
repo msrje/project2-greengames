@@ -81,14 +81,36 @@ public class BoardServiceProc implements BoardService{
 				.collect(Collectors.toList()));
 	}
 
-    //검색
+    //검색, 페이징
     @Transactional
 	@Override
-	public void search(String keyword,  Model model) {
-    	 List<BoardListDTO> searchList = repository.findByTitleContaining(keyword).stream().map(BoardListDTO::new)
- 				.collect(Collectors.toList());
-    	 model.addAttribute("searchList", searchList);
+	public void search(String keyword,  Model model, int page) {
+    	
+		/*
+		 * List<BoardListDTO> searchList =
+		 * repository.findByTitleContaining(keyword).stream().map(BoardListDTO::new)
+		 * .collect(Collectors.toList());
+		 */ //검색만
+    	 
+     	int size=10;
+ 		Sort sort=Sort.by(Direction.DESC, "bno");
+ 		Pageable pageable=PageRequest.of(page-1, size ,sort);
+ 		
+ 		Page<BoardEntity> result=repository.findByTitleContaining(keyword, pageable); //검색, 페이징 동시에
+ 		
+ 		int nowPage = result.getNumber()+1;
+ 		int startPage = Math.max(nowPage -4, 1);
+ 		int endPage = Math.min(nowPage +5, result.getTotalPages());
+ 		
+ 		model.addAttribute("nowPage", nowPage);
+ 		model.addAttribute("startPage", startPage);
+ 		model.addAttribute("endPage", endPage);
+ 		
+ 		model.addAttribute("keyword", keyword);
+    	model.addAttribute("p", result);
+    	model.addAttribute("searchList", result.stream().map(BoardListDTO::new).collect(Collectors.toList())); //검색, 페이징 동시에
 		
+    	System.err.println(">>>>>>>>>>>>"+keyword);
 	}
 	
 	@Transactional
