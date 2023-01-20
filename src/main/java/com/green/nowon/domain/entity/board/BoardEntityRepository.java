@@ -23,8 +23,6 @@ public interface BoardEntityRepository extends JpaRepository<BoardEntity, Long>{
 
 	Page<BoardEntity> findByTitleContaining(String keyword, Pageable pageable); //검색 후 페이징
 	
-	//List<BoardEntity> findByTitleContaining(String keyword,  Pageable pageable);//검색 후 페이징
-	
 	//조회수 쿼리
 	@Modifying
 	@Query("update BoardEntity b set b.readCount = b.readCount +1 where b.bno = :bno")

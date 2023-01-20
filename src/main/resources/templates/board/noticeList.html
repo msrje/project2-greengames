@@ -42,20 +42,33 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     			<div class="page_wrap">
   					<div class="page_nation">
 		    			<div th:if="${p.getNumberOfElements()>0}">
-		    				<a class="arrow prev" th:if="${p.hasPrevious()}" th:href="|/notice-boards?page=${p.getNumber()}|">&lt;</a>
+		    				<a class="arrow prev" th:if="${p.hasPrevious()}" th:href="|/notice-boards?page=${nowPage-1}|">&lt;</a>
 		    				
-		    				<th:block th:each="p:${#numbers.sequence(startPage, endPage)}">
+		    				<th:block th:if="${totPage>=6}">
+		    				<th:block th:if="${nowPage <= 4}" th:each="p:${#numbers.sequence(1, 7)}">
 		    					<a th:if="${p != nowPage}" th:href="@{notice-boards?(page=${p})}" th:text="${p}"></a>
 		    					<a th:if="${p == nowPage}" th:text="${p}" class="active"></a>
 		    				</th:block>
+		    				
+		    				<th:block th:if="${nowPage>4 && nowPage<totPage-2}" th:each="p:${#numbers.sequence(startPage, endPage)}">
+		    					<a th:if="${p != nowPage}" th:href="@{notice-boards?(page=${p})}" th:text="${p}"></a>
+		    					<a th:if="${p == nowPage}" th:text="${p}" class="active"></a>
+		    				</th:block>
+		    				
+		    				<th:block th:if="${nowPage >= totPage-2}" th:each="p:${#numbers.sequence(nowPage-(6-(totPage-nowPage)), totPage)}">
+		    					<a th:if="${p != nowPage}" th:href="@{notice-boards?(page=${p})}" th:text="${p}"></a>
+		    					<a th:if="${p == nowPage}" th:text="${p}" class="active"></a>
+		    				</th:block>
+		    				</th:block>
+		    				
 		    						    				
-		    				<a class="arrow next" th:if="${p.hasNext()}" th:href="|/notice-boards?page=${p.getNumber()+2}|">&gt;</a>
+		    				<a class="arrow next" th:if="${p.hasNext()}" th:href="|/notice-boards?page=${nowPage+1}|">&gt;</a>
 		    			</div>
 		    		</div>
 		    	</div>
 				<form action="/notice-boards/search" method="GET">
 				    <div class="btn-group" role="group" aria-label="Basic example">
-				        <input name="keyword" type="text" placeholder="검색어를 입력해주세요">
+				        <input class="tit" name="keyword" type="text" placeholder="검색어를 입력해주세요">
 				        <button class="btn2">검색</button>
 				    </div>
 				</form>
