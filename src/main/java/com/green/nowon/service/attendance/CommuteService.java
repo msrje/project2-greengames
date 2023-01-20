@@ -14,13 +14,18 @@ import com.green.nowon.domain.entity.attendance.CommuteEntity;
 
 public interface CommuteService {
 
-	Optional<CommuteEntity> findGoTime(long mno);
+	Optional<CommuteEntity> findTodayTime(long mno);
+	/**
+	 * 가장 최근에 근무한 날짜 조회
+	 * @return 
+	 */
+	Optional<CommuteEntity> findLastTime(long mno, CommuteInsertDTO idto);
 
 	void save(long mno, CommuteInsertDTO idto, CommuteUpdateDTO udto);
 
 	long MemberMno(Principal principal);
 
-	//void showListTime(long memberMno, Model model2);
+	void showListTime(long mno, Model model,int page);
 
 	/**
 	 * 가장 최근에 근무한 날짜 조회
