@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import org.springframework.web.bind.annotation.ResponseBody;
+
+
 import com.green.nowon.domain.dto.attendance.CommuteInsertDTO;
 import com.green.nowon.service.PositionService;
 import com.green.nowon.service.attendance.CommuteService;

@@ -3,6 +3,7 @@ package com.green.nowon.service.impl;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
@@ -44,7 +45,7 @@ public class CommuteServiceProc implements CommuteService {
 	@Transactional
 	@Override
 	public void save(long mno, CommuteInsertDTO idto , CommuteUpdateDTO udto) {
-		Optional<CommuteEntity> result = findGoTime(mno);
+		Optional<CommuteEntity> result = findTodayTime(mno);
 		if(result.isEmpty()) {
 			commuteRepo.save(idto.entity().fkSaver(memberRepo.findByMno(mno).get()));
 		}else {
@@ -68,7 +69,7 @@ public class CommuteServiceProc implements CommuteService {
 	 * 오늘자 출근이 있는지 확인하는 메소드 -> 오늘자에서 가장 최근의 근무일자
 	 */
 	@Override
-	public Optional<CommuteEntity> findGoTime(long mno) {
+	public Optional<CommuteEntity> findTodayTime(long mno) {
 		List<CommuteEntity> result = commuteRepo.findAllByMember_mno(mno);//1.member찾기
 		LocalDate today = LocalDate.now();
 		long cno = 0;
@@ -87,7 +88,7 @@ public class CommuteServiceProc implements CommuteService {
 	 * 가장 최근에 근무한 날짜 조회
 	 */
 	@Override
-	public void showGTime(Long mno,Model model,CommuteInsertDTO idto) {
+	public Optional<CommuteEntity> findLastTime(long mno,CommuteInsertDTO idto) {
 		List<CommuteEntity> result = commuteRepo.findAllByMember_mno(mno);
 		long cno = 0L;
 		if(!result.isEmpty()) {//값이 있으면 실행
@@ -97,12 +98,11 @@ public class CommuteServiceProc implements CommuteService {
 			Optional<CommuteEntity> CommuteLastDay = commuteRepo.findById(cno);
 	//		System.out.println("최근날짜 확인>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+CommuteLastDay.get().getToday());
 			
-			
-			model.addAttribute("time",commuteRepo.findAllByCno(cno));
 		}else {//값이 없으면 새로 저장
 			commuteRepo.save(idto.entity().fkSaver(memberRepo.findByMno(mno).get()));
-			model.addAttribute("time",commuteRepo.findAllByCno(cno));
+			return commuteRepo.findById(cno+1);
 		}
+		return commuteRepo.findById(cno);
 	}
 	
 	@Override
@@ -133,6 +133,20 @@ public class CommuteServiceProc implements CommuteService {
 		model.addAttribute("nowPage", nowPage);
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
+		
+		//없으면 기본값
+		String workStart = "출근 시간";
+		String workEnd = "퇴근 시간";
+		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("D일 a h시간 mm분");
+		Optional<CommuteEntity> todayDate = findTodayTime(mno);
+		if(todayDate.isPresent()) {//있으면 그녀석
+			workStart = todayDate.get().getGTime().format(dateTimeFormatter).toString();
+			workEnd = todayDate.get().getOTime().format(dateTimeFormatter).toString();
+		}
+		
+		
+		model.addAttribute("gtime",workStart);//오늘날짜
+		model.addAttribute("otime",workEnd);//오늘날짜
 		
 		model.addAttribute("p",result);
 		model.addAttribute("list", result

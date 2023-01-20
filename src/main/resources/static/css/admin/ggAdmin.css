@@ -1,0 +1,27 @@
+@charset "UTF-8";
+.commuteList_wrap{
+	padding-left:5%;
+	padding-top: 5%;	
+}
+
+
+.commuteListTable{
+	border: 1px solid #a9a9a9;
+}
+.commutehead>tr td{
+	padding: 0 10px;
+	text-align: center;
+	font-weight: bold;
+	font-size:20px;
+	border: 1px solid #a9a9a9;
+}
+.commutehead{
+	border: 1px solid #a9a9a9;
+}
+.commuteList>tr td{
+	padding: 0 10px;
+	border: 1px solid #a9a9a9;
+}
+.commuteList{
+	border: 1px solid #a9a9a9;
+}

@@ -15,6 +15,6 @@ public interface CommuteEntityRepository extends JpaRepository<CommuteEntity, Lo
 
 	Object findAllByCno(long cno);
 
-	Page<CommuteEntity> findAllByMember_mno(long mno,Pageable pageable);
+	Page<CommuteEntity> findAllByMember_mno(long mno, Pageable pageable);
 	
 }
