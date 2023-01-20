@@ -1,6 +1,7 @@
 package com.green.nowon.service.impl;
 
 
+import java.security.Principal;
 import java.util.Map;
 import java.util.Optional;
 
@@ -20,6 +21,9 @@ import com.green.nowon.domain.dto.memberDTO.AddressInsertDTO;
 import com.green.nowon.domain.dto.memberDTO.MemberDetailDTO;
 import com.green.nowon.domain.dto.memberDTO.MemberInsertDTO;
 import com.green.nowon.domain.dto.memberDTO.MemberUpdateDTO;
+import com.green.nowon.domain.entity.cate.DepartmentEntity;
+import com.green.nowon.domain.entity.cate.DepartmentMemberEntity;
+import com.green.nowon.domain.entity.cate.DepartmentMemberEntityRepository;
 import com.green.nowon.domain.entity.member.AddressEntityRepsoitory;
 import com.green.nowon.domain.entity.member.MemberEntity;
 import com.green.nowon.domain.entity.member.MemberEntityRepository;
@@ -50,6 +54,9 @@ public class MemberSerivceProc implements MemberService {
 	private ProfileEntityRepository ProfileRepo;
 	
 	@Autowired
+	private DepartmentMemberEntityRepository dmRepo;
+	
+	@Autowired
 	private PasswordEncoder pe;
 
 	@Override
@@ -58,6 +65,14 @@ public class MemberSerivceProc implements MemberService {
 		);
 		String id = mdto.getId();
 		addressRepo.save(adto.signin().member(memberRepo.findById(id)));
+		
+		long mno=memberRepo.findById(id).getMno();//사번
+		
+		dmRepo.save(DepartmentMemberEntity.builder() //부서등록
+				  .department(DepartmentEntity.builder() .dno(11) .build())
+				  .member(MemberEntity.builder() .mno(mno) .build()) .build());
+		
+		
 	}
 
 	@Transactional
