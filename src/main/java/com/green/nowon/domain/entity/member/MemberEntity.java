@@ -24,6 +24,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -80,7 +81,8 @@ public class MemberEntity extends BaseDateEntity{
 	@Column(nullable = true ,columnDefinition = "0")
 	private double boList;//보너스
 	
-	@Column(nullable = true,columnDefinition = "0")
+	@Column(nullable = true)
+	@ColumnDefault("0")
 	private Integer totSalary;//tot = nomalsal + bonus-min
 	
 	
