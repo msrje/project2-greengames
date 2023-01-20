@@ -54,9 +54,8 @@ public class CommuteController {
 	@GetMapping("/member/commute/list")
 	public String commuteList(Principal principal,Model model) {
 		long mno = commuteService.MemberMno(principal);
-		commuteService.showListTime(mno,model,1);
+		commuteService.showListTime(mno,model,0);
 		return "admin/ggAdmin";
 	}
-	
 	
 }

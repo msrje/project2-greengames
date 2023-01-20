@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.green.nowon.service.attendance.CommuteService;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.green.nowon.domain.dto.attendance.CommuteInsertDTO;
@@ -33,8 +34,8 @@ public class amdinController {
 	private PositionService service;
 	
 	@GetMapping("/admin")
-	public String admin(Model model,Principal principal,CommuteInsertDTO idto) {
-		commuteService.showListTime(commuteService.MemberMno(principal), model , 1);
+	public String admin(Model model,Principal principal,CommuteInsertDTO idto,@RequestParam(defaultValue = "1")int page) {
+		commuteService.showListTime(commuteService.MemberMno(principal), model , page);
 		return "admin/ggAdmin";
 	}
 	
