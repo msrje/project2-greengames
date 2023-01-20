@@ -21,6 +21,10 @@ import lombok.Getter;
 @Getter
 public class MyUserDetails extends User{
 	
+	/**
+	 * 
+	 */
+	//private static final long serialVersionUID = 1L;
 	private String id;
 	private String name;
 	private long mno;

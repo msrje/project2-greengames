@@ -25,12 +25,9 @@ public interface CommuteService {
 
 	long MemberMno(Principal principal);
 
-	void showListTime(long mno, Model model,int page);
+	
 
-	/**
-	 * 가장 최근에 근무한 날짜 조회
-	 */
-	void showGTime(Long mno, Model model, CommuteInsertDTO idto);
+	
 
 	/**
 	 * ajax를 사용해서 저장된 시간을 보여주기
