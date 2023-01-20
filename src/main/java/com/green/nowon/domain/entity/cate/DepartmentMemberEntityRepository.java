@@ -14,4 +14,8 @@ public interface DepartmentMemberEntityRepository extends JpaRepository<Departme
 
 	List<DepartmentMemberEntity> findByMemberMno(long arr);
 
+	List<DepartmentMemberEntity> findAllByMember_mno(long mno);
+
+	Optional<DepartmentMemberEntity> findByMember_mnoAndDepartment_depth(long mno, int i);
+
 }

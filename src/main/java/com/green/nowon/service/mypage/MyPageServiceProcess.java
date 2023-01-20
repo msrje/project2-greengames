@@ -1,5 +1,6 @@
 package com.green.nowon.service.mypage;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 
 import com.green.nowon.domain.dto.memberDTO.AddressDetailDTO;
 import com.green.nowon.domain.dto.memberDTO.DepartmentDTO;
+import com.green.nowon.domain.dto.memberDTO.DepartmentMemberDTO;
 import com.green.nowon.domain.dto.memberDTO.MemberDetailDTO;
 import com.green.nowon.domain.dto.memberDTO.ProfileDTO;
 import com.green.nowon.domain.dto.memberDTO.SalaryListDTO;
@@ -71,18 +73,30 @@ public class MyPageServiceProcess implements MyPageService{
 	@Transactional
 	@Override //급여관리리스트에서 사원의 디테일페이지
 	public void salaryInfo(long mno, Model model) {
+		
+		model.addAttribute("detail",
+				dmRepo.findByMember_mnoAndDepartment_depth(mno,3).map(DepartmentMemberDTO::new)
+				.orElseThrow());
+		
+		
+		
+		/*
 		model.addAttribute("detail",mRepo.findById(mno)
 				.map(SalaryListDTO::new).orElseThrow());
 		
+		
+		
 		List<DepartmentDTO> result=dRepo.findAllByDepth(3).stream()
 				.map(DepartmentDTO::new).collect(Collectors.toList());
-		
 		model.addAttribute("department",result);
+		
+		
 		
 		List<PositionDTO> aaa=pRepo.findAll().stream()
 				.map(PositionDTO::new).collect(Collectors.toList());
 		
 		model.addAttribute("position",aaa);
+		*/
 	}
 	@Override
 	public void update(long mno, long pno,long dno) {

@@ -91,7 +91,7 @@ public class MemberEntity extends BaseDateEntity{
 	@ManyToOne
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn
-	private PositionEntity pno;
+	private PositionEntity pno;//position 으로 바꾸길 추천
 	
 	@Builder.Default
 	@OneToMany(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
