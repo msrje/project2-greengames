@@ -100,7 +100,6 @@ public class MyPageServiceProcess implements MyPageService{
 		  .department(DepartmentEntity.builder() .dno(dno) .build())
 		  .member(MemberEntity.builder() .mno(mno) .build()) .build());
 		
-		
 	}
 
 	@Transactional
