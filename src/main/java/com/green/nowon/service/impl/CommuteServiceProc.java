@@ -121,9 +121,9 @@ public class CommuteServiceProc implements CommuteService {
 	@Transactional
 	@Override
 	public void showListTime(long mno, Model model,int page) {
-		int size=5;
+		int size=10;
 		Sort sort=Sort.by(Direction.DESC, "cno");
-		Pageable pageable=PageRequest.of(page-1 , size, sort);
+		Pageable pageable=PageRequest.of(page-1, size, sort);
 		Page<CommuteEntity> result=commuteRepo.findAllByMember_mno(mno,pageable);
 		
 		int nowPage = result.getNumber()+1;

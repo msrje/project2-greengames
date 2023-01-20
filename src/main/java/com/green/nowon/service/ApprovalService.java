@@ -10,7 +10,7 @@ public interface ApprovalService {
 
 	void save(ApprovalSaveDTO dto);
 
-	void list(Model model);
+	void list(Model model, int page);
 
 	void detail(long ano, Model model);
 
@@ -20,8 +20,8 @@ public interface ApprovalService {
 
 	void findMax(Model model);
 
-	void list(Model model, long mno);
-
 	void refuse(long ano);
+
+	void list(Model model, long mno, int page);
 
 }

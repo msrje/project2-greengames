@@ -25,8 +25,17 @@
    					</td>
    					
    				</tr>	
-   			
+   			 			<tr th:if="${page.getNumberOfElements()==0}">
+	    				<td colspan="5">존재하지 않는페이지</td>
+	    			</tr>
    			</table>
+   			<div th:if="${page.getNumberOfElements()>0}">
+    			<a th:if="${page.hasPrevious()}" th:href="|/approval/sure?page=${page.getNumber()}|">&lt;</a>
+    			<span th:text="${page.getNumber()+1}">현재페이지</span>
+    			/
+    			<span th:text="${page.getTotalPages()}">총페이지수</span> 
+    			<a th:if="${page.hasNext()}" th:href="|/approval/sure?page=${page.getNumber()+2}|">&gt;</a>
+    		</div>
        	</div>
     </main>
 </body>

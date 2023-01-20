@@ -70,25 +70,25 @@ public class MyPageServiceProcess implements MyPageService{
 	
 	@Transactional
 	@Override //급여관리리스트에서 사원의 디테일페이지
-	public void salaryInfo(long mno, Model model ,Model model2,Model model3) {
+	public void salaryInfo(long mno, Model model) {
 		model.addAttribute("detail",mRepo.findById(mno)
 				.map(SalaryListDTO::new).orElseThrow());
 		
 		List<DepartmentDTO> result=dRepo.findAllByDepth(3).stream()
 				.map(DepartmentDTO::new).collect(Collectors.toList());
 		
-		model2.addAttribute("department",result);
+		model.addAttribute("department",result);
 		
 		List<PositionDTO> aaa=pRepo.findAll().stream()
 				.map(PositionDTO::new).collect(Collectors.toList());
 		
-		model3.addAttribute("position",aaa);
+		model.addAttribute("position",aaa);
 	}
 	@Override
 	public void update(long mno, long pno,long dno) {
 		Optional<MemberEntity> me=mRepo.findById(mno);
 		
-		me.ifPresent(e -> {
+		me.ifPresent(e -> { //직책등록
 			e.setPno(PositionEntity.builder()
 					.pno(pno)
 					.build());
@@ -96,12 +96,26 @@ public class MyPageServiceProcess implements MyPageService{
 		});
 		
 		
-		  dmRepo.save(DepartmentMemberEntity.builder()
+		  dmRepo.save(DepartmentMemberEntity.builder() //부서등록
 		  .department(DepartmentEntity.builder() .dno(dno) .build())
 		  .member(MemberEntity.builder() .mno(mno) .build()) .build());
 		
 		
 	}
+
+	@Transactional
+	@Override
+	public void update2(long mno, double plSal, Integer totSal) {
+		Optional<MemberEntity> mem=mRepo.findById(mno);
+		mem.ifPresent(e->{
+			e.setBoList(plSal);
+			e.setTotSalary(totSal);
+		mRepo.save(e);
+		});
+		
+	}
+
+
 
 
 

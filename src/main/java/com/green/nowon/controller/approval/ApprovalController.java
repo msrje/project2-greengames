@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.green.nowon.domain.dto.approval.ApprovalListDTO;
 import com.green.nowon.domain.dto.approval.ApprovalSaveDTO;
@@ -40,14 +41,14 @@ public class ApprovalController {
 	}
 	
 	@GetMapping("/approval/check/{mno}")
-	public String list(Model model,@PathVariable long mno) {
-		approvalService.list(model,mno);
+	public String list(Model model,@PathVariable long mno,@RequestParam(defaultValue = "1") int page) {
+		approvalService.list(model,mno,page);
 		return "/approval/check";
 	}
 	
 	@GetMapping("/approval/sure")
-	public String sure(Model model) {
-		approvalService.list(model);
+	public String sure(Model model,@RequestParam(defaultValue = "1") int page) {
+		approvalService.list(model,page);
 		return "/approval/sure";
 	}
 	
@@ -58,8 +59,8 @@ public class ApprovalController {
 	}
 	
 	@GetMapping("/approval/vacation")
-	public String vacation() {
-		
+	public String vacation(Model model) {
+		approvalService.findMax(model);
 		return "/approval/vacation";
 	}
 	
