@@ -61,6 +61,12 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		    				</th:block>
 		    				</th:block>
 		    				
+		    				<th:block th:if="${totPage<6}">
+		    				<th:block th:each="p:${#numbers.sequence(startPage, endPage)}">
+		    					<a th:if="${p != nowPage}" th:href="@{notice-boards?(page=${p})}" th:text="${p}"></a>
+		    					<a th:if="${p == nowPage}" th:text="${p}" class="active"></a>
+		    				</th:block>
+		    				</th:block>	
 		    						    				
 		    				<a class="arrow next" th:if="${p.hasNext()}" th:href="|/notice-boards?page=${nowPage+1}|">&gt;</a>
 		    			</div>
