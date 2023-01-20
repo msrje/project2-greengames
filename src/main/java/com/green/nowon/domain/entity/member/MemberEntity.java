@@ -83,6 +83,8 @@ public class MemberEntity extends BaseDateEntity{
 	@Column(nullable = true,columnDefinition = "0")
 	private Integer totSalary;//tot = nomalsal + bonus-min
 	
+	@Column(nullable = false)
+	private String email;
 	
 	@ManyToOne
 	@OnDelete(action = OnDeleteAction.CASCADE)
