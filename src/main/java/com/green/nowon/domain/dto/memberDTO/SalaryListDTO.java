@@ -17,6 +17,9 @@ public class SalaryListDTO {
 	private String phone;
 	
 	private String profileUrl;
+	private String newName;
+	private String orgName;
+	
 	
 	private PositionEntity pno;
 	private String pname;
@@ -107,6 +110,8 @@ public class SalaryListDTO {
 		
 		if(e.defImg()!=null) {
 			this.profileUrl=e.defImg().getUrl()+e.defImg().getNewName();
+			this.orgName = e.defImg().getOrgName();
+			this.newName = e.defImg().getNewName();
 		}
 
 	}	

@@ -14,10 +14,10 @@ public class ProfileDTO {
 	private String plusImg;
 	
 	public ProfileDTO(ProfileEntity e) {
-		this.pno=e.getPno();
-		this.url=e.getUrl();
-		this.orgName=e.getOrgName();
-		this.newName=e.getNewName();
-		this.plusImg=e.getUrl()+e.getNewName();
+		pno=e.getPno();
+		url=e.getUrl();
+		orgName=e.getOrgName();
+		newName=e.getNewName();
+		plusImg=e.getUrl()+e.getNewName();
 	}
 }

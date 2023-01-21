@@ -26,7 +26,6 @@
 			plag = 1;
 		}else{
 			if(goSpan=="출근 시간"){
-				alert(goSpan);
 				alert("출근을 먼저 해주세요");
 				return;
 			}
@@ -60,15 +59,15 @@
     	<div class="wrap">
     		<input class="mno" type="hidden" th:value="${#authentication.principal.mno}">
     		<p>GreenGames의 관리페이지 입니다.</p>
-    		<div class="flex"><!-- 네모네모 상자 -->
-    			<div><!-- 출근 상자 -->
-    				<span class="goSpan" th:text="${gtime}"></span>
+    		<div class="flex commuteBox"><!-- 네모네모 상자 -->
+    			<div class="Box"><!-- 출근 상자 -->
+    				<span class="goSpan" th:text="${gtime}"></span><br>
     				<button class="go" onclick="already(this)" th:if="${gtime==otime}">출근</button>
     				<button class="go" onclick="btnOnclick(this)" th:if="${gtime!=otime}">출근</button>
     			</div>
-    			<div><!-- 퇴근 상자 -->
+    			<div class="Box"><!-- 퇴근 상자 -->
     				<span class="offSpan" th:text="퇴근시간" th:if="${gtime==otime}"></span>
-    				<span class="offSpan" th:text="${otime}" th:if="${gtime!=otime}"></span>
+    				<span class="offSpan" th:text="${otime}" th:if="${gtime!=otime}"></span><br>
     				<button class="off" onclick="btnOnclick(this)">퇴근</button>
     			</div>
     		</div>
@@ -86,7 +85,7 @@
 				</thead>
 				<tbody class="commuteList">
 					<tr th:each="lists : ${list}" th:if="${!#lists.isEmpty(list)}">
-						<td th:text="${lists.name}">이름</td>
+						<td th:text="${lists.member.name}">이름</td>
 						<td th:text="${lists.today}">날짜</td>
 						<td th:text="${lists.gTime}">출근시간</td>
 					
