@@ -16,8 +16,8 @@ public class DepartmentMemberDTO {
 	
 	public DepartmentMemberDTO(DepartmentMemberEntity e) {
 		dmno=e.getDmno();
-		department=new DepartmentDTO(e.getDepartment());
 		salary=new SalaryListDTO(e.getMember());
+		department=new DepartmentDTO(e.getDepartment());
 		position=new PositionDTO(e.getMember().getPno());
 	}
 

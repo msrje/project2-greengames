@@ -21,6 +21,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -93,9 +94,11 @@ public class MemberEntity extends BaseDateEntity{
 	@JoinColumn
 	private PositionEntity pno;//position 으로 바꾸길 추천
 	
-	@Builder.Default
-	@OneToMany(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	List<ProfileEntity> profile=new ArrayList<>();
+	//@Builder.Default
+	//@OneToMany(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(mappedBy="member", optional=true)
+	//List<ProfileEntity> profile=new ArrayList<>();
+	ProfileEntity profile;
 	
 	@Builder.Default
 	@CollectionTable(name = "GgDeploy")
@@ -112,15 +115,16 @@ public class MemberEntity extends BaseDateEntity{
 		this.phone = dto.getPhone();
 		return this;
 	}
-	/**
-	 * 대표이미지 없는데 없으면 @builder가 안먹힘
-	 * @return
-	 */
-	public ProfileEntity defImg() {
-		for(ProfileEntity pimg:profile) {
-			return pimg;
-		}
-		return null;
-	}
+//	/**
+//	 * 대표이미지 없는데 없으면 @builder가 안먹힘
+//	 * @return
+//   * optional=false를 사용해서 강제로 하나의 데이터만 가져와서 사용
+//	 */ 
+//	public ProfileEntity defImg() {
+//		for(ProfileEntity pimg:profile) {
+//			return pimg;
+//		}
+//		return profile;
+//	}
 	
 }

@@ -40,7 +40,7 @@ public interface BoardService {
 
 	void update02(long bno, GenBoardUpdateDTO dto);
 
-	void myGetListAll02(Model model);
+	void myGetListAll02(Model model,long mno);
 	
 	int updateReadCount(Long bno); //조회수
 

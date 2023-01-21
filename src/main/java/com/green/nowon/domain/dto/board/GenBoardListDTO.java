@@ -15,7 +15,7 @@ public class GenBoardListDTO {
 	private long bno;
 	private String title;
 	private int readCount;
-	private String writer;
+	//private String writer;
 	private LocalDateTime updatedDate;
 	private LocalDate toDay;
 	private String writerId;
@@ -26,10 +26,10 @@ public class GenBoardListDTO {
 		this.bno = ent.getBno();
 		this.title = ent.getTitle();
 		this.readCount = ent.getReadCount();
-		this.writer = ent.getMember().getName(); //member의 name이 작성자임
+		//this.writer = ent.getMember().getName(); //member의 name이 작성자임
 		this.updatedDate = ent.getUpdatedDate();
 		toDay=LocalDate.now();
-		this.writerId =ent.getMember().getId();
+		this.writerId =String.valueOf(ent.getMno());//.getId();
 	}
 	
 }
