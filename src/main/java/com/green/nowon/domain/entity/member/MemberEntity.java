@@ -30,6 +30,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import com.green.nowon.domain.dto.memberDTO.MemberUpdateDTO;
 import com.green.nowon.domain.entity.BaseDateEntity;
+import com.green.nowon.domain.entity.cate.DepartmentMemberEntity;
 import com.green.nowon.domain.entity.cate.PositionEntity;
 import com.green.nowon.security.MyRole;
 
@@ -101,6 +102,9 @@ public class MemberEntity extends BaseDateEntity{
 	@ElementCollection(fetch = FetchType.EAGER)
 	private Set<MyRole> roles = new HashSet<>();
 
+	//@OneToMany(mappedBy = "member")
+	//private DepartmentMemberEntity departmentMember;
+	
 	public MemberEntity addRole(MyRole role) {
 		roles.add(role);
 		return this;
