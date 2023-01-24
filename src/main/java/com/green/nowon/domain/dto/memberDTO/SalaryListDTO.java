@@ -1,6 +1,6 @@
 package com.green.nowon.domain.dto.memberDTO;
 
-import org.hibernate.query.criteria.internal.predicate.IsEmptyPredicate;
+import org.springframework.util.StringUtils;
 
 import com.green.nowon.domain.entity.cate.PositionEntity;
 import com.green.nowon.domain.entity.member.MemberEntity;
@@ -44,8 +44,8 @@ public class SalaryListDTO {
 	private double bonus;//증가되는 금액
 	private int totSal;//모든걸 계산한 후 최종급여
 	
+	String role;
 	
-
 	public SalaryListDTO(MemberEntity e){
 		this.mno=e.getMno();
 		this.id=e.getId();
@@ -53,7 +53,7 @@ public class SalaryListDTO {
 		this.pass = e.getPass();
 		this.phone=e.getPhone();
 
-		
+		this.role=e.getRoles().toString();
 
 		if(e.getPno()!=null) {	//직책,기본금,마이너스,플러스금액 계산
 
@@ -93,20 +93,13 @@ public class SalaryListDTO {
 			
 			
 		}
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 스타트겟프로파일");
 		
-//		if(e.getTotSalary()!=null && e.getBoList()!=0.0) {
-//			this.totSal=e.getTotSalary();
-//			this.bonus=e.getBoList();
-//		}else {
-//			this.totSal=0;
-//			this.bonus=0.0;
-//		}
-		
-		
-		
-		
-		if(e.defImg()!=null) {
-			this.profileUrl=e.defImg().getUrl()+e.defImg().getNewName();
+		if(e.getProfile()!=null) {
+			this.profileUrl=e.getProfile().getUrl()+e.getProfile().getNewName();
+			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+e.getProfile());
+		}else{
+			this.profileUrl="";
 		}
 
 	}	
