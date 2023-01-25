@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import com.green.nowon.domain.dto.PhoneInfo;
 import com.green.nowon.domain.dto.chatbot.AnswerDTO;
 import com.green.nowon.domain.dto.chatbot.MessageDTO;
+import com.green.nowon.domain.entity.cate.DepartmentMemberEntity;
+import com.green.nowon.domain.entity.cate.DepartmentMemberEntityRepository;
 import com.green.nowon.domain.entity.chatbot.Answer;
 import com.green.nowon.domain.entity.chatbot.ChatBotIntention;
 import com.green.nowon.domain.entity.chatbot.ChatBotIntentionRepository;
@@ -92,6 +94,9 @@ public class KomoranService {
 
 	@Autowired
 	MemberEntityRepository member;
+	
+	@Autowired
+	DepartmentMemberEntityRepository DeptMember;
 	//전화문의인경우 DB에서 사원을 을 찾아서 처리
 	private PhoneInfo analyzeTokenIsPhone(Set<String> next) {
 		for(String name : next) {
@@ -99,7 +104,10 @@ public class KomoranService {
 			if(m.isEmpty())continue;
 			//존재하면
 			//String deptName=m.get().getDept().getDname();
-			String deptName=null;
+			long mno = m.get().getMno();
+			Optional<DepartmentMemberEntity> dM = DeptMember.findAllByMemberMno(mno);
+			String deptName=dM.get().getDepartment().getDname();
+			System.err.println(">>>>>>>>>>>>>>>>>>>부서명:"+deptName);
 			String phone=m.get().getPhone();
 			String memberName=m.get().getName();
 			return PhoneInfo.builder()
@@ -109,6 +117,7 @@ public class KomoranService {
 			.build();
 
 		}
+		System.err.println("값이 없는데요?");
 		return null;
 	}
 

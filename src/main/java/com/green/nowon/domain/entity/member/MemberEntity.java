@@ -32,7 +32,6 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import com.green.nowon.domain.dto.memberDTO.MemberUpdateDTO;
 import com.green.nowon.domain.entity.BaseDateEntity;
-import com.green.nowon.domain.entity.cate.DepartmentMemberEntity;
 import com.green.nowon.domain.entity.cate.PositionEntity;
 import com.green.nowon.security.MyRole;
 
@@ -55,11 +54,13 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name = "agg_Member")
+@SequenceGenerator(name = "seq_gen_GgMember", 
+		sequenceName = "seq_GgMember", initialValue = 1, allocationSize = 1)
+@Table(name = "GgMember")
 @Entity
 public class MemberEntity extends BaseDateEntity{
 	
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(generator = "seq_gen_GgMember", strategy = GenerationType.SEQUENCE)
 	@Id
 	private long mno;//사원번호
 	
@@ -78,8 +79,7 @@ public class MemberEntity extends BaseDateEntity{
 	@Column(nullable = true)
 	private LocalDate hireDate;
 	
-	@Column(nullable = true)
-	@ColumnDefault("0")
+	@Column(nullable = true ,columnDefinition = "0")
 	private double boList;//보너스
 	
 	@Column(nullable = true)
@@ -94,10 +94,10 @@ public class MemberEntity extends BaseDateEntity{
 	@JoinColumn
 	private PositionEntity pno;//position 으로 바꾸길 추천
 	
-//	@Builder.Default
-//	@OneToMany(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	//@Builder.Default
+	//@OneToMany(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@OneToOne(mappedBy="member", optional=true)
-//	List<ProfileEntity> profile=new ArrayList<>();
+	//List<ProfileEntity> profile=new ArrayList<>();
 	ProfileEntity profile;
 	
 	@Builder.Default
@@ -106,9 +106,6 @@ public class MemberEntity extends BaseDateEntity{
 	@ElementCollection(fetch = FetchType.EAGER)
 	private Set<MyRole> roles = new HashSet<>();
 
-//	@OneToMany(mappedBy = "member")
-//	private DepartmentMemberEntity departmentMember;
-	
 	public MemberEntity addRole(MyRole role) {
 		roles.add(role);
 		return this;
@@ -118,16 +115,16 @@ public class MemberEntity extends BaseDateEntity{
 		this.phone = dto.getPhone();
 		return this;
 	}
-	/**
-	 * 대표이미지 없는데 없으면 @builder가 안먹힘
-	 * @return
-   * optional=false를 사용해서 강제로 하나의 데이터만 가져와서 사용
-	 */ 
+//	/**
+//	 * 대표이미지 없는데 없으면 @builder가 안먹힘
+//	 * @return
+//   * optional=false를 사용해서 강제로 하나의 데이터만 가져와서 사용
+//	 */ 
 //	public ProfileEntity defImg() {
 //		for(ProfileEntity pimg:profile) {
 //			return pimg;
 //		}
-//		return null;
+//		return profile;
 //	}
 	
 }
