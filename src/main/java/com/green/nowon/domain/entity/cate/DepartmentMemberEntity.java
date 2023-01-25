@@ -8,6 +8,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import com.green.nowon.domain.entity.member.MemberEntity;
 
 import lombok.AllArgsConstructor;
@@ -33,10 +36,12 @@ public class DepartmentMemberEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long dmno;
 	
+	@OnDelete(action= OnDeleteAction.CASCADE)
 	@JoinColumn//category_cno
 	@ManyToOne
 	private DepartmentEntity department;
 	
+	@OnDelete(action= OnDeleteAction.CASCADE)
 	@JoinColumn//goods_gno
 	@ManyToOne
 	private MemberEntity member;

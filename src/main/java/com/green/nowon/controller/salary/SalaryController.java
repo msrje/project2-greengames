@@ -24,16 +24,22 @@ public class SalaryController {
 	
 	
 	@GetMapping("/salaryinfo/{mno}")
-	public String salaryDetail(@PathVariable long mno, Model model,Model model2,Model model3) {
-		service.salaryInfo(mno,model, model2, model3);
+	public String salaryDetail(@PathVariable long mno, Model model) {
+		service.salaryInfo(mno,model);
 		return "member/salary-detail";
 	}
 	@PostMapping("/salary/department/{mno}")
-	public String salaryDepartment(@PathVariable long mno,long dno,long pno, Model model,Model model2,Model model3) {
+	public String salaryDepartment(@PathVariable long mno,long dno,long pno, Model model) {
 		service.update(mno,pno,dno);
-		service.update2(mno);
-		service.salaryInfo(mno,model, model2, model3);
+		service.salaryInfo(mno,model);
 		return "member/salary-detail";
+	}
+	@PostMapping("/salary/salary")
+	public String salaryUpdate(long mno,double plSal,int totSal,Model model) {
+		System.err.println(mno+">>>>>>>>>>>>>>>>>>>>"+plSal+">>>>>>>>>>>>>"+totSal);
+		service.update2(mno,plSal,totSal);
+		service.salaryInfo(mno,model);
+		return "/member/salary-detail";
 	}
 
 }

@@ -27,10 +27,10 @@ public class MemberController {
 	}
 	
 	@GetMapping("/mypage/{mno}")
-	public String detail(@PathVariable long mno,Model model,Model model2) {
+	public String detail(@PathVariable long mno,Model model) {
 		System.err.println(">>>>>>>>>>>>>>>>" + mno);
-		memberService.detail(mno,model,model2);
-		return "/mypage/employee-detail";
+		memberService.detail(mno,model);
+		return "mypage/employee-detail";
 	}
 	
 	@PostMapping("/mypage/{mno}/update")

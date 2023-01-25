@@ -14,12 +14,13 @@ public class GenBoardSaveDTO {
 	private String title; 
 	private String content;
 	private long mno;
-	private String cate;
 	
 	//셋팅된 dto data를 Entity객체로 변환
 	public GeneralBoardEntity toGeneralBoardEntity() {
 		return GeneralBoardEntity.builder()
-				.title(title).content(content).member(MemberEntity.builder().mno(mno).build())
+				.title(title).content(content)
+				//.member(MemberEntity.builder().mno(mno).build())
+				.mno(mno)
 				.build();
 	}
 	

@@ -8,20 +8,21 @@
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<!-- 	지수가 라이브러리좀 추가했음  날짜 format 라이브러리-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-
 <script th:inline="javascript">
 	var calendarEl;
 	var calendar;
+	var adminUser = $('#adminUser').text();
+	var color;
 	document.addEventListener('DOMContentLoaded', function() {
-
 		calendarEl = document.getElementById('calendar');
 		calendar = new FullCalendar.Calendar(calendarEl, {
 			timeZone : 'local',
 			initialView : 'dayGridMonth', // 홈페이지에서 다른 형태의 view를 확인할  수 있다.
 			editable : true, // false로 변경 시 draggable 작동 x 
 			displayEventTime : false,
+			slotMinTime: '06:00',
+			slotMaxTime: '23:00',
 			events : //getMapCalender// 일정 데이터 추가 , DB의 event를 가져오려면 JSON 형식으로 변환해 events에 넣어주면된다.
 			$.ajax({
 				url : "/schedule/calendar/" + $('#userMno').val(),
@@ -37,10 +38,12 @@
 						var obj = {
 							"title" : dto.ctitle,
 							"start" : moment(dto.cstartTime).format('YYYY-MM-DD'),
-							"end" : moment(dto.cendTime).format('YYYY-MM-DD'),
+							"end" : moment(dto.cendTime).add(1,"day").format('YYYY-MM-DD'),
 							"cno" :  dto.cno,
-							"color": "rgb(3, 187, 133)"
+							"color": dto.color,
+							allDay: true
 						}
+						console.log(JSON.stringify(obj));
 						calendar.addEvent(obj);
 					})
 
@@ -48,12 +51,10 @@
 				error : function(request, status, error) {
 					alert("경고")
 				}
-
 			}) 
-			
 			,
 			headerToolbar : {
-				center : 'addEventButton' // headerToolbar에 버튼을 추가
+					center : 'addEventButton' // headerToolbar에 버튼을 추가
 			},
 			customButtons : {
 				addEventButton : { // 추가한 버튼 설정
@@ -66,6 +67,7 @@
 									var start_date = $("#calendar_start_date").val();
 									var end_date = $("#calendar_end_date").val();
 									var userMno = $('#userMno').val();
+									
 									//내용 입력 여부 확인
 									if (content == null || content == "") {
 										alert("내용을 입력하세요.");
@@ -75,11 +77,14 @@
 									} else if (new Date(end_date)
 											- new Date(start_date) < 0) { // date 타입으로 변경 후 확인
 										alert("종료일이 시작일보다 먼저입니다.");
+									} else if(color == null || color == ""){
+										alert("색상을 선택 해주세요.");
 									} else { // 정상적인 입력 시
 										var obj = {
 											"ctitle" : content,
 											"cstartTime" : start_date,
-											"cendTime" : end_date
+											"cendTime" : end_date,
+											"color" : color
 										}//전송할 객체 생성
 										$.ajax({
 											url : "/schedule/calendar/"+$('#userMno').val(),
@@ -91,17 +96,17 @@
 											success : function(result) {
 												
 												//이거왜 안오는지 물어봐죠.. null 로 나옴..
-												console.log("result > > > [[${cno}]]");
 												calendar.addEvent({
 													"title" : content,
-													"start" : moment(start_date).format('YYYY-MM-DD hh:mm:ss'),
-													"end" 	: moment(end_date).format('YYYY-MM-DD hh:mm:ss'),
-													"color"	: "rgb(3, 187, 133)",
+													"start" : moment(start_date).format('YYYY-MM-DD'),
+													"end" 	: moment(end_date).add(1,"day").format('YYYY-MM-DD'),
+													"color"	: color,
 													"cno" 	: result
 				               	                    });
 												$("#calendar_content").val("");
 												$("#calendar_start_date").val("");
 												$("#calendar_end_date").val("");
+												
 											},error:function(jqXHR, textStatus, errorThrown){
 												 alert("에러가 발생 하였습니다." + textStatus + " : " + errorThrown);
 											}
@@ -143,8 +148,9 @@
                      var obj = new Object();
                          obj.ctitle =  info.event._def.title;
                          obj.cstartTime =  moment(info.event.start).format('YYYY-MM-DD');
-                         obj.cendTime = moment(info.event.end).format('YYYY-MM-DD');
+                         obj.cendTime = moment(info.event.end).subtract(1,"day").format('YYYY-MM-DD');
                          obj.cno = info.event.extendedProps.cno;
+                         obj.color = info.event._def.ui.backgroundColor;
                          
                          $.ajax({
                            	url : "/schedule/calendar/" + $('#userMno').val(),
@@ -161,20 +167,41 @@
                 	}
             
             },
+         
             editable : true,
             displayEventTime : false // 시간 표시 x
 		});
 		calendar.render();
 	});
+	
+	$(function(){
+		 $('.calendar_type').click(function(){
+				color = $(this).css("background-color");
+				$(this).addClass("calender_active");
+					$(".calendar_type").not($(this)).removeClass('calender_active');  
+		});
+	})
+	
 </script>
 <style type="text/css">
-    .fc-day-number.fc-sat.fc-past { color:#0000FF; }     /* 토요일 */
-    .fc-day-number.fc-sun.fc-past { color:#FF0000; }    /* 일요일 */
+    
+    .calendar_type {
+	    width: 50px; 
+	    height: 50px; 
+	    border-radius: 50%; 
+	    border-style: none;
+    }
+    .calender_active {
+	    border-style: solid;
+	    border-color: black;
+	    border-width: 3px;
+    }
 </style>
+
 </head>
 <body class="flex">
 	<th:block th:insert="~{admin/AdminLayout :: header}" />
-	<div style="width: 1000px; height: 1000px; margin: auto;">
+	<div style="width: 1350px; height: 1000px; margin: auto;">
 		<div id='calendar'></div>
 	</div>
 	<input type="hidden" id="userMno"
@@ -191,20 +218,28 @@
 					</button>
 				</div>
 				<div class="modal-body">
+				<div style="position: relative; left: 16px;">
+					<button class="calendar_type"  name="color" style="background-color: #ffb3b3;"></button>
+					<button class="calendar_type"  name="color" style="background-color: #ffd9b3;"></button>
+					<button class="calendar_type"  name="color" style="background-color: #ffffb3;"></button>
+					<button class="calendar_type"  name="color" style="background-color: #b3ffb3;"></button>
+					<button class="calendar_type"  name="color" style="background-color: #b3ffff;"></button>
+					<button class="calendar_type"  name="color" style="background-color: #b3d9ff;"></button>
+					<button class="calendar_type"  name="color" style="background-color: #c6b3ff;"></button>
+					<button class="calendar_type"  name="color" style="background-color: #ffb3ff;"></button>
+				</div>
 					<div class="form-group">
-						<label for="taskId" class="col-form-label">일정 내용</label> <input
-							type="text" class="form-control" id="calendar_content"
-							name="calendar_content"> <label for="taskId"
-							class="col-form-label">시작 날짜</label> <input type="date"
-							class="form-control" id="calendar_start_date"
-							name="calendar_start_date"> <label for="taskId"
-							class="col-form-label">종료 날짜</label> <input type="date"
-							class="form-control" id="calendar_end_date"
-							name="calendar_end_date">
+						<input type="hidden" id="adminUser" th:value="${#authentication.principal.roles}"> 
+						<label for="taskId" class="col-form-label">일정 내용</label> 
+						<input type="text" class="form-control" id="calendar_content" name="calendar_content"> 
+							<label for="taskId" class="col-form-label">시작 날짜</label> 
+							<input type="date" class="form-control" id="calendar_start_date" name="calendar_start_date"> 
+							<label for="taskId" class="col-form-label">종료 날짜</label> 
+							<input type="date"class="form-control" id="calendar_end_date"name="calendar_end_date">
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-warning" id="addCalendar">추가</button>
+					<button type="button" class="btn btn-warning" id="addCalendar" style="background-color: rgb(3, 187, 133); border-color:rgb(3, 187, 133); color: white;">추가</button>
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal" id="sprintSettingModalClose">취소</button>
 				</div>

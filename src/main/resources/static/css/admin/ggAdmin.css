@@ -1,0 +1,70 @@
+@charset "UTF-8";
+.commuteList_wrap{
+	padding-left:5%;
+	padding-top: 5%;	
+}
+
+
+.commuteListTable{
+	border: 1px solid #a9a9a9;
+}
+.commutehead>tr td{
+	padding: 0 10px;
+	text-align: center;
+	font-weight: bold;
+	font-size:20px;
+	border: 1px solid #a9a9a9;
+}
+.commutehead{
+	border: 1px solid #a9a9a9;
+}
+.commuteList>tr td{
+	padding: 0 10px;
+	border: 1px solid #a9a9a9;
+}
+.commuteList{
+	border: 1px solid #a9a9a9;
+}
+
+.commuteBox{
+	margin-top: 20px;
+	margin-left: 20px;
+	width: 400px;
+	height: 100px;
+	border: 1px solid #00af85;
+	border-radius: 20px;
+}
+
+.Box{
+	margin :auto auto;
+}
+
+.Box>.goSpan{
+	margin: 20px;
+	text-align: center;
+}
+
+.Box>.offSpan{
+	margin-top: 20px;
+	text-align: center;
+}
+
+.Box>.go{
+	margin : 10px auto; 
+	text-align: center;
+	width: 50px;
+	color: white;
+	background-color: #00af85;
+	border-radius: 20px;
+	border-color: #00af85;
+}
+
+.Box>.off{
+	margin : 10px auto; 
+	text-align: center;
+	width: 50px;
+	color: white;
+	background-color: #00af85;
+	border-radius: 20px;
+	border-color: #00af85;
+}

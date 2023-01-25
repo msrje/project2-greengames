@@ -16,4 +16,5 @@ public interface CalendarEntityRepository extends JpaRepository<CalendarEntity, 
 	// 캘린더 select
 	List<CalendarEntity> findAllByMember_mno(long userMno);
 
+
 }

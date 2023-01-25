@@ -40,10 +40,18 @@ public interface BoardService {
 
 	void update02(long bno, GenBoardUpdateDTO dto);
 
-	void myGetListAll02(Model model);
+	void myGetListAll02(Model model,long mno);
 	
 	int updateReadCount(Long bno); //조회수
 
 	int genUpdateReadCount(Long bno); //자유게시판 조회수
+
+	//void search(String keyword,  Model model);
+
+	//void search02(String keyword, Model model);
+
+	void search(String keyword, Model model, int page);
+
+	void search02(String keyword, Model model, int page);
 
 }

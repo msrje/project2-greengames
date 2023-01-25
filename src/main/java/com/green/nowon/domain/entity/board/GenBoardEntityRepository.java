@@ -17,8 +17,15 @@ public interface GenBoardEntityRepository extends JpaRepository<GeneralBoardEnti
 
 	List<GeneralBoardEntity> findAllByOrderByBnoDesc();
 	
+	List<GeneralBoardEntity> findByMnoOrderByBnoDesc(long mno);
+	
 	Page<GeneralBoardEntity> findAllByOrderByBnoDesc(Pageable pageable);
+	
+	List<GeneralBoardEntity> findByTitleContaining(String keyword); //자유게시물 검색
+	
 
+	Page<GeneralBoardEntity> findByTitleContaining(String keyword, Pageable pageable);//게시물 검색, 페이징
+  
 	//조회수 쿼리
 	@Modifying
 	@Query("update GeneralBoardEntity b set b.readCount = b.readCount +1 where b.bno = :bno")

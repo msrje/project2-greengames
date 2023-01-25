@@ -19,7 +19,7 @@ class GreengamesApplicationTests {
 	private PasswordEncoder pe;
 	
 	
-	@Test
+	//@Test
 	void contextLoads() {
 		repo.save(MemberEntity.builder()
 				.mno(1)

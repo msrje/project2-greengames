@@ -1,15 +1,25 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
  	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script src="/js/daumPostcode.js"></script>
+	<link rel="stylesheet" href="/css/commons/common.css">
+	<link rel="stylesheet" href="/css/commons/reset.css">
+	<link rel="stylesheet" href="/css/member/mypage-detail.css">
+	<th:block th:insert="~{admin/ManagerLayout :: head}"/>
+	<th:block th:insert="~{admin/ManagerLayout :: header}"/>
 </head>
+<body class="flex">
 <main>
 	<h1>메인컨텐츠</h1>
 	<div class="wrap flex view-size-m">
 		<section id="signup-form">
-			<h1>사원등록 페이지 폼</h1>
+			<div>
+				<h2 class="title">사원등록 페이지 폼</h2>
+			</div>
+			<hr class="title_line">
+			
 			<div class="wrap">
 				<form action="/signup" method="post">
 					<ul>
@@ -40,6 +50,7 @@
 						</li>
 						<!-- 주소입력 -->
 						<li>
+							<label for="address">주소</label><br>
 							<input type="text" id="postcode" name="postcode" placeholder="우편번호">
 							<input type="button" onclick="daumPostcode()" value="우편번호 찾기"><br>
 							<input type="text" id="roadAddress" name="roadAddress" placeholder="도로명주소">
@@ -53,7 +64,10 @@
 							<input class="box-style-common" type="date" name="hireDate" id="hireDate" >
 							<div class="msg"></div>
 						</li>
-						<li><button>회원가입</button></li>
+						<li>
+							<hr>
+							<button class="active_button">회원가입</button>
+						</li>
 					</ul>
 				</form>
 			</div>
@@ -61,4 +75,5 @@
 		
 	</div>
 </main>
+</body>
 </html>

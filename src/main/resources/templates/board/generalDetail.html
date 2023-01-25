@@ -39,6 +39,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     				<button type="button" id="btn-edit">게시물 수정</button>
     			</span>
     		</div>
+    		
     		<div sec:authorize="hasRole('ROLE_USER')">
     			<th:block th:if="${#authentication.name == detail2.writerId or #authorization.expression('hasRole(''ROLE_ADMIN'')')}">
     			<form th:action="|/boards/${detail2.bno}|" method="post">
@@ -47,7 +48,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				</form>
 				</th:block>
     		</div>
-    		<form id="edit-mode" th:action="|/notice-boards/${detail2.bno}|" method="post">
+    		<form id="edit-mode" th:action="|/boards/${detail2.bno}|" method="post">
 	    		<div class="section no">
     				<span class="title">No.</span>
     				<span th:text="${detail2.bno}"></span>
@@ -74,7 +75,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	    		</div>
 	    		<div class="section">
 	    				<span class="title">작성자</span>
-	    				<span  th:text="${detail2.writerName}"></span>
+	    				<span  th:text="${writerName}"></span>
 	    		</div>
 	    		<div class="section">
 	    				<span class="title">조회수</span>
@@ -127,7 +128,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	    		</div>
 	    		<div class="section">
 	    				<span class="title">작성자</span>
-	    				<span  th:text="${detail2.writerName}"></span>
+	    				<span  th:text="${writerName}"></span>
 	    		</div>
 	    		<div class="section">
 	    				<span class="title">조회수</span>

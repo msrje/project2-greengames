@@ -7,6 +7,11 @@
 	<script src="/js/daumPostcode.js"></script>
 	<link rel="stylesheet" href="/css/member/mypage-detail.css">
 	<script type="text/javascript">
+	$(function(){
+		var profileUrl = $(".profileUrl").val();
+		console.log(profileUrl);
+		$(".img").css("background-image", "url("+profileUrl+")");
+	});
     function imgChanged(el) {
     	
     	var fileData=$(el)[0].files[0];
@@ -57,10 +62,12 @@
 						<li>
 							<label for="profile">프로필</label>
 							<div>
+								<input class="profileUrl" th:if="${#strings.isEmpty(detail.profileUrl)}" type="hidden" value="/image/test/profiletest.jpeg">
+								<input class="profileUrl" th:if="${!#strings.isEmpty(detail.profileUrl)}" type="hidden" th:value="${detail.profileUrl}">
 	    						<label class="img" for="img">+</label>
 	    						<input id="img" class="img" type="file" name="img" onchange="imgChanged(this)">
-	    						<input type="hidden" class="newName" name="newName">
-	    						<input type="hidden" class="orgName" name="orgName">
+	    						<input type="hidden" class="newName" name="newName" th:value="${detail.newName}">
+	    						<input type="hidden" class="orgName" name="orgName" th:value="${detail.orgName}">
 	    						<input type="hidden" class="size" name="size">
 	    					</div>
 							<div class="msg"></div>
@@ -96,7 +103,7 @@
 							<input class="box-style-common" type="date" name="hireDate" id="hireDate" readonly="readonly">
 							<div class="msg"></div>
 						</li>
-						<li><button>수정</button></li>
+						<li><button class="active_button">수정</button></li>
 					</ul>
 				</form>
 			</div>

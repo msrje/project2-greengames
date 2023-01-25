@@ -36,9 +36,6 @@ public class SecurityConfig {
  				.formLogin(login-> login
  							.loginPage("/login")//로그인 페이지
 							.loginProcessingUrl("/signin")//form의 action값
-
- 		
-
 							.usernameParameter("id")
 							.passwordParameter("pass")
 							.failureUrl("/login")//로그인 실패 시 다시 로그인페이지로 이동
