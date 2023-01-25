@@ -79,6 +79,7 @@ public class KomoranService {
 	@Autowired
 	MemberEntityRepository member;
 	//전화문의인경우 DB에서 사원을 을 찾아서 처리
+	
 	private PhoneInfo analyzeTokenIsPhone(Set<String> next) {
 		for(String name : next) {
 			Optional<MemberEntity> m=member.findByName(name);

@@ -7,8 +7,10 @@
 	<link rel="stylesheet" href="/css/commons/common.css">
 	<link rel="stylesheet" href="/css/commons/reset.css">
 	<link rel="stylesheet" href="/css/member/mypage-detail.css">
-	
+	<th:block th:insert="~{admin/ManagerLayout :: head}"/>
+	<th:block th:insert="~{admin/ManagerLayout :: header}"/>
 </head>
+<body class="flex">
 <main>
 	<h1>메인컨텐츠</h1>
 	<div class="wrap flex view-size-m">
@@ -73,4 +75,5 @@
 		
 	</div>
 </main>
+</body>
 </html>
