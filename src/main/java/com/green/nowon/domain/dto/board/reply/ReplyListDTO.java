@@ -14,6 +14,7 @@ public class ReplyListDTO {
 	private long mno;
 	private String content;
 	private String writerName;
+	private String writerId;
 	private LocalDateTime createdDate;
 	
 	//reply entity를 dto로 바꿔주기
@@ -24,6 +25,7 @@ public class ReplyListDTO {
 		this.mno=e.getMember().getMno();
 		this.content=e.getContent();
 		this.writerName=e.getMember().getName();
+		this.writerId=e.getMember().getId();
 		this.createdDate=e.getCreatedDate();
 		
 	}

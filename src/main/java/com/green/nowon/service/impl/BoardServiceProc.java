@@ -17,6 +17,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.green.nowon.domain.dto.board.BoardDetailDTO;
@@ -305,7 +306,7 @@ public class BoardServiceProc implements BoardService{
 		int size=5;
 		Sort sort= Sort.by(Direction.DESC, "bno");
 		Pageable pageable= PageRequest.of(page-1, size, sort);
-		Page<GeneralBoardEntity> result = repo.findByTitleContaining(keyword, pageable);
+		Page<GeneralBoardEntity> result = geRepo.findByTitleContaining(keyword, pageable);
 		
 		int nowPage=result.getNumber()+1;
 		int startPage=Math.max(nowPage-3, 1);
@@ -332,12 +333,16 @@ public class BoardServiceProc implements BoardService{
     
 	@Transactional
 	@Override
-	public void myGetListAll(Model model) {
+	public void myGetListAll(int page, Model model) {
 		
-		List<BoardListDTO> result=repository.findAll().stream()
-				.map(BoardListDTO::new).collect(Collectors.toList());
+		int size=5;
+		Sort sort=Sort.by(Direction.DESC, "bno");
 		
-		model.addAttribute("list", result);
+		Pageable pageable=PageRequest.of(page-1, size ,sort);
+		Page<BoardEntity> result=repository.findAll(pageable);
+		
+		
+		model.addAttribute("list", result.stream().map(BoardListDTO::new).collect(Collectors.toList()));
 		
 	}
 

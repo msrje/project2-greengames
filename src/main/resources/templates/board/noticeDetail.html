@@ -44,6 +44,7 @@ xmlns:sec="http://www.thymeleaf.org/exdivas/spring-security">
 		    			<form th:action="|/notice-boards/${detail.bno}|" method="post">
 		    				<input type="hidden" name="flag" value="1">
 							<input type="hidden" name="_method" value="DELETE">
+							<input type="hidden" name="rno" value="0">
 							<button>게시물 삭제</button>
 						</form>
 					</th:block>
@@ -154,32 +155,34 @@ xmlns:sec="http://www.thymeleaf.org/exdivas/spring-security">
     		<div class="reply">
     			<form class="reply-form" method="post" th:action="|/notice-boards/${detail.bno}|">
 		    		<div>
-		    			<div>
+		    			<div class="re-title">
 		    				<span>댓글 작성</span>
 		    			</div>
 		    			<div class="flex">
-		    				<span><input type="text" name="content" placeholder="댓글 내용을 입력하세요"></span>
+		    				<span><input type="text" name="content" placeholder="댓글 내용을 입력하세요" style="width: 280px; height: 30px; margin-right: 10px;"></span>
 		    				<span>
-								<input type="submit" value="등록">
+								<input class="reply_button" type="submit" value="등록">
 		    				</span>
 		    			</div>
 		    		</div>
 	    		</form>
 	    		<div>
-		    		<th:block th:each="rdto : ${list}" th:if="${detail.bno == rdto.bno}">
-		    			<div class="reply-list section">
-		    				<span th:text="${rdto.createdDate.toLocalDate()}">작성일자</span>
-		    				<span th:utext="${rdto.content}">댓글 내용</span>
-		    				<span th:text="${rdto.writerName}">작성자</span>
-		    			</div>
-			    		<th:block th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
-	        				<form th:action="|/notice-boards/${detail.bno}|" method="post">
-								<input type="hidden" name="_method" value="DELETE">
-								<input type="hidden" name="flag" value="0">
-								<input type="hidden" name="rno" th:value="${rdto.rno}">
-								<button class="btn2">댓글 삭제</button>
-							</form>
-						</th:block>
+		    		<th:block th:each="rdto : ${list}">
+		    			<div class="flex">
+			    			<div class="reply-list section">
+			    				<span th:text="${rdto.createdDate.toLocalDate()}" style="display:inline-block; margin-right:7px; color: gray; ">작성일자</span>
+			    				<span th:text="${rdto.writerName}" style="color: #037e51; margin-right:10px;">작성자</span>
+			    				<span th:utext="${rdto.content}" style="display: inline-block; width: 300px;">댓글 내용</span>
+			    			</div>
+				    		<th:block th:if="${#authentication.name == rdto.writerId or #authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+		        				<form th:action="|/notice-boards/${detail.bno}|" method="post">
+									<input type="hidden" name="_method" value="DELETE">
+									<input type="hidden" name="flag" value="0">
+									<input type="hidden" name="rno" th:value="${rdto.rno}">
+									<button class="reply_button">댓글 삭제</button>
+								</form>
+							</th:block>
+						</div>
 		    		</th:block>
 				</div>
     		</div>
