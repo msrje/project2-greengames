@@ -5,21 +5,6 @@
 	margin: 0 40px;
 }
 
-.defImg{
-	width:500px;
-	height:500px;
-	background-repeat:no-repeat;
-    background-position: center;
-    background-size: contain;
-}
-
-.addImg{
-	width:500px;
-	height:500px;
-	background-repeat:no-repeat;
-    background-position: center;
-    background-size: contain;
-}
 
 button{
 	background-color: #037e51;
@@ -37,6 +22,33 @@ button{
 	
 }
 
+.edit_button {
+	background-color: transparent;
+    border: 1px solid #037e51;
+    color: #037e51;
+}
+
+.button_box {
+	margin-right: 10px;	
+}
+
+.defImg{
+	width:500px;
+	height:500px;
+	background-repeat:no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.addImg{
+	width:500px;
+	height:500px;
+	margin-bottom: 10px;
+	background-repeat:no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
 .update_date{
 	margin-left: 200px;
 }
@@ -47,18 +59,19 @@ button{
 	margin-right: 5px;
 }
 
-.section{
+.img-area{
 	margin-top: 10px;
 }
-
 .section{
+	margin-top: 10px;
 	border-bottom: #c9c9c9;
 	border-bottom-style: solid;
 	border-bottom-width: thin;
+	line-height: 26px;
 }
 .no{
 	margin-top: 45px;
 }
 .content{
-	margin-top: 30px;
+	margin-top: 20px;
 }

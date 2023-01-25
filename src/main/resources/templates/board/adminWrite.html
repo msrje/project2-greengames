@@ -96,13 +96,13 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		<p class="pagetitle">게시물 작성</p>
     		<form class="form" method="post" name="frm">
 	    		<div class="all">
-	    			<div>
-	    				<span>제목</span>
+	    			<div class="tit-row">
+	    				<span class="form-tit tit-tit">제목</span>
 	    				<span><input type="text" name="title" placeholder="제목을 입력하세요"></span>
 	    			</div>
 	    			<div class="dep1">
-	    				<span style="display:inline-block; width: 60px;">이미지</span>
 	    				<span style="display:inline-block; width: 280px; padding-right: 20px;">
+	    					<span class="form-tit" style="display:inline-block; width: 60px;">이미지</span>
 	    					<span>
 	    						<label class="img" for="defimg">+</label>
 	    						<input style="width: 250px;" id="defimg" class="bimg" type="file" name="bimg" onchange="bimgChanged(this)">
@@ -111,9 +111,9 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	    						<input style="width: 250px;" type="hidden" class="size" name="size">
 	    					</span>
 	    				</span>
-	    				<span style="display:inline-block; width: 100px;">추가 이미지</span>
 	    				<span id="addimg-wrap">
 	    					<span class="addimg" style="display:inline-block; width: 300px;">
+	    	    				<span class="form-tit" style="display:inline-block; width: 100px;">추가 이미지</span>						
 	    						<label class="img" for="addimg">+</label>
 	    						<input id="addimg" class="bimg" type="file" name="bimg" onchange="bimgChanged(this)">
 	    						<input type="hidden" class="newName" name="newName">
@@ -124,15 +124,15 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	    				</span>
 	    			</div>
 	    			<div>
-	    				<span>내용</span>
+	    				<span class="form-tit">내용</span>
 	    			</div>
 	    			<div>
 	    				<span><textarea id="summernote" name="content"></textarea></span>
 	    			</div>
 	    			<div>
 	    				<span>
-							<input type="submit" value="공지사항 등록" onclick='btn_click("notice");'>
-							<input type="submit" value="자유게시물 등록" onclick='btn_click("normal");'>
+							<input class="reg-btn" type="submit" value="공지사항 등록" onclick='btn_click("notice");'>
+							<input class="reg-btn" type="submit" value="자유게시물 등록" onclick='btn_click("normal");'>
 	    				</span>
 	    			</div>
 	    		</div>
