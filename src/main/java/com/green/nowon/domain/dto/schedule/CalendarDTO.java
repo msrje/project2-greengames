@@ -17,12 +17,14 @@ public class CalendarDTO {
 	private Date cEndTime;
 	private long cno;
 	private long mno;
+	private String color;
 	
 	public CalendarEntity toCalendarEntity() {
 		
 		return CalendarEntity.builder()
 				.cTitle(cTitle).cStartTime(cStartTime).cEndTime(cEndTime)
 				.member(MemberEntity.builder().mno(mno).build())
+				.color(color)
 				.build();
 	}
 
@@ -31,6 +33,7 @@ public class CalendarDTO {
 		this.cStartTime = e.getCStartTime();
 		this.cEndTime = e.getCEndTime();
 		this.cno = e.getCno();
+		this.color = e.getColor();
 	}
 	
 	

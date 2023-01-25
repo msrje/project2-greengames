@@ -37,6 +37,10 @@ public class MyUserDetailsService implements UserDetailsService {
 		
 		List<DepartmentMemberEntity> aaa= drepo.findByMemberMno(repo.findById(username).get().getMno());
 		
+		Optional<MemberEntity> test = repo.findById(username);
+		
+		System.out.println(">>>>>>>>>>>>>>>"+test.get().getId());
+		
 		DepartmentMemberEntity aa= aaa.get(aaa.size()-1);
 		
 		return new MyUserDetails(

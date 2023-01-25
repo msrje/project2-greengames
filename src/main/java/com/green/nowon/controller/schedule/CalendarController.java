@@ -44,6 +44,7 @@ public class CalendarController {
 	@ResponseBody
 	@PostMapping("/schedule/calendar/{userMno}")
 	public long calendarInsert(@PathVariable long userMno, @RequestBody CalendarDTO dto, Model model) {
+		System.out.println(dto);
 		long cno = cService.save(userMno, dto);
 		model.addAttribute("cno", cno);
 		System.out.println("cno : " + cno);

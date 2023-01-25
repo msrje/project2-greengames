@@ -51,10 +51,12 @@ public class GeneralBoardEntity extends BaseDateTimeColumns{
 	//작성자 - MemeberEntity
 	
 	
-	@JoinColumn(name = "mno")
-	@ManyToOne(cascade = CascadeType.DETACH)
-	private MemberEntity member;//작성자
-
+//	@JoinColumn(name = "mno")
+//	@ManyToOne(cascade = CascadeType.DETACH)
+//	private MemberEntity member;//작성자
+	
+	private long mno;
+	
 	//편의메서드
 	public GeneralBoardEntity update(GenBoardUpdateDTO dto) {
 		this.title=dto.getTitle();

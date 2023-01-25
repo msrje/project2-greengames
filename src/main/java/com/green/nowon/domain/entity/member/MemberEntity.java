@@ -21,9 +21,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -81,7 +83,8 @@ public class MemberEntity extends BaseDateEntity{
 	@Column(nullable = true ,columnDefinition = "0")
 	private double boList;//보너스
 	
-	@Column(nullable = true,columnDefinition = "0")
+	@Column(nullable = true)
+	@ColumnDefault("0")
 	private Integer totSalary;//tot = nomalsal + bonus-min
 	
 	@Column(nullable = false)
@@ -90,11 +93,13 @@ public class MemberEntity extends BaseDateEntity{
 	@ManyToOne
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn
-	private PositionEntity pno;
+	private PositionEntity pno;//position 으로 바꾸길 추천
 	
-	@Builder.Default
-	@OneToMany(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	List<ProfileEntity> profile=new ArrayList<>();
+	//@Builder.Default
+	//@OneToMany(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(mappedBy="member", optional=true)
+	//List<ProfileEntity> profile=new ArrayList<>();
+	ProfileEntity profile;
 	
 	@Builder.Default
 	@CollectionTable(name = "GgDeploy")
@@ -102,8 +107,8 @@ public class MemberEntity extends BaseDateEntity{
 	@ElementCollection(fetch = FetchType.EAGER)
 	private Set<MyRole> roles = new HashSet<>();
 
-	//@OneToMany(mappedBy = "member")
-	//private DepartmentMemberEntity departmentMember;
+//	@OneToMany(mappedBy = "member")
+//	private DepartmentMemberEntity departmentMember;
 	
 	public MemberEntity addRole(MyRole role) {
 		roles.add(role);
@@ -117,12 +122,13 @@ public class MemberEntity extends BaseDateEntity{
 	/**
 	 * 대표이미지 없는데 없으면 @builder가 안먹힘
 	 * @return
-	 */
-	public ProfileEntity defImg() {
-		for(ProfileEntity pimg:profile) {
-			return pimg;
-		}
-		return null;
-	}
+   * optional=false를 사용해서 강제로 하나의 데이터만 가져와서 사용
+	 */ 
+//	public ProfileEntity defImg() {
+//		for(ProfileEntity pimg:profile) {
+//			return pimg;
+//		}
+//		return null;
+//	}
 	
 }

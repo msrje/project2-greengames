@@ -44,7 +44,7 @@ public class MemberInsertDTO {
 		totSalary = e.getTotSalary();
 		email = e.getEmail();
 		hireDate = e.getHireDate().toString();
-		profile= new ProfileDTO(e.getProfile().get(0));
+		profile= new ProfileDTO(e.getProfile());
 		return this;
 	}
 	

@@ -5,7 +5,7 @@ import org.springframework.ui.Model;
 public interface MyPageService {
 
 
-	void info(long mno, Model model, Model model2);
+	void info(long mno, Model model);
 
 
 	void list(long mno, Model model);

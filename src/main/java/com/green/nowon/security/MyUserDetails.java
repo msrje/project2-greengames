@@ -34,33 +34,33 @@ public class MyUserDetails extends User{
 	private DepartmentEntity department;
 	private String dName;
 
-	private List<ProfileEntity> profile;
+	private ProfileEntity profile;
 	public MyUserDetails(String username, String password, Collection<? extends GrantedAuthority> authorities) {
 		super(username, password, authorities);
 		
 	}
-	public MyUserDetails(MemberEntity entity,DepartmentMemberEntity en) {
-		this(entity.getId(), entity.getPass(), entity.getRoles() //set<MyRole> ---> set<GrantedAuthority>
+	public MyUserDetails(MemberEntity memEnt,DepartmentMemberEntity depMemEnt) {
+		this(memEnt.getId(), memEnt.getPass(), memEnt.getRoles() //set<MyRole> ---> set<GrantedAuthority>
 				.stream()
 				.map(Role->new SimpleGrantedAuthority(Role.getRole()) ) //Stream<GrantedAuthority> "ROLE_USER" or "ROLE_ADMIN"
 				.collect(Collectors.toSet()));
 		
-		this.id=entity.getId();
-		this.name=entity.getName();
-		this.mno=entity.getMno();
+		this.id=memEnt.getId();
+		this.name=memEnt.getName();
+		this.mno=memEnt.getMno();
 
-		this.roles = entity.getRoles();
+		this.roles = memEnt.getRoles();
 
-		this.dName=en.getDepartment().getDname();
+		this.dName=depMemEnt.getDepartment().getDname();
 
 		
-		for(MyRole role:entity.getRoles()) {
+		for(MyRole role:memEnt.getRoles()) {
 			if(role.name().equals("ADMIN")) {
 				admin=true;
 			}
 		}
-		this.department=en.getDepartment();
-		this.profile = entity.getProfile();
+		this.department=depMemEnt.getDepartment();
+		this.profile = memEnt.getProfile();
 	}
 	
 
