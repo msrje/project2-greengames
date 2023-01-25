@@ -22,6 +22,7 @@ import org.springframework.ui.Model;
 
 import com.green.nowon.domain.dto.attendance.CommuteInsertDTO;
 import com.green.nowon.domain.dto.attendance.CommuteUpdateDTO;
+import com.green.nowon.domain.dto.commuteMember.CommuteDTO;
 import com.green.nowon.domain.dto.commuteMember.CommuteMemberListDTO;
 import com.green.nowon.domain.entity.attendance.CommuteEntity;
 import com.green.nowon.domain.entity.attendance.CommuteEntityRepository;
@@ -151,7 +152,7 @@ public class CommuteServiceProc implements CommuteService {
 		model.addAttribute("p",result);
 		model.addAttribute("list", result
 				 .stream()
-				 .map(CommuteMemberListDTO::new)
+				 .map(CommuteDTO::new)
 				 .collect(Collectors.toList()));
 	}
 	
