@@ -103,10 +103,10 @@ public class SalaryListDTO {
 		
 		
 		
-		if(e.defImg()!=null) {
-			this.profileUrl=e.defImg().getUrl()+e.defImg().getNewName();
-			this.orgName = e.defImg().getOrgName();
-			this.newName = e.defImg().getNewName();
+		if(e.getProfile()!=null) {
+			this.profileUrl=e.getProfile().getUrl()+e.getProfile().getNewName();
+			this.orgName = e.getProfile().getOrgName();
+			this.newName = e.getProfile().getNewName();
 
 		}
 
