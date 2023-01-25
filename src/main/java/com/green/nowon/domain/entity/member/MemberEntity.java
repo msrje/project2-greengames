@@ -55,13 +55,11 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-@SequenceGenerator(name = "seq_gen_GgMember", 
-		sequenceName = "seq_GgMember", initialValue = 1, allocationSize = 1)
-@Table(name = "GgMember")
+@Table(name = "agg_Member")
 @Entity
 public class MemberEntity extends BaseDateEntity{
 	
-	@GeneratedValue(generator = "seq_gen_GgMember", strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	private long mno;//사원번호
 	
@@ -80,7 +78,8 @@ public class MemberEntity extends BaseDateEntity{
 	@Column(nullable = true)
 	private LocalDate hireDate;
 	
-	@Column(nullable = true ,columnDefinition = "0")
+	@Column(nullable = true)
+	@ColumnDefault("0")
 	private double boList;//보너스
 	
 	@Column(nullable = true)
@@ -95,10 +94,10 @@ public class MemberEntity extends BaseDateEntity{
 	@JoinColumn
 	private PositionEntity pno;//position 으로 바꾸길 추천
 	
-	//@Builder.Default
-	//@OneToMany(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//	@Builder.Default
+//	@OneToMany(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@OneToOne(mappedBy="member", optional=true)
-	//List<ProfileEntity> profile=new ArrayList<>();
+//	List<ProfileEntity> profile=new ArrayList<>();
 	ProfileEntity profile;
 	
 	@Builder.Default
