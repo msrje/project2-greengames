@@ -43,15 +43,18 @@ public class CalendarEntity {
 	@Column(nullable = false)
 	private String cTitle;
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+9")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
 	@Column(nullable = false)
 	private Date cStartTime;
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+9")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
 	@Column(nullable = false)
 	private Date cEndTime;
+	
+	@Column(nullable = false)
+	private String color;
 	
 	@JoinColumn(name = "mno")
 	@ManyToOne(cascade = CascadeType.DETACH)
