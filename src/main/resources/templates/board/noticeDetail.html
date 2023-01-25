@@ -167,7 +167,7 @@ xmlns:sec="http://www.thymeleaf.org/exdivas/spring-security">
 		    		</div>
 	    		</form>
 	    		<div>
-		    		<th:block th:each="rdto : ${list}">
+		    		<th:block th:each="rdto : ${list}" th:if="${detail.bno == rdto.bno}">
 		    			<div class="flex">
 			    			<div class="reply-list section">
 			    				<span th:text="${rdto.createdDate.toLocalDate()}" style="display:inline-block; margin-right:7px; color: gray; ">작성일자</span>

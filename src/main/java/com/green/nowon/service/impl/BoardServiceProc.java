@@ -203,7 +203,7 @@ public class BoardServiceProc implements BoardService{
 	@Override
 	public void getListAll02(int page, Model model) {
 		//board list를 페이지로 전송
-		int size=10;
+		int size=5;
 		Sort sort=Sort.by(Direction.DESC, "bno");
 		
 		
@@ -218,8 +218,8 @@ public class BoardServiceProc implements BoardService{
 		Pageable pageable=PageRequest.of(page-1, size, sort);
 		Page<GeneralBoardEntity> result=geRepo.findAll(pageable);
 		int nowPage = result.getNumber()+1;
-		int startPage = Math.max(nowPage-4, 1);
-		int endPage = Math.min(nowPage+5, result.getTotalPages());
+		int startPage = Math.max(nowPage-3, 1);
+		int endPage = Math.min(nowPage+3, result.getTotalPages());
 		int totPage= result.getTotalPages();
 		
 		model.addAttribute("nowPage", nowPage);
