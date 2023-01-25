@@ -1,5 +1,6 @@
 package com.green.nowon.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -26,12 +27,13 @@ import com.green.nowon.domain.dto.board.GenBoardDetailDTO;
 import com.green.nowon.domain.dto.board.GenBoardListDTO;
 import com.green.nowon.domain.dto.board.GenBoardSaveDTO;
 import com.green.nowon.domain.dto.board.GenBoardUpdateDTO;
+import com.green.nowon.domain.entity.board.BoardEntity;
 import com.green.nowon.domain.entity.board.BoardEntityRepository;
 import com.green.nowon.domain.entity.board.BoardImgEntityRepository;
 import com.green.nowon.domain.entity.board.GenBoardEntityRepository;
 import com.green.nowon.domain.entity.board.GeneralBoardEntity;
-import com.green.nowon.domain.entity.board.BoardEntity;
 import com.green.nowon.domain.entity.member.MemberEntity;
+import com.green.nowon.domain.entity.member.MemberEntityRepository;
 import com.green.nowon.service.BoardService;
 import com.green.nowon.util.MybFileUtils;
 
@@ -50,9 +52,11 @@ public class BoardServiceProc implements BoardService{
 	@Autowired
 	private final BoardEntityRepository repository;
 	@Autowired
-	private final GenBoardEntityRepository repo;
+	private final GenBoardEntityRepository geRepo;
 	@Autowired
 	private final BoardImgEntityRepository imgRepo; //이미지
+	@Autowired
+	private final MemberEntityRepository memRepo;//멤버
 	
 	
 	@Transactional
@@ -122,6 +126,11 @@ public class BoardServiceProc implements BoardService{
 	@Transactional
 	@Override
 	public void sendDetail(long bno, Model model) {
+		
+		Optional<BoardEntity> temp= repository.findById(bno);
+		
+		System.out.println(">>>>>>>>>>>>>>>>"+temp.isEmpty());
+		
 		model.addAttribute("detail", repository.findById(bno)
 				.map(BoardDetailDTO::new)
 				.orElseThrow());
@@ -183,9 +192,12 @@ public class BoardServiceProc implements BoardService{
     
 
 	
+    
+    
 	/* 여기서부터 자유게시판 입니다 */
     
 	
+    
 	@Transactional
 	@Override
 	public void getListAll02(int page, Model model) {
@@ -193,8 +205,17 @@ public class BoardServiceProc implements BoardService{
 		int size=10;
 		Sort sort=Sort.by(Direction.DESC, "bno");
 		
+		
+		List<MemberEntity> writerMemList = memRepo.findAll();
+		HashMap<String , String> writerMemMap=new HashMap<>();
+		for(MemberEntity mem : writerMemList) {
+			writerMemMap.put(String.valueOf(mem.getMno()), mem.getName());
+		
+		}
+		
+		
 		Pageable pageable=PageRequest.of(page-1, size, sort);
-		Page<GeneralBoardEntity> result=repo.findAll(pageable);
+		Page<GeneralBoardEntity> result=geRepo.findAll(pageable);
 		int nowPage = result.getNumber()+1;
 		int startPage = Math.max(nowPage-4, 1);
 		int endPage = Math.min(nowPage+5, result.getTotalPages());
@@ -209,13 +230,23 @@ public class BoardServiceProc implements BoardService{
 		model.addAttribute("list2", result.stream()
 				.map(GenBoardListDTO::new)
 				.collect(Collectors.toList()));
+		model.addAttribute("writerMemMap",writerMemMap);
+		
 	}
 
-	@Override
+	@Override //자유게시판 상세페이지
 	public void sendDetail02(long bno, Model model) {
-		model.addAttribute("detail2", repo.findById(bno)
-				.map(GenBoardDetailDTO::new)
-				.orElseThrow());
+		
+		GenBoardDetailDTO boDetail = geRepo.findById(bno).map(GenBoardDetailDTO::new).orElseThrow();
+		Optional<MemberEntity> writerMem = memRepo.findById(boDetail.getMno());
+		boDetail.setWriterId(writerMem.get().getId());
+		model.addAttribute("writerName", writerMem.get().getName());
+		model.addAttribute("detail2", boDetail);
+
+		
+//		model.addAttribute("detail2", repo.findById(bno)
+//				.map(GenBoardDetailDTO::new)
+//				.orElseThrow());
 		
 	}
 
@@ -228,27 +259,28 @@ public class BoardServiceProc implements BoardService{
 		
 		GeneralBoardEntity entity=GeneralBoardEntity.builder()
 				.title(dto.getTitle()).content(dto.getContent())
-				.member(MemberEntity.builder().mno(dto.getMno()).build())
+				.mno(dto.getMno())
 				.build();
-		repo.save(entity);
+				//.member(MemberEntity.builder().mno(dto.getMno()).build()).build();
+		geRepo.save(entity);
 		
 	}
 
 	@Override
 	public void delete02(long bno) {
-		repo.deleteById(bno);
+		geRepo.deleteById(bno);
 	}
 
 	@Override
 	public void update02(long bno, GenBoardUpdateDTO dto) {
-		Optional<GeneralBoardEntity> result= repo.findById(bno);
+		Optional<GeneralBoardEntity> result= geRepo.findById(bno);
 		
 		//존재하면 수정
 		if(result.isPresent()) {
 			GeneralBoardEntity entity=result.get();
 			entity.update(dto);
 			//업데이트 반영
-			repo.save(entity);//이미 존재하는 Pk이면 수정됨
+			geRepo.save(entity);//이미 존재하는 Pk이면 수정됨
 		}
 		
 	}
@@ -256,7 +288,7 @@ public class BoardServiceProc implements BoardService{
 	//자유조회수
     @Transactional
     public int genUpdateReadCount(Long bno) {
-        return repo.genUpdateReadCount(bno);
+        return geRepo.genUpdateReadCount(bno);
     }
     
 	//자유 검색
@@ -311,15 +343,25 @@ public class BoardServiceProc implements BoardService{
 
 	@Transactional
 	@Override
-	public void myGetListAll02(Model model) {
-		List<GenBoardListDTO> result=repo.findAll().stream()
+	public void myGetListAll02(Model model,long mno) {
+		
+//		List<GeneralBoardEntity> board=repo.findByMnoOrderByBnoDesc(mno);
+//		System.out.println(" >>>> : "+board.size());
+		
+		List<GenBoardListDTO> result=geRepo.findByMnoOrderByBnoDesc(mno).stream()
 				.map(GenBoardListDTO::new).collect(Collectors.toList());
 		
-		model.addAttribute("list2", result);
+		Optional<MemberEntity> writerMem = memRepo.findById(mno);
 		
+		System.out.println(" >>>>리이이이이절트 : "+result.size());
+		
+		for(GenBoardListDTO bo : result) {
+			System.out.println(">>>>>>>>>>>>>>>>"+bo.getTitle());
+			System.out.println(">>>>>>>>>>>>>>>>"+bo.getWriterId());
+		}
+		
+		model.addAttribute("list2", result);
+		model.addAttribute("writerName",writerMem.get().getName());
 	}
-
-
-
 
 }

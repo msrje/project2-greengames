@@ -1,5 +1,6 @@
 package com.green.nowon.service;
 
+import java.security.Principal;
 import java.util.Map;
 
 import org.springframework.ui.Model;
@@ -12,7 +13,7 @@ import com.green.nowon.domain.dto.memberDTO.MemberUpdateDTO;
 
 public interface MemberService {
 	void save(MemberInsertDTO mdto,AddressInsertDTO adto);
-	void detail(long mno, Model model ,Model model2) ;
+	void detail(long mno, Model model) ;
 	Map<String, String> fileTempUpload(MultipartFile img);
 	void update(long mno, MemberUpdateDTO dto);
 	void list(Model model);

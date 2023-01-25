@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html  xmlns:th="http://www.thymeleaf.org" >
 <head>
- 	<th:block th:insert="~{admin/AdminLayout :: head}"/>
+	<link rel="stylesheet" href="/css/commons/common.css">
+	<link rel="stylesheet" href="/css/commons/reset.css">
+ 	<th:block th:insert="~{admin/ManagerLayout :: head}"/>
     <script type="text/javascript">
 		$(function(){
 			$("#cate1").keyup(fnKeyup);
@@ -34,22 +36,25 @@
 	</script>
 </head>
 <body class="flex">
-    <th:block th:insert="~{admin/AdminLayout :: header}"/>
+    <th:block th:insert="~{admin/ManagerLayout :: header}"/>
     <main>
     	<div class="wrap">
-    		<p>카테고리 등록페이지</p>
+    		<h2>부서&팀 추가등록</h2>
     		<form action="/admin/departments" method="post">
     			<ul class="flex">
     				<li>
+    					<label>회사명</label>
     					<input type="text" id="cate1" readonly="readonly" name="name" placeholder="1차카데고리" value="그린게임즈">
     					<div class="msg"></div>
-    				</li>	
+    				</li>
     				<li>
-		    			<input type="text" name="name" placeholder="2차카데고리" required="required">
+    					<label>부서명</label>
+		    			<input type="text" name="name" placeholder="부서명" required="required">
 		    			<div class="msg"></div>
     				</li>
     				<li>
-		    			<input type="text" name="name" placeholder="3차카데고리" required="required" >
+    					<label>팀명</label>
+		    			<input type="text" name="name" placeholder="팀명" required="required" >
 		    			<div class="msg"></div>
     				</li>
     				<li>
@@ -57,7 +62,6 @@
     				</li>
     			</ul>
     		</form>
-    		<a href="/admin/departments">카테고리 리스트 띄우기</a>
     	</div>
     </main>
 </body>
