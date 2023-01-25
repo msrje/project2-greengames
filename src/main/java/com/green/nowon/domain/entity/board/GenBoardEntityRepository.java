@@ -20,6 +20,8 @@ public interface GenBoardEntityRepository extends JpaRepository<GeneralBoardEnti
 	Page<GeneralBoardEntity> findAllByOrderByBnoDesc(Pageable pageable);
 	
 	List<GeneralBoardEntity> findByTitleContaining(String keyword); //자유게시물 검색
+	
+	Page<GeneralBoardEntity> findByTitleContaining(String keyword, Pageable pageable);//게시물 검색, 페이징
 
 	//조회수 쿼리
 	@Modifying

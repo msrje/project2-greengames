@@ -48,8 +48,10 @@ public interface BoardService {
 
 	//void search(String keyword,  Model model);
 
-	void search02(String keyword, Model model);
+	//void search02(String keyword, Model model);
 
 	void search(String keyword, Model model, int page);
+
+	void search02(String keyword, Model model, int page);
 
 }

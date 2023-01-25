@@ -30,22 +30,24 @@ xmlns:sec="http://www.thymeleaf.org/exdivas/spring-security">
     <main>
     	<h1>메인영역</h1>
     	<div class="wrap b-view-size">
-    	
-    		<!-- ROLE_USER 인경우만 -->
-    		<div sec:authorize="hasRole('ROLE_USER')">
-    			<!-- 현재유저의 username = 작성자ID일치한 경우 수정버튼 활성화 -->
-    			<!-- 현재 #authentication.name , #authentication.principal. 일치하는데이터 -->
-    			<span th:if="${#authentication.name == detail.writerId}">
-    				<button type="button" id="btn-edit">게시물 수정</button>
-    			</span>
-    		</div>
-    		<div sec:authorize="hasRole('ROLE_USER')">
-    			<th:block th:if="${#authentication.name == detail.writerId or #authorization.expression('hasRole(''ROLE_ADMIN'')')}">
-    			<form th:action="|/notice-boards/${detail.bno}|" method="post">
-					<input type="hidden" name="_method" value="DELETE">
-					<button>게시물 삭제</button>
-				</form>
-				</th:block>
+    		<div class="flex">
+	    		<!-- ROLE_USER 인경우만 -->
+	    		<div class="button_box" sec:authorize="hasRole('ROLE_USER')">
+	    			<!-- 현재유저의 username = 작성자ID일치한 경우 수정버튼 활성화 -->
+	    			<!-- 현재 #authentication.name , #authentication.principal. 일치하는데이터 -->
+	    			<span th:if="${#authentication.name == detail.writerId}">
+	    				<button class="edit_button" type="button" id="btn-edit">게시물 수정</button>
+	    			</span>
+	    		</div>
+	    		<div sec:authorize="hasRole('ROLE_USER')">
+	    			<th:block th:if="${#authentication.name == detail.writerId or #authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+		    			<form th:action="|/notice-boards/${detail.bno}|" method="post">
+		    				<input type="hidden" name="flag" value="1">
+							<input type="hidden" name="_method" value="DELETE">
+							<button>게시물 삭제</button>
+						</form>
+					</th:block>
+	    		</div>
     		</div>
     		<form id="edit-mode" th:action="|/notice-boards/${detail.bno}|" method="post">
 	    		<div class="section no">
@@ -137,7 +139,7 @@ xmlns:sec="http://www.thymeleaf.org/exdivas/spring-security">
     				<span class="title">제목</span>
     				<span  th:text="${detail.title}"></span>
     			</div>
-    			<div class="img-area section">
+    			<div class="img-area">
 					<ul class="addImg-wrap flex">
 						<th:block th:each="idto:${detail.imgs}">
 							<li class="addImg" th:style="|background-image: url('${idto.imgUrl}');|"></li>
@@ -148,6 +150,38 @@ xmlns:sec="http://www.thymeleaf.org/exdivas/spring-security">
     				<span class="title">내용</span>
     				<span th:utext="${detail.content}"></span>
     			</div>
+    		</div>
+    		<div class="reply">
+    			<form class="reply-form" method="post" th:action="|/notice-boards/${detail.bno}|">
+		    		<div>
+		    			<div>
+		    				<span>댓글 작성</span>
+		    			</div>
+		    			<div class="flex">
+		    				<span><input type="text" name="content" placeholder="댓글 내용을 입력하세요"></span>
+		    				<span>
+								<input type="submit" value="등록">
+		    				</span>
+		    			</div>
+		    		</div>
+	    		</form>
+	    		<div>
+		    		<th:block th:each="rdto : ${list}" th:if="${detail.bno == rdto.bno}">
+		    			<div class="reply-list section">
+		    				<span th:text="${rdto.createdDate.toLocalDate()}">작성일자</span>
+		    				<span th:utext="${rdto.content}">댓글 내용</span>
+		    				<span th:text="${rdto.writerName}">작성자</span>
+		    			</div>
+			    		<th:block th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+	        				<form th:action="|/notice-boards/${detail.bno}|" method="post">
+								<input type="hidden" name="_method" value="DELETE">
+								<input type="hidden" name="flag" value="0">
+								<input type="hidden" name="rno" th:value="${rdto.rno}">
+								<button class="btn2">댓글 삭제</button>
+							</form>
+						</th:block>
+		    		</th:block>
+				</div>
     		</div>
     	</div>
     </main>
