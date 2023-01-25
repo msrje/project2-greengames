@@ -32,6 +32,7 @@ public class CalendarServiceProc implements CalendarService {
 		CalendarEntity entity=CalendarEntity.builder()
 				.cTitle(dto.getCTitle()).cStartTime(dto.getCStartTime()).cEndTime(dto.getCEndTime()).cno(dto.getCno())
 				.member(MemberEntity.builder().mno(userMno).build())
+				.color(dto.getColor())
 				.build();
 		
 		return crepo.save(entity).getCno();
@@ -59,6 +60,7 @@ public class CalendarServiceProc implements CalendarService {
 		CalendarEntity entity=CalendarEntity.builder()
 				.cTitle(dto.getCTitle()).cStartTime(dto.getCStartTime()).cEndTime(dto.getCEndTime()).cno(cno)
 				.member(MemberEntity.builder().mno(userMno).build())
+				.color(dto.getColor())
 				.build();
 		crepo.save(entity);
 		
