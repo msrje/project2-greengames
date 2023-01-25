@@ -17,6 +17,9 @@ public class SalaryListDTO {
 	private String phone;
 	
 	private String profileUrl;
+	private String newName;
+	private String orgName;
+	
 	
 	private PositionEntity pno;
 	private String pname;
@@ -95,11 +98,16 @@ public class SalaryListDTO {
 		}
 		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 스타트겟프로파일");
 		
+
+		
+		
+		
+		
 		if(e.getProfile()!=null) {
 			this.profileUrl=e.getProfile().getUrl()+e.getProfile().getNewName();
-			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+e.getProfile());
-		}else{
-			this.profileUrl="";
+			this.orgName = e.getProfile().getOrgName();
+			this.newName = e.getProfile().getNewName();
+
 		}
 
 	}	
