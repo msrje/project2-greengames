@@ -305,7 +305,7 @@ public class BoardServiceProc implements BoardService{
 		int size=5;
 		Sort sort= Sort.by(Direction.DESC, "bno");
 		Pageable pageable= PageRequest.of(page-1, size, sort);
-		Page<GeneralBoardEntity> result = repo.findByTitleContaining(keyword, pageable);
+		Page<GeneralBoardEntity> result = geRepo.findByTitleContaining(keyword, pageable);
 		
 		int nowPage=result.getNumber()+1;
 		int startPage=Math.max(nowPage-3, 1);
