@@ -44,10 +44,10 @@ public class MemberDTO {
 		email = e.getEmail();
 		hireDate = e.getHireDate().toString();
 		
-		newName = e.defImg().getNewName();
-		orgName = e.defImg().getOrgName();
-		if(e.defImg()!=null) {
-			profileUrl=e.defImg().getUrl()+e.defImg().getNewName();
+		newName = e.getProfile().getNewName();
+		orgName = e.getProfile().getOrgName();
+		if(e.getProfile()!=null) {
+			profileUrl=e.getProfile().getUrl()+e.getProfile().getNewName();
 		}
 	}
 }
