@@ -3,6 +3,7 @@
 <head>
  	<th:block th:insert="~{admin/AdminLayout :: head}"/>
 	<link rel="stylesheet" href="/css/approval/approval.css">
+	<link rel="stylesheet" href="/css/approval/list.css">
 </head>
 <body class="flex">
 	<th:block th:insert="~{admin/AdminLayout :: header}"/>
@@ -10,13 +11,16 @@
     	<h1>메인컨텐츠</h1>
     	<div class="wrap">
    			<table >
+   				<thead>
    				<tr>
    					<td>결재번호</td>
    					<td>결재자</td>
    					<td>결재제목</td>
    					<td>결재등록일</td>
    					<td>결재상태</td>
+   					<td>내용 보기</td>
    				</tr>
+   				</thead>
    				<tr th:each="dto:${list}">
    					<td>[[${dto.ano}]]</td>
    					<td th:if="${dto.mName == null}">알수없음</td>
