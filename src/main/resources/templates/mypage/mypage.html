@@ -88,7 +88,7 @@
 											<td th:text="${dto.readCount}">조회수</td>
 											<td>[[${dto.writer}]]</td>
 											<td><span
-												th:if="${dto.updatedDate.toLocalDate() eq dto.toDay}"
+												
 												th:text="${dto.updatedDate.toLocalDate()}">날짜</span></td>
 										</tr>
 									</table>
@@ -105,15 +105,14 @@
 											<td>작성자</td>
 											<td>작성일</td>
 										</tr>
-										<tr th:each="dto : ${list2}"
-											th:if="${#authentication.name == dto.writerId}">
+										<tr th:each="dto : ${list2}">
 											<td th:text="${dto.bno}">No</td>
 											<td><a th:href="|/boards/${dto.bno}|">[[${dto.title}]]</a></td>
 											<td th:text="${dto.readCount}">조회수</td>
-											<td>[[${dto.writer}]]</td>
-											<td><span
-												th:if="${dto.updatedDate.toLocalDate() eq dto.toDay}"
-												th:text="${dto.updatedDate.toLocalDate()}">날짜</span></td>
+											<td th:text="${writerName}"></td>
+											<td>
+												<span th:text="${dto.updatedDate.toLocalDate()}">날짜</span>
+											</td>
 										</tr>
 									</table>
 								</div>
@@ -134,17 +133,25 @@
 					<div class="member-info">
 						<form>
 							<ul>
-								<li><label for="name">이름 -</label> <span>[[${detail.name}]]</span>
+								<li>
+									<label for="name">이름 - </label> <span>[[${detail.name}]]</span>
 								</li>
-								<li><label for="name">사번 -</label> <span>[[${detail.mno}]]</span>
+								<li>
+									<label for="name">사번 - </label> <span>[[${detail.mno}]]</span>
 								</li>
-								<li><label for="name">전화번호 -</label> <span>[[${detail.phone}]]</span>
-
+								<li>
+									<label for="name">전화번호 - </label> <span>[[${detail.phone}]]</span>
 								</li>
-								<li><label for="name">id=email -</label> <span>[[${detail.id}]]</span>
-
+								<li>
+									<label for="name">id=email - </label> <span>[[${detail.id}]]</span>
 								</li>
-								<li><label for="name">직책 -</label> <span>[[${detail.pname}]]</span></li>
+								<li>
+									<label for="name">직책 - </label> <span>[[${detail.pname}]]</span>
+								</li>
+								<li>
+									<label for="name">부서 - </label> <span>[[${detail.pname}]]</span>
+								</li>
+								
 							</ul>
 						</form>
 					</div>
