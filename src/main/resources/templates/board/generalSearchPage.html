@@ -9,7 +9,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			<td th:text="${dto.bno}">No</td>
 			<td><a th:href="|/boards/${dto.bno}|">[[${dto.title}]]</a></td>
 			<td th:text="${dto.readCount}">조회수</td>
-			 <td>[[${dto.writer}]]</td>
+			 <td>[[${dto.writerId}]]</td>
 			<td>
 				<span
 				th:text="${dto.updatedDate.toLocalDate()}">날짜</span>
