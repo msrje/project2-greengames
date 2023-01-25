@@ -3,7 +3,9 @@ package com.green.nowon.controller.board;
 import java.lang.ProcessBuilder.Redirect;
 import java.util.Map;
 
+import org.hibernate.sql.Select;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,17 +21,19 @@ import org.springframework.web.multipart.MultipartFile;
 import com.green.nowon.domain.dto.board.BoardUpdateDTO;
 import com.green.nowon.domain.dto.board.GenBoardSaveDTO;
 import com.green.nowon.domain.dto.board.GenBoardUpdateDTO;
+import com.green.nowon.domain.dto.board.reply.ReplySaveDTO;
 import com.green.nowon.domain.dto.board.BoardSaveDTO;
 import com.green.nowon.security.MyUserDetails;
 import com.green.nowon.service.BoardService;
+import com.green.nowon.service.ReplyService;
 
 @Controller
 public class BoardController {
 	
-	private static final String String = null;
-	private static final String Model = null;
 	@Autowired
 	private BoardService service;
+	@Autowired
+	private ReplyService serv;
 
 	//공지사항 게시판
 	
@@ -44,6 +48,7 @@ public class BoardController {
 		return "board/adminWrite";
 	}
 	
+	//등록
 	@PostMapping("/notice-boards")        
 	public String write(BoardSaveDTO dto, Authentication auth) {
 		MyUserDetails myUserDetails=(MyUserDetails)auth.getPrincipal();
@@ -59,20 +64,25 @@ public class BoardController {
 	}
 	
 	
-	//공지사항 상세페이지
+	//공지사항 상세 페이지
 	@GetMapping("/notice-boards/{bno}")
 	public String detail(@PathVariable long bno, Model model) {
 		service.updateReadCount(bno);  //조회수(레포지토리에 쿼리추가후)
 		service.sendDetail(bno, model);
+		
+		serv.findAll(model); // 댓글 목록
 		return "board/noticeDetail";
 	}
 	
 	//삭제
 	@DeleteMapping("/notice-boards/{bno}")
-	public String delete(@PathVariable long bno) {
-		
-		service.delete(bno);
-		return "redirect:/notice-boards";
+	public String delete(@PathVariable long bno, long rno, int flag) {
+		if(flag==1){
+			service.delete(bno);
+			return "redirect:/notice-boards";}
+		else {
+			serv.delete(rno);
+			return "redirect:/notice-boards/{bno}";}
 	}
 	
 	//수정
@@ -82,13 +92,28 @@ public class BoardController {
 		return "redirect:/notice-boards/{bno}";
 	}
 	
-	//검색
+	//검색 및 페이징까지
 	@GetMapping("/notice-boards/search")
     public String search(String keyword, Model model, @RequestParam(defaultValue = "1") int page) {
         service.search(keyword, model, page);
         return "board/noticeSearchPage";
     }
 	
+	//댓글등록
+	@PostMapping("/notice-boards/{bno}")
+	public String replyWrite(@PathVariable long bno, ReplySaveDTO dto, Authentication auth) {
+		MyUserDetails myUserDetails=(MyUserDetails)auth.getPrincipal();
+		dto.setMno(myUserDetails.getMno());
+		serv.save(dto);
+		return "redirect:/notice-boards/{bno}";
+	}
+	
+	//댓글 리스트 @GetMapping("/notice-boards/{bno}") 증복오류
+	/*
+	 * @GetMapping("/notice-boards/{bno}") public String replyList(@PathVariable
+	 * long bno, Model model) { serv.findAll(model); return
+	 * "redirect:/notice-boards/{bno}"; }
+	 */
 	
 	
 	
@@ -100,15 +125,25 @@ public class BoardController {
 		return "board/generalList";
 	}
 	
-	//검색 ajax활용
+	/*
+	 * 검색기능 ajax 활용 방법
+	 * 
+	 * @GetMapping("/boards/search")
+	 * public String genSearch(String keyword, Model model, int page) {
+	 * 
+	 * service.search02(keyword, model, page);
+	 * 
+	 * return "board/generalSearchPage";
+	 * }
+	 */
+	
+	//검색
 	@GetMapping("/boards/search")
-	public String genSearch(String keyword, Model model) {
-		
-		service.search02(keyword, model);
-		
-		return "board/generalSearchPage";
-		
+	public String genSearch(String keyword, Model model, @RequestParam(defaultValue = "1") int page) {
+		service.search02(keyword, model, page);
+		return "board/genSearchPage";
 	}
+	
 	
 	@GetMapping("/general/boards-registration")
 	public String genBoardReg() {
@@ -118,7 +153,7 @@ public class BoardController {
 	@PostMapping("/boards")        
 	public String genWrite(GenBoardSaveDTO dto, Authentication auth) {
 		MyUserDetails myUserDetails=(MyUserDetails)auth.getPrincipal();
-		dto.setMno(myUserDetails.getMno());
+		dto.setMno(myUserDetails.getMno()); //DTO에 @Setter를 이용하여 받아 올 수 있다.
 		service.save02(dto);		
 		return "redirect:/boards";
 	}

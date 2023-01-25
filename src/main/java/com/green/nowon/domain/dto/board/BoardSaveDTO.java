@@ -22,7 +22,6 @@ public class BoardSaveDTO {
 	private String title; 
 	private String content;
 	private long mno;
-	private String cate;
 	
 	private String[] newName;
 	private String[] orgName;
