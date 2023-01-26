@@ -173,14 +173,21 @@ public class BoardServiceProc implements BoardService{
 	@Transactional
 	@Override
 	public void update(long bno, BoardUpdateDTO dto) {
+		BoardEntity entityImg=null;
+		
+		//findById(bno) 통해서 엔티티의 데이터 찾음 -> result
 		Optional<BoardEntity> result= repository.findById(bno);
 		
 		//존재하면 수정
 		if(result.isPresent()) {
 			BoardEntity entity=result.get();
-			entity.update(dto);
+			//이미지 저장 전에 삭제
+			imgRepo.deleteByBoard_bno(bno);
+			entity.update(dto); //board 엔티티에 있는 편의메서드
 			//업데이트 반영
-			repository.save(entity);//이미 존재하는 Pk이면 수정됨
+			entityImg = repository.save(entity);
+			//이미지 저장
+			dto.toListImgs(entityImg, locationUpload).forEach(imgRepo::save);
 		}
 		
 	}
