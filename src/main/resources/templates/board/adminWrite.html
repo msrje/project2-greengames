@@ -14,13 +14,13 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <!-- include summernote css/js -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-    
-	<script type="text/javascript">
+<script type="text/javascript">
+	var idx=1;
 	
 	$(document).ready(function () {
 	    $('#summernote').summernote({
 	        placeholder: '내용을 작성하세요',
-	        width: 900,
+	        width: 1000,
 	        height: 300,
 	       
 	    });
@@ -73,12 +73,13 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     
     function addTag() {
     	var tag=`
-   		<div class="addimg">
+   		<span class="addimg" style="display:inline-block; width: 300px;">
+   			<span class="form-tit" style="display:inline-block; width: 100px;">추가 이미지</span>
     		<label class="img" for="addimg_${idx}" > + </label>
     		<input id="addimg_${idx}" class="gimg" type="file" name="gimg" onchange="bimgChanged(this)">
 			<input type="hidden" class="newName" name="newName">
 			<input type="hidden" class="orgName" name="orgName">
-    	</div>
+    	</span>
    		`
     	//클래스이름이 addimg인 모든 태그 선택자중 마지막 태그 뒤에 삽입
     	$(".addimg").last().after(tag);
@@ -86,7 +87,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     }
 	
         
-	</script>
+</script>
 </head>
 <body class="flex">
     <th:block th:insert="~{admin/AdminLayout :: header}"/>

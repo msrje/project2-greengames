@@ -64,8 +64,8 @@ public class MemberSerivceProc implements MemberService {
 
 	@Override
 	public void save(MemberInsertDTO mdto, AddressInsertDTO adto) {
-		//memberRepo.save(mdto.signin(pe).addRole(MyRole.USER)// .addRole(MyRole.ADMIN)
-		//);
+		memberRepo.save(mdto.signin(pe).addRole(MyRole.USER)// .addRole(MyRole.ADMIN)
+		);
 		String id = mdto.getId();
 		addressRepo.save(adto.signin().member(memberRepo.findById(id)));
 		

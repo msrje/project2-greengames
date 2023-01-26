@@ -17,6 +17,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.green.nowon.domain.dto.board.BoardDetailDTO;
@@ -172,14 +173,21 @@ public class BoardServiceProc implements BoardService{
 	@Transactional
 	@Override
 	public void update(long bno, BoardUpdateDTO dto) {
+		BoardEntity entityImg=null;
+		
+		//findById(bno) 통해서 엔티티의 데이터 찾음 -> result
 		Optional<BoardEntity> result= repository.findById(bno);
 		
 		//존재하면 수정
 		if(result.isPresent()) {
 			BoardEntity entity=result.get();
-			entity.update(dto);
+			//이미지 저장 전에 삭제
+			imgRepo.deleteByBoard_bno(bno);
+			entity.update(dto); //board 엔티티에 있는 편의메서드
 			//업데이트 반영
-			repository.save(entity);//이미 존재하는 Pk이면 수정됨
+			entityImg = repository.save(entity);
+			//이미지 저장
+			dto.toListImgs(entityImg, locationUpload).forEach(imgRepo::save);
 		}
 		
 	}
@@ -202,7 +210,7 @@ public class BoardServiceProc implements BoardService{
 	@Override
 	public void getListAll02(int page, Model model) {
 		//board list를 페이지로 전송
-		int size=10;
+		int size=5;
 		Sort sort=Sort.by(Direction.DESC, "bno");
 		
 		
@@ -217,8 +225,8 @@ public class BoardServiceProc implements BoardService{
 		Pageable pageable=PageRequest.of(page-1, size, sort);
 		Page<GeneralBoardEntity> result=geRepo.findAll(pageable);
 		int nowPage = result.getNumber()+1;
-		int startPage = Math.max(nowPage-4, 1);
-		int endPage = Math.min(nowPage+5, result.getTotalPages());
+		int startPage = Math.max(nowPage-3, 1);
+		int endPage = Math.min(nowPage+3, result.getTotalPages());
 		int totPage= result.getTotalPages();
 		
 		model.addAttribute("nowPage", nowPage);
@@ -305,7 +313,7 @@ public class BoardServiceProc implements BoardService{
 		int size=5;
 		Sort sort= Sort.by(Direction.DESC, "bno");
 		Pageable pageable= PageRequest.of(page-1, size, sort);
-		Page<GeneralBoardEntity> result = repo.findByTitleContaining(keyword, pageable);
+		Page<GeneralBoardEntity> result = geRepo.findByTitleContaining(keyword, pageable);
 		
 		int nowPage=result.getNumber()+1;
 		int startPage=Math.max(nowPage-3, 1);
@@ -332,12 +340,16 @@ public class BoardServiceProc implements BoardService{
     
 	@Transactional
 	@Override
-	public void myGetListAll(Model model) {
+	public void myGetListAll(int page, Model model) {
 		
-		List<BoardListDTO> result=repository.findAll().stream()
-				.map(BoardListDTO::new).collect(Collectors.toList());
+		int size=5;
+		Sort sort=Sort.by(Direction.DESC, "bno");
 		
-		model.addAttribute("list", result);
+		Pageable pageable=PageRequest.of(page-1, size ,sort);
+		Page<BoardEntity> result=repository.findAll(pageable);
+		
+		
+		model.addAttribute("list", result.stream().map(BoardListDTO::new).collect(Collectors.toList()));
 		
 	}
 
