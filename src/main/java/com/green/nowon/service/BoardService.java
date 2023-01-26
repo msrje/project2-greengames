@@ -26,8 +26,6 @@ public interface BoardService {
 
 	void update(long bno, BoardUpdateDTO dto);
 
-	void myGetListAll(Model model);
-
 	void getListAll02(int page, Model model);
 
 	void sendDetail02(long bno, Model model);	
@@ -48,8 +46,12 @@ public interface BoardService {
 
 	//void search(String keyword,  Model model);
 
-	void search02(String keyword, Model model);
+	//void search02(String keyword, Model model);
 
 	void search(String keyword, Model model, int page);
+
+	void search02(String keyword, Model model, int page);
+
+	void myGetListAll(int page, Model model);
 
 }

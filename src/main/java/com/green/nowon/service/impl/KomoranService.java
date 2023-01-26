@@ -79,6 +79,7 @@ public class KomoranService {
 			}else if(token.contains("안녕")){
 				DateTimeFormatter dateFormatter=DateTimeFormatter.ofPattern("yyyy년 MM월 dd일");
 				messageDTO.today(today.format(dateFormatter));//처음 접속할때만 날짜표기
+
 			}
 			messageDTO.answer(answer);//토근에대한 응답정보
 			

@@ -18,15 +18,48 @@
 input[type=file] {
 	display: none;
 }
+div{
+	margin-bottom: 5px;
+}
+
 
 .pagetitle{
-	text-align: center;
+	margin-left: 400px;
 	font-size: 25px;
 	font-weight: 600;
 	margin-bottom: 20px;
 }
 .form{
-	padding: 15px;
+	padding: 15px 50px;
+}
+
+.tit_row {
+	display: flex;
+	align-items: center;
+}
+
+.reg-btn{
+	font-weight: 600;
+	width: 120px;
+	height: 30px;
+	border-radius: 10px;
+	border: thin solid gray;
+	background-color:rgb(134, 209, 15, 20%);
+	margin-left: 5px;
+}
+
+.form-tit{
+	display: inline-block;
+	vertical-align: top;
+	padding-top: 10px;
+	margin-right: 25px;
+	font-size: 16px;
+	line-height: 20px;
+	font-weight: 600;
+}
+
+.tit-tit {
+	padding: 0;
 }
 
 td{

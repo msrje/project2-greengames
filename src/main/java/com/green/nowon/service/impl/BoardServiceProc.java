@@ -17,6 +17,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.green.nowon.domain.dto.board.BoardDetailDTO;
@@ -99,8 +100,8 @@ public class BoardServiceProc implements BoardService{
 		 * repository.findByTitleContaining(keyword).stream().map(BoardListDTO::new)
 		 * .collect(Collectors.toList());
 		 */ //검색만
-    	 
-     	int size=5;
+    	
+    	int size=5;
  		Sort sort=Sort.by(Direction.DESC, "bno");
  		Pageable pageable=PageRequest.of(page-1, size ,sort);
  		
@@ -142,6 +143,7 @@ public class BoardServiceProc implements BoardService{
 	public void save(BoardSaveDTO dto, String name) {
 	}
 	
+	//등록
 	@Transactional
 	@Override
 	public void save(BoardSaveDTO dto) {
@@ -162,21 +164,30 @@ public class BoardServiceProc implements BoardService{
 		return MybFileUtils.fileUpload(bimg, locationTemp);
 	}
 
+	@Transactional
 	@Override
 	public void delete(long bno) {
 		repository.deleteById(bno);
 	}
 
+	@Transactional
 	@Override
 	public void update(long bno, BoardUpdateDTO dto) {
+		BoardEntity entityImg=null;
+		
+		//findById(bno) 통해서 엔티티의 데이터 찾음 -> result
 		Optional<BoardEntity> result= repository.findById(bno);
 		
 		//존재하면 수정
 		if(result.isPresent()) {
 			BoardEntity entity=result.get();
-			entity.update(dto);
+			//이미지 저장 전에 삭제
+			imgRepo.deleteByBoard_bno(bno);
+			entity.update(dto); //board 엔티티에 있는 편의메서드
 			//업데이트 반영
-			repository.save(entity);//이미 존재하는 Pk이면 수정됨
+			entityImg = repository.save(entity);
+			//이미지 저장
+			dto.toListImgs(entityImg, locationUpload).forEach(imgRepo::save);
 		}
 		
 	}
@@ -192,13 +203,14 @@ public class BoardServiceProc implements BoardService{
     
     
 	/* 여기서부터 자유게시판 입니다 */
+    
 	
     
 	@Transactional
 	@Override
 	public void getListAll02(int page, Model model) {
 		//board list를 페이지로 전송
-		int size=10;
+		int size=5;
 		Sort sort=Sort.by(Direction.DESC, "bno");
 		
 		
@@ -213,12 +225,14 @@ public class BoardServiceProc implements BoardService{
 		Pageable pageable=PageRequest.of(page-1, size, sort);
 		Page<GeneralBoardEntity> result=geRepo.findAll(pageable);
 		int nowPage = result.getNumber()+1;
-		int startPage = Math.max(nowPage-4, 1);
-		int endPage = Math.min(nowPage+5, result.getTotalPages());
+		int startPage = Math.max(nowPage-3, 1);
+		int endPage = Math.min(nowPage+3, result.getTotalPages());
+		int totPage= result.getTotalPages();
 		
 		model.addAttribute("nowPage", nowPage);
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
+		model.addAttribute("totPage",totPage);
 		
 		model.addAttribute("p2", result);
 		model.addAttribute("list2", result.stream()
@@ -284,22 +298,58 @@ public class BoardServiceProc implements BoardService{
     public int genUpdateReadCount(Long bno) {
         return geRepo.genUpdateReadCount(bno);
     }
-
-	
-	
-
     
+	//자유 검색
+	@Transactional
+	@Override
+	public void search02(String keyword, Model model, int page) {
+		/* 검색만 할 때
+		 * 
+		 * List<GenBoardListDTO> searchResult= repo.findByTitleContaining(keyword)
+		 * .stream().map(GenBoardListDTO::new).collect(Collectors.toList());
+		 * model.addAttribute("searchResult", searchResult);
+		 */
+		
+		int size=5;
+		Sort sort= Sort.by(Direction.DESC, "bno");
+		Pageable pageable= PageRequest.of(page-1, size, sort);
+		Page<GeneralBoardEntity> result = geRepo.findByTitleContaining(keyword, pageable);
+		
+		int nowPage=result.getNumber()+1;
+		int startPage=Math.max(nowPage-3, 1);
+		int endPage=Math.min(nowPage+3, result.getTotalPages());
+		int totPage= result.getTotalPages();
+		
+		model.addAttribute("nowPage", nowPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("totPage",totPage);
+		model.addAttribute("keyword", keyword);
+		
+		model.addAttribute("p", result);
+		model.addAttribute("searchList", result.stream().map(GenBoardListDTO::new).collect(Collectors.toList()));
+		
+	
+
+	}
+	
+	
+
     
 	//mypage에 띄우는 리스트
     
 	@Transactional
 	@Override
-	public void myGetListAll(Model model) {
+	public void myGetListAll(int page, Model model) {
 		
-		List<BoardListDTO> result=repository.findAll().stream()
-				.map(BoardListDTO::new).collect(Collectors.toList());
+		int size=5;
+		Sort sort=Sort.by(Direction.DESC, "bno");
 		
-		model.addAttribute("list", result);
+		Pageable pageable=PageRequest.of(page-1, size ,sort);
+		Page<BoardEntity> result=repository.findAll(pageable);
+		
+		
+		model.addAttribute("list", result.stream().map(BoardListDTO::new).collect(Collectors.toList()));
 		
 	}
 
@@ -325,16 +375,5 @@ public class BoardServiceProc implements BoardService{
 		model.addAttribute("list2", result);
 		model.addAttribute("writerName",writerMem.get().getName());
 	}
-
-	//자유 검색
-	@Transactional
-	@Override
-	public void search02(String keyword, Model model) {
-		List<GenBoardListDTO> searchResult= geRepo.findByTitleContaining(keyword)
-				.stream().map(GenBoardListDTO::new).collect(Collectors.toList());
-		model.addAttribute("searchResult", searchResult);
-	}
-
-
 
 }
