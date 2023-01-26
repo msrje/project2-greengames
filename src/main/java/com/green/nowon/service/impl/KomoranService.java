@@ -60,12 +60,12 @@ public class KomoranService {
 			
 			
 			String keyword=null;
-			if(token.contains("전화")) {
+			if(token.contains("번호")) {
 				PhoneInfo phone=analyzeTokenIsPhone(next);
 				if(phone ==null ) {
 					keyword="입력한 사원을 찾을수 없습니다.";
 				}else {
-					keyword=phone.getDeptName()+" : "+phone.getMemberName()+" : "+ phone.getPhone();
+					keyword=phone.getDeptName()+" : "+phone.getMemberName()+" "+"연락처 : "+ phone.getPhone();
 				}
 			}
 			

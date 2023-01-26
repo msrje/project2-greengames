@@ -65,13 +65,16 @@ public class MemberSerivceProc implements MemberService {
 	@Override
 	public void save(MemberInsertDTO mdto, AddressInsertDTO adto) {
 		memberRepo.save(mdto.signin(pe).addRole(MyRole.USER)// .addRole(MyRole.ADMIN)
-		);
+		);//멤버 저장
 		String id = mdto.getId();
-		addressRepo.save(adto.signin().member(memberRepo.findById(id)));
+		addressRepo.save(adto.signin().member(memberRepo.findById(id)));//주소저장
+		//System.err.println(">>>>>>>>>>>>>111111111111111111" + mdto.getId());
 		
+		System.err.println(memberRepo.findById(id));
 		long mno=memberRepo.findById(id).getMno();//사번
+		//System.err.println(">>>>>>>>>>>>>2222222222222222"+mno);
 		
-		dmRepo.save(DepartmentMemberEntity.builder() //부서등록
+		dmRepo.save(DepartmentMemberEntity.builder() // 기본 부서등록
 				  .department(DepartmentEntity.builder() .dno(11) .build())
 				  .member(MemberEntity.builder() .mno(mno) .build()) .build());
 		
