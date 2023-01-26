@@ -80,7 +80,8 @@ public class MemberEntity extends BaseDateEntity{
 	@Column(nullable = true)
 	private LocalDate hireDate;
 	
-	@Column(nullable = true ,columnDefinition = "0")
+	@Column(nullable = true)
+	@ColumnDefault("0")
 	private double boList;//보너스
 	
 	@Column(nullable = true)
