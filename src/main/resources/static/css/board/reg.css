@@ -24,13 +24,13 @@ div{
 
 
 .pagetitle{
-	margin-left: 350px;
-	font-size: 20px;
+	margin-left: 400px;
+	font-size: 25px;
 	font-weight: 600;
 	margin-bottom: 20px;
 }
 .form{
-	padding: 15px;
+	padding: 15px 50px;
 }
 
 .tit_row {
@@ -39,6 +39,7 @@ div{
 }
 
 .reg-btn{
+	font-weight: 600;
 	width: 120px;
 	height: 30px;
 	border-radius: 10px;

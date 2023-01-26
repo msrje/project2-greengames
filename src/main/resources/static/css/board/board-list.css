@@ -37,11 +37,12 @@
 	height: 30px;
 }
 .board-list{
-	margin: 10px 30px;
+	margin: 50px 70px;
 }
 
 .title{
-	margin-left:450px;
+	margin-left: 500px;
+	margin-bottom: 20px;
 	font-size: 30px;
 	font-weight: 600;
 
@@ -52,28 +53,28 @@
 
 td{
 	padding: 5px;
-	height: 50px;
+	height: 60px;
 	text-align: center;
 }
 
 td:nth-child(1){
-	width: 100px;
+	width: 140px;
 }
 td:nth-child(2){
-	width: 450px;
+	width: 490px;
 }
 td:nth-child(3){
-	width: 160px;
+	width: 200px;
 }
 td:nth-child(4){
-	width: 170px;
+	width: 200px;
 }
 td:nth-child(5){
-	width: 170px;
+	width: 200px;
 }
 
 tr:nth-child(even){
-	background: #88e91657;
+	background: rgb(134, 209, 15, 20%);
 }
 .reg-page{
 	background-color: #c5e77a;
@@ -94,8 +95,8 @@ tr:nth-child(even){
 
 /* 페이징 */
 .page_wrap {
-	margin-top: 15px;
-	margin-left:450px;
+	margin-top: 30px;
+	margin-left:460px;
 	font-size:0;
  }
 .page_nation {
