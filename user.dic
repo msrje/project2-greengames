@@ -1,4 +1,5 @@
 인력개발팀	NNP
+	NNP
 게임개발B	NNP
 클라이언트	NNP
 이정현	NNP
@@ -28,7 +29,6 @@ Ab게임개발팀	NNP
 클라이언트팀	NNP
 dddd	NNP
 npc디자인팀	NNP
-
 해외영업팀	NNP
 UI/UX	NNP
 영업관리팀	NNP

@@ -24,7 +24,7 @@
 	height: 420px;
 	border-radius: 30px;
 	position: relative;
-	top: -650px;
+	top: 0px;
 }
 .member-info>p{
 	font-size: 15px;
@@ -51,10 +51,11 @@
 }
 .approval-1{
 	position: relative;
-	top: -820px;
+	
 	left:90px;
 	width: auto;
 	max-width: 700px;
+	top: 0px;
 }
 
 
@@ -79,7 +80,7 @@
 	margin:5% 5% 5% 5%;
 	text-align: center;
 	position: relative;
-	top: -500px;
+	top: 0px;
 }
 .salary-info p{
 	border-bottom: 1px solid #a9a9a9;
